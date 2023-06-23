@@ -80,6 +80,7 @@ const Navbar = () => {
             >
               Register
             </Link>
+            
 
 
             {/* additinal button style  */}
