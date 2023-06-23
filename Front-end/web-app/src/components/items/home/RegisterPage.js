@@ -9,6 +9,7 @@ const RegisterPage = () => {
     <div>
       
        <h1>Register</h1>
+       <p>lorem ip</p>
     </div>
    </div>
       
