@@ -8,6 +8,7 @@ const App = () => {
    <div>
     <div>
        <img src={web_banner} alt='web-banner' />
+       <h1>hello</h1>
     </div>
    </div>
       
