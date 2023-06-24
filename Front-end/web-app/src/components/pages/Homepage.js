@@ -1,5 +1,5 @@
 import React from 'react';
-import web_banner from '../../assests/home/web-banner.jpeg'
+import WebBanner from '../items/home/WebBanner';
 
 const App = () => {
   
@@ -7,8 +7,8 @@ const App = () => {
   return (
    <div>
     <div>
-       <img src={web_banner} alt='web-banner' />
-       <h1>hello</h1>
+       <WebBanner/>
+       <h1 className='bg-blue-400'>hello</h1>
     </div>
    </div>
       
