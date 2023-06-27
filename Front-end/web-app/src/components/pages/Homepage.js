@@ -8,7 +8,7 @@ const App = () => {
    <div>
     <div>
        <WebBanner/>
-       <h1 className='bg-blue-400'>hello</h1>
+       <h1 className='bg-blue-400'>seneth</h1>
     </div>
    </div>
       

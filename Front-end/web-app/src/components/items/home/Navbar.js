@@ -27,7 +27,7 @@ const Navbar = () => {
 
           <div className="hidden md:flex">
             <Link
-              to="/home"
+              to="/"
               className="ml-4 text-xl text-yellow-600 hover:text-yellow-500 relative group"
               style={{ fontFamily: 'Berkshire Swash, cursive', marginRight: '10px' }}
             >
@@ -117,7 +117,7 @@ const Navbar = () => {
             <div className="flex flex-col mt-2 py-2 px-4 bg-gray-700">
              
             <Link
-              to="/home"
+              to="/"
               className="ml-4 text-xl text-yellow-600 hover:text-yellow-500 relative group"
               style={{ fontFamily: 'Berkshire Swash, cursive', marginRight: '10px' }}
             >
