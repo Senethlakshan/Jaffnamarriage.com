@@ -46,11 +46,11 @@ const WebBanner = () => {
             </p>
           </div>
         </Carousel>
-        <div>
-           <div className='bg-blue-400 '>
-           <iframe src="https://embed.lottiefiles.com/animation/96048"></iframe>
-           </div>
-        </div>
+        <div className="flex justify-center items-center" style={{ height: '100%', marginTop: '5px' }}>
+          <div>
+            <iframe src="https://embed.lottiefiles.com/animation/96048" style={{ width: '100%', height: '100%' }}></iframe>
+          </div>
+          </div>
       </div>
     </div>
   );
