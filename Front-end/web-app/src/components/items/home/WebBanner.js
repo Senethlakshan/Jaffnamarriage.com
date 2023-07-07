@@ -15,7 +15,8 @@ const WebBanner = () => {
     right: '180px',
     height: '107px',
     width: '1105px',
-    background: 'linear-gradient(to right, rgba(0, 0, 0, 0.6) 10%, rgba(255, 215, 0, 0.6) 50%, rgba(0, 0, 0, 0.6) 100%)',
+    background: 'rgba(255, 255, 255, 0.8)',
+    // background: 'linear-gradient(to right, rgba(0, 0, 0, 0.6) 10%, rgba(255, 215, 0, 0.6) 50%, rgba(0, 0, 0, 0.6) 100%)',
     borderRadius: '15px',
     
   
@@ -79,7 +80,7 @@ const WebBanner = () => {
           )}
         </div>
       </div>
-      <div className="absolute" style={boxStyles}>
+      <div className="absolute p-2" style={boxStyles}>
         <h1 className="text-black">hello</h1>
       </div>
     </div>
