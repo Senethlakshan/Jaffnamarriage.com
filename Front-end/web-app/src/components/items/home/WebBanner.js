@@ -35,6 +35,7 @@ const WebBanner = () => {
           fontFamily: 'Berkshire Swash, cursive'
         }}
       >
+        {/* carousel text */}
         <Carousel
           showStatus={false}
           showThumbs={false}
@@ -80,8 +81,51 @@ const WebBanner = () => {
           )}
         </div>
       </div>
+      {/* box like serach Members */}
       <div className="absolute p-2" style={boxStyles}>
-        <h1 className="text-black">hello</h1>
+      <table className="w-full">
+            <tbody>
+              <tr>
+                <td className=" p-2 text-center">I'm Looking For a </td>
+                <td className=" p-2 text-center">Age </td>
+                <td className=" p-2 text-center">Age </td>
+                <td className=" p-2 text-center">Of Religion </td>
+                <td className=" p-2 text-center"> </td>
+              </tr>
+              <tr>
+                <td className=" p-2 text-center">
+                <select className="w-full bg-white border border-gray-300 rounded py-2 px-4">
+                  <option value="">Looking for</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                </select>
+                </td>
+                <td className=" p-2 text-center">
+                <select className="w-full bg-white border border-gray-300 rounded py-2 px-4">
+                  <option value="">Looking for</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                </select>
+                </td>
+                <td className=" p-2 text-center">
+                <select className="w-full bg-white border border-gray-300 rounded py-2 px-4">
+                  <option value="">Looking for</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                </select>
+                </td>
+                <td className=" p-2 text-center">
+                  <select className="w-full bg-white border border-gray-300 rounded py-2 px-4">
+                  <option value="">Looking for</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                </select></td>
+                <td className=" p-2 text-center">
+                <button className="bg-blue-500 text-white py-2 px-4 rounded">Search</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
       </div>
     </div>
   );
