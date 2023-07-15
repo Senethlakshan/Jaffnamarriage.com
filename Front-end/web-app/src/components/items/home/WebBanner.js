@@ -69,7 +69,8 @@ const WebBanner = () => {
           </div>
         </Carousel>
         <div className="flex justify-center items-center h-full mt-2">
-         
+            
+            {/* lottiefiles hart animated */}
             <iframe src="https://embed.lottiefiles.com/animation/96048" className="w-full h-full"></iframe>
          
         </div>

@@ -1,21 +1,19 @@
 import React from 'react';
+import LottieAnimation from 'lottie-react';
+import animationData from '../../../assests/home/bg-remover/lottie/Astronot.json'; // Replace with the path to your downloaded Lottie animation file
 
-
-const RegisterPage = () => {
-  
-
+function RegisterPage() {
   return (
-   <div>
     <div>
-      
-       <h1>Register</h1>
-       <p>lorem ip</p>
-       <p>lorem ip</p>
-       <p>lorem ip</p>
+      <h1>login page</h1>
+      <LottieAnimation
+        lottieRef={(ref) => ref && ref.setSpeed(0.5)} // Optional: Adjust animation speed
+        animationData={animationData}
+        loop={true}
+        autoplay={true}
+      />
     </div>
-   </div>
-      
   );
-};
+}
 
 export default RegisterPage;

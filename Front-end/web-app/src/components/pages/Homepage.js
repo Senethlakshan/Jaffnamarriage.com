@@ -1,14 +1,36 @@
-import React from "react";
-import { FaUser, FaSearch, FaLink } from "react-icons/fa";
-import WebBanner from "../items/home/WebBanner";
-import Newmember from "../items/home/Newmember";
-import ContactForm from "../items/home/ContactForm";
-import SucessStories from "../items/home/SucessStories";
-
+import React from 'react';
+import { Helmet } from 'react-helmet';
+import { FaUser, FaSearch, FaLink } from 'react-icons/fa';
+import { useLocation } from 'react-router-dom';
+import WebBanner from '../items/home/WebBanner';
+import Newmember from '../items/home/Newmember';
+import ContactForm from '../items/home/ContactForm';
+import SucessStories from '../items/home/SucessStories';
 
 const Homepage = () => {
+  const location = useLocation();
+  const isHomePage = location.pathname === '/';
+
   return (
     <div>
+      <Helmet>
+        {isHomePage && (
+          <script type="text/javascript">
+            {`
+              var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+              (function(){
+                var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+                s1.async=true;
+                s1.src='https://embed.tawk.to/64b18508cc26a871b0287207/1h5amvajm';
+                s1.charset='UTF-8';
+                s1.setAttribute('crossorigin','*');
+                s0.parentNode.insertBefore(s1,s0);
+              })();
+            `}
+          </script>
+        )}
+      </Helmet>
+
       <div>
         <WebBanner />
         {/* padding 150px section start*****/}
@@ -17,13 +39,9 @@ const Homepage = () => {
             <div className="bg-blue-400 h-597 min-w-full">
               <div className="flex pl-4 pr-4 flex-col items-center justify-center">
                 <h2 className="text-gold text-4xl m-2">How It Works</h2>
-                <h1 className="text-6xl m-1">
-                  Find Your Partner In Just a Few Steps
-                </h1>
+                <h1 className="text-6xl m-1">Find Your Partner In Just a Few Steps</h1>
                 <p className="text-2xl mt-4">
-                  JaffnaMarriage will help you find your perfect match with just a
-                  few steps. You focus on what is most important to you, we do all
-                  the work.
+                  JaffnaMarriage will help you find your perfect match with just a few steps. You focus on what is most important to you, we do all the work.
                 </p>
               </div>
             </div>
@@ -43,9 +61,7 @@ const Homepage = () => {
                 <span className="text-gray-400 mx-4">➜</span>
                 <div className="flex flex-col items-center">
                   <FaLink className="text-3xl mb-2" />
-                  <span className="text-2xl font-bold">
-                    Connect with Your Partner
-                  </span>
+                  <span className="text-2xl font-bold">Connect with Your Partner</span>
                 </div>
               </div>
             </div>
@@ -53,7 +69,7 @@ const Homepage = () => {
             <Newmember />
             {/* get started contact form */}
             <ContactForm />
-            {/* sucess stories */}
+            {/* success stories */}
             <SucessStories />
             <Newmember />
           </div>
