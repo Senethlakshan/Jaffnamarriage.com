@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FaEye, FaEyeSlash,FaUserAlt } from 'react-icons/fa';
+import { Link } from "react-router-dom";
 import { useSpring, animated } from 'react-spring';
 import LottieAnimation from 'lottie-react';
 import animationData from '../../../assests/home/bg-remover/l2/goldenhart.json';
@@ -205,13 +206,15 @@ function RegisterPage() {
                     </span>
                   </label>
                 </div>
+                {/* Next button */}
+                <Link to="/regiter-process" >
                 <button
                   type="submit"
                   className="w-full py-3 rounded-lg bg-gradient-to-tr from-amber-900 to-yellow-300 text-white font-bold"
-                  disabled={!isChecked}
                 >
-                  Register
+                  Next
                 </button>
+                </Link>
               </form>
             </div>
           </div>

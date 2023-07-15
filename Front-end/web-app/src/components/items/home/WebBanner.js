@@ -1,25 +1,25 @@
-import React from 'react';
-import { Carousel } from 'react-responsive-carousel';
-import 'react-responsive-carousel/lib/styles/carousel.min.css';
-import web_banner from '../../../assests/home/web-banner.jpeg';
-import { useMediaQuery } from 'react-responsive';
-
+import React from "react";
+import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import web_banner from "../../../assests/home/web-banner.jpeg";
+import { useMediaQuery } from "react-responsive";
+import { FaSearch } from "react-icons/fa";
 
 const WebBanner = () => {
-  const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
-  const isTablet = useMediaQuery({ query: '(min-width: 769px) and (max-width: 1024px)' });
+  const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
+  const isTablet = useMediaQuery({
+    query: "(min-width: 769px) and (max-width: 1024px)",
+  });
 
   const boxStyles = {
-    top: '549px',
-    left: '180px',
-    right: '180px',
-    height: '107px',
-    width: '1105px',
-    background: 'rgba(255, 255, 255, 0.8)',
+    top: "549px",
+    left: "180px",
+    right: "180px",
+    height: "107px",
+    width: "1105px",
+    background: "rgba(255, 255, 255, 0.8)",
     // background: 'linear-gradient(to right, rgba(0, 0, 0, 0.6) 10%, rgba(255, 215, 0, 0.6) 50%, rgba(0, 0, 0, 0.6) 100%)',
-    borderRadius: '15px',
-    
-  
+    borderRadius: "15px",
   };
 
   return (
@@ -28,11 +28,11 @@ const WebBanner = () => {
       <div
         className="absolute top-0 left-0 p-4 text-yellow-400"
         style={{
-          width: isMobile ? '100%' : '561px',
-          height: isMobile ? '100%' : '356px',
-          fontSize: isMobile ? '32px' : '50px', // Adjust font size for mobile
-          paddingTop: isMobile ? '70px' : '100px', // Adjust top padding for mobile
-          fontFamily: 'Berkshire Swash, cursive'
+          width: isMobile ? "100%" : "561px",
+          height: isMobile ? "100%" : "356px",
+          fontSize: isMobile ? "32px" : "50px", // Adjust font size for mobile
+          paddingTop: isMobile ? "70px" : "100px", // Adjust top padding for mobile
+          fontFamily: "Berkshire Swash, cursive",
         }}
       >
         {/* carousel text */}
@@ -44,93 +44,110 @@ const WebBanner = () => {
           autoPlay
           infiniteLoop
           interval={5000}
-          style={{ width: '100%', height: '100%' }}
+          style={{ width: "100%", height: "100%" }}
         >
           <div>
             <p className="slider-text">
-              Enjoy life and find your life partner<br />
+              Enjoy life and find your life partner
+              <br />
               <span className="pt-7">
-                <span className="text-white text-lg text-center font-berkshire">JaffnaMariage.com💕</span><br />
-                <span className="text-white text-lg font-times">"Where love stories begin and dreams come true."</span>
+                <span className="text-white text-lg text-center font-berkshire">
+                  JaffnaMariage.com💕
+                </span>
+                <br />
+                <span className="text-white text-lg font-times">
+                  "Where love stories begin and dreams come true."
+                </span>
               </span>
             </p>
           </div>
           <div>
             <p className="slider-text text-center">
-              Now put your hands together, put your hearts together in your hands.<br />
-              <span className="text-white text-lg text-center pt-4 font-berkshire">JaffnaMariage.com💕</span>
+              Now put your hands together, put your hearts together in your
+              hands.
+              <br />
+              <span className="text-white text-lg text-center pt-4 font-berkshire">
+                JaffnaMariage.com💕
+              </span>
             </p>
           </div>
           <div>
             <p className="slider-text text-center">
-              "Embark on a new chapter of love and happiness.."<br />
-              <span className="text-white text-lg text-center pt-4 font-berkshire">JaffnaMariage.com💕</span>
+              "Embark on a new chapter of love and happiness.."
+              <br />
+              <span className="text-white text-lg text-center pt-4 font-berkshire">
+                JaffnaMariage.com💕
+              </span>
             </p>
           </div>
         </Carousel>
         <div className="flex justify-center items-center h-full mt-2">
-            
-            {/* lottiefiles hart animated */}
-            <iframe src="https://embed.lottiefiles.com/animation/96048" className="w-full h-full"></iframe>
-         
+          {/* lottiefiles hart animated */}
+          <iframe
+            src="https://embed.lottiefiles.com/animation/96048"
+            className="w-full h-full"
+          ></iframe>
         </div>
         <div className="flex justify-center items-center h-full mt-2">
-          {isTablet ? (
-            <></>
-          ) : (
-            <></>
-          )}
+          {isTablet ? <></> : <></>}
         </div>
       </div>
       {/* box like serach Members */}
       <div className="absolute p-2" style={boxStyles}>
-      <table className="w-full">
-            <tbody>
-              <tr>
-                <td className=" p-2 text-center">I'm Looking For a </td>
-                <td className=" p-2 text-center">Age </td>
-                <td className=" p-2 text-center">Age </td>
-                <td className=" p-2 text-center">Of Religion </td>
-                <td className=" p-2 text-center"> </td>
-              </tr>
-              <tr>
-                <td className=" p-2 text-center">
+        <table className="w-full">
+          <tbody>
+            <tr>
+              <td className=" p-2 text-center">I'm Looking For a </td>
+              <td className=" p-2 text-center">Age </td>
+              <td className=" p-2 text-center"></td>
+              <td className=" p-2 text-center">Age </td>
+              <td className=" p-2 text-center">Of Religion </td>
+              <td className=" p-2 text-center"> </td>
+            </tr>
+            <tr>
+              <td className=" p-2 text-center">
                 <select className="w-full bg-white border border-gray-300 rounded py-2 px-4">
                   <option value="">Looking for</option>
                   <option value="male">Male</option>
                   <option value="female">Female</option>
                 </select>
-                </td>
-                <td className=" p-2 text-center">
+              </td>
+              <td className=" p-2 text-center">
                 <select className="w-full bg-white border border-gray-300 rounded py-2 px-4">
-                  <option value="">Looking for</option>
+                  <option value="">Select</option>
                   <option value="male">Male</option>
                   <option value="female">Female</option>
                 </select>
-                </td>
-                <td className=" p-2 text-center">
+              </td>
+              <td className=" p-2 text-center">
+                <p>To</p>
+              </td>
+              <td className=" p-2 text-center">
                 <select className="w-full bg-white border border-gray-300 rounded py-2 px-4">
-                  <option value="">Looking for</option>
+                  <option value="">Select</option>
                   <option value="male">Male</option>
                   <option value="female">Female</option>
                 </select>
-                </td>
-                <td className=" p-2 text-center">
-                  <select className="w-full bg-white border border-gray-300 rounded py-2 px-4">
-                  <option value="">Looking for</option>
+              </td>
+              <td className=" p-2 text-center">
+                <select className="w-full bg-white border border-gray-300 rounded py-2 px-4">
+                  <option value="">Select</option>
                   <option value="male">Male</option>
                   <option value="female">Female</option>
-                </select></td>
-                <td className=" p-2 text-center">
-                <button className="bg-blue-500 text-white py-2 px-4 rounded">Search</button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+                </select>
+              </td>
+              <td className=" p-2 text-center">
+                <button className="bg-gradient-to-tr from-amber-900 to-yellow-300 text-white py-2 px-4 rounded flex items-center">
+                  Search
+                  <FaSearch className="ml-2" />
+                </button>{" "}
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   );
 };
 
 export default WebBanner;
-
