@@ -1,17 +1,102 @@
-import React from 'react';
+import React from "react";
+import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import photo1 from "../../../assests/home/stories.jpeg";
 
 function SucessStories() {
   return (
     <div>
-      <div className="bg-white h-597 min-w-full flex flex-col items-center justify-center">
-          <h2 className="text-3xl mb-4">Sucess stories</h2>
-          <p className="text-2xl mt-4">
-              JaffnaMarriage will help you find your perfect match with just a
-              few steps. You focus on what is most important to you, we do all
-              the work.
-            </p>
-        </div>
-        {/* sucess stories carousel section */}
+      <div className="h-597 min-w-full mt-10 flex flex-col items-center justify-center">
+        <h2 className="mb-4  text-amber-500 text-4xl font-serif">Success stories</h2>
+        <p className="text-2xl mt-4 font-serif text-center">
+          JaffnaMarriage will help you find your perfect match with just a few
+          steps. You focus on what is most important to you, we do all the work.
+        </p>
+      </div>
+      {/* Success stories carousel section */}
+      <div className="flex justify-center mt-5  py-2 px-4">
+        {/* User profile scroll slide bar */}
+        <Carousel
+          showThumbs={false}
+          showStatus={false}
+          autoPlay={true}
+          infiniteLoop={true}
+          centerMode={true}
+          centerSlidePercentage={33.33}
+          className="w-full"
+        >
+          {/* Success Story Card 1 */}
+          <div className="flex justify-center">
+            <div
+              className="card  rounded-lg pb-2 m-1 shadow"
+              style={{ width: "18rem" }}
+            >
+              <img
+                className="card-img-top"
+                src={photo1}
+                alt="Success Story 1"
+              />
+              <div className="card-body">
+                <p className="card-text mt-3 px-2 text-justify">
+                  Some quick example text to build on the card title and make up
+                  the bulk of the card's content.
+                  Some quick example text to build on the card title and make up
+                  the bulk of the card's content.
+                </p>
+                <span className="text-3xl" role="img" aria-label="star">⭐️⭐️⭐️⭐️⭐️</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Success Story Card 2 */}
+          <div className="flex justify-center">
+            <div
+              className="card bg-white rounded-lg pb-2 m-1 shadow"
+              style={{ width: "18rem" }}
+            >
+              <img
+                className="card-img-top"
+                src={photo1}
+                alt="Success Story 1"
+              />
+              <div className="card-body">
+                <p className="card-text mt-3 px-2 text-justify">
+                  Some quick example text to build on the card title and make up
+                  the bulk of the card's content.
+                  Some quick example text to build on the card title and make up
+                  the bulk of the card's content.
+                </p>
+                <span className="text-3xl" role="img" aria-label="star">⭐️⭐️⭐️</span>
+
+              </div>
+            </div>
+          </div>
+          {/* Success Story Card 3 */}
+          <div className="flex justify-center">
+            <div
+              className="card bg-white rounded-lg pb-2 m-1 shadow"
+              style={{ width: "18rem" }}
+            >
+              <img
+                className="card-img-top"
+                src={photo1}
+                alt="Success Story 1"
+              />
+              <div className="card-body">
+                <p className="card-text mt-3 px-2 text-justify">
+                  Some quick example text to build on the card title and make up
+                  the bulk of the card's content.
+                  Some quick example text to build on the card title and make up
+                  the bulk of the card's content.
+                </p>
+                <span className="text-3xl" role="img" aria-label="star">⭐️⭐️⭐️⭐️⭐️</span>
+
+              </div>
+            </div>
+          </div>
+          {/* Add more success story cards as needed */}
+        </Carousel>
+      </div>
     </div>
   );
 }

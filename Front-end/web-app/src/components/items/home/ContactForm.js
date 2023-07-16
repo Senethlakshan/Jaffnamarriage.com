@@ -4,22 +4,17 @@ function ContactForm() {
   return (
     <div>
           
-    <div className="flex justify-center">
+    <div className="flex justify-center mt-5 bg-gradient-to-r from-yellow-500 to-yellow-700 rounded-xl">
       <div className="w-1/2 p-8">
         {/* Left side: Form */}
         <div className="bg-gray-200 p-4 rounded-md">
-          <h2 className="text-2xl mb-4">Get Started</h2>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-            faucibus dolor id tortor efficitur posuere. Vestibulum
-            tincidunt vestibulum sem, nec interdum quam iaculis sed.
-            Nullam at fermentum neque.
-          </p>
+          <h2 className="text-2xl">Get Started</h2>
         </div>
       </div>
       <div className="w-1/2 p-8">
         {/* Right side: "Get Started" text */}
 
+        <div className='bg-white p-5 rounded-xl'>
         <form>
           <div className="mb-4">
             <label htmlFor="name" className="block text-lg mb-2">
@@ -59,11 +54,12 @@ function ContactForm() {
           </div>
           <button
             type="submit"
-            className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
+            className="bg-gradient-to-tr from-amber-900 to-yellow-300 text-white py-2 px-4 rounded-md hover:bg-blue-600"
           >
             Submit
           </button>
         </form>
+        </div>
       </div>
     </div>
    </div> 
