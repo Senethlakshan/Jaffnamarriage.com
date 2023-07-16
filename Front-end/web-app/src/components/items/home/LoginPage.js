@@ -66,7 +66,7 @@ function LoginPage() {
           {/* login from */}
           <div className="w-1/2 flex items-center justify-center  " >
           <div className="p-6 max-w-sm w-full border-2 border-solid border-gray-300 rounded-lg bg-white">
-            <h2 className="text-2xl font-semibold  flex items-center mb-6">
+            <h2 className="text-2xl font-semibold  flex items-center justify-center mb-6">
                 <FaUserAlt className="mr-2" />
                 Login
               </h2>

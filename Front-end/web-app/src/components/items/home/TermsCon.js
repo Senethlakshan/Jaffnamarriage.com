@@ -8,19 +8,30 @@ const TermsCon = () => {
   };
 
   return (
-    <div className="container mx-auto">
+    <div className="w-861 h-645 mx-auto">
       <div className="max-w-lg mx-auto">
-        <h1 className="text-2xl font-bold mb-4">Terms and Conditions</h1>
-        <div
-          className="max-h-72 overflow-y-auto border border-gray-300 p-4 mb-4"
-          style={{ scrollbarWidth: 'thin' }}
-        >
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce convallis diam in nisl
-            sagittis hendrerit. Curabitur in purus pretium, gravida turpis vel, ultricies quam.
-            Duis lacinia leo ut purus congue, id scelerisque neque luctus. Morbi ut semper ex.
-          </p>
-          {/* Add more content here */}
+        <h1 className="text-2xl text-center font-bold mb-4 bg-gray-200 rounded-xl p-2">Terms and Conditions</h1>
+        <div className="max-h-72 overflow-y-auto border rounded-md border-gray-300 p-4 mb-4">
+          <div className="h-full">
+            <p className="text-sm">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce convallis diam in nisl
+              sagittis hendrerit. Curabitur in purus pretium, gravida turpis vel, ultricies quam.
+              Duis lacinia leo ut purus congue, id scelerisque neque luctus. Morbi ut semper ex.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce convallis diam in nisl
+              sagittis hendrerit. Curabitur in purus pretium, gravida turpis vel, ultricies quam.
+              Duis lacinia leo ut purus congue, id scelerisque neque luctus. Morbi ut semper ex.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce convallis diam in nisl
+              sagittis hendrerit. Curabitur in purus pretium, gravida turpis vel, ultricies quam.
+              Duis lacinia leo ut purus congue, id scelerisque neque luctus. Morbi ut semper ex.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce convallis diam in nisl
+              sagittis hendrerit. Curabitur in purus pretium, gravida turpis vel, ultricies quam.
+              Duis lacinia leo ut purus congue, id scelerisque neque luctus. Morbi ut semper ex.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce convallis diam in nisl
+              sagittis hendrerit. Curabitur in purus pretium, gravida turpis vel, ultricies quam.
+              Duis lacinia leo ut purus congue, id scelerisque neque luctus. Morbi ut semper ex.
+            </p>
+            {/* Add more content here */}
+          </div>
         </div>
         <div className="flex items-center">
           <input

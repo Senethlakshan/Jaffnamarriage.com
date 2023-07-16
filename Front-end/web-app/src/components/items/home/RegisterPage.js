@@ -107,7 +107,7 @@ function RegisterPage() {
           {/* login from */}
           <div className="w-1/2 flex items-center justify-center  ">
             <div className="w-full max-w-sm p-6 bg-white rounded-lg shadow-lg">
-              <h2 className="text-2xl font-semibold flex items-center mb-6">
+              <h2 className="text-2xl font-semibold flex items-center justify-center mb-6">
                 <FaUserAlt className="mr-2" />
                 Register
               </h2>
@@ -192,19 +192,6 @@ function RegisterPage() {
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     className="w-full px-4 py-3 rounded-lg bg-gray-100 border-gray-300 focus:border-blue-500 focus:bg-white focus:outline-none"
                   />
-                </div>
-                <div className="mb-4">
-                  <label className="flex items-center">
-                    <input
-                      type="checkbox"
-                      className="form-checkbox h-4 w-4 text-blue-500"
-                      checked={isChecked}
-                      onChange={() => setIsChecked(!isChecked)}
-                    />
-                    <span className="ml-2 text-gray-700">
-                      I agree to the <a href="#">Terms and Conditions</a>
-                    </span>
-                  </label>
                 </div>
                 {/* Next button */}
                 <Link to="/regiter-process" >
