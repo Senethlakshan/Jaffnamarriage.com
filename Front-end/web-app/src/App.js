@@ -7,6 +7,7 @@ import RegisterPage from "./components/items/home/RegisterPage";
 import Aboutus from './components/pages/Aboutus';
 import Contactpage from "./components/pages/Contactpage";
 import RegProcesswrap from "./components/items/home/RegProcesswrap";
+import UserDashbord from "./components/pages/userPanel/UserDashbord";
 
 
 const App = () => {
@@ -20,6 +21,7 @@ const App = () => {
         <Route path="/about" element={<Aboutus />} />
         <Route path="/contact" element={<Contactpage />} /> 
         <Route path="/regiter-process" element={<RegProcesswrap />} /> 
+        <Route path="/user-panel" element={<RegProcesswrap />} /> 
       </Routes>
     </Router>
   );

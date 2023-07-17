@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { FaEye, FaEyeSlash,FaUserAlt } from 'react-icons/fa';
+import { FaEye, FaEyeSlash, FaUserAlt } from 'react-icons/fa';
 import { useSpring, animated } from 'react-spring';
 import LottieAnimation from 'lottie-react';
 import animationData from '../../../assests/home/bg-remover/lottie/login.json';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function LoginPage() {
   const fadeAnimation = useSpring({
@@ -18,6 +19,8 @@ function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
+
+  const navigate = useNavigate();
 
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
@@ -37,11 +40,20 @@ function LoginPage() {
       return;
     }
 
-    // Perform login logic
-    // ...
-
-    // Display success message
-    toast.success('Login successful');
+    // Make API call to login endpoint
+    axios
+      .post('your-login-endpoint', { email, password })
+      .then((response) => {
+        // Display success message
+        toast.success('Login successful');
+        // Redirect to the user panel page after successful login
+        navigate('/user-panel');
+      })
+      .catch((error) => {
+        // Display error message
+        toast.error('Login failed');
+        // Handle the error or display an appropriate message
+      });
   };
 
   const validateEmail = (email) => {
@@ -63,10 +75,10 @@ function LoginPage() {
               autoplay={true}
             />
           </div>
-          {/* login from */}
-          <div className="w-1/2 flex items-center justify-center  " >
-          <div className="p-6 max-w-sm w-full border-2 border-solid border-gray-300 rounded-lg bg-white">
-            <h2 className="text-2xl font-semibold  flex items-center justify-center mb-6">
+          {/* login form */}
+          <div className="w-1/2 flex items-center justify-center  ">
+            <div className="p-6 max-w-sm w-full border-2 border-solid border-gray-300 rounded-lg bg-white">
+              <h2 className="text-2xl font-semibold  flex items-center justify-center mb-6">
                 <FaUserAlt className="mr-2" />
                 Login
               </h2>
@@ -124,12 +136,7 @@ function LoginPage() {
                     />
                     <span className="ml-2 text-gray-700">Remember me</span>
                   </label>
-                  <a
-                    href="#"
-                    className="text-sm text-blue-500 hover:text-blue-700"
-                  >
-                    Forgot password?
-                  </a>
+                  <div className="text-sm text-blue-500 hover:text-blue-700">Forgot password?</div>
                 </div>
                 <button
                   type="submit"
@@ -148,4 +155,3 @@ function LoginPage() {
 }
 
 export default LoginPage;
-
