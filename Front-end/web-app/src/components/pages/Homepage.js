@@ -68,7 +68,7 @@ const Homepage = () => {
                   <tbody>
                     <tr>
                       <td className=" px-4 py-2">
-                        <div className="flex justify-center">
+                        <div className="flex justify-center hover:scale-110">
                           <img src={RegisterIcon} alt="Register" />
                         </div>
                       </td>
@@ -83,7 +83,7 @@ const Homepage = () => {
                         </div>
                       </td>
                       <td className=" px-4 py-2">
-                        <div className="flex justify-center">
+                        <div className="flex justify-center hover:scale-110">
                         <img src={FindIcon} alt="Find" />
                         </div>
                       </td>
@@ -98,7 +98,7 @@ const Homepage = () => {
                         </div>
                       </td>
                       <td className=" px-4 py-2">
-                      <div className="flex justify-center">
+                      <div className="flex justify-center hover:scale-110">
                       <img src={ConnectIcon} alt="Connect" />
                         </div>
                       </td>

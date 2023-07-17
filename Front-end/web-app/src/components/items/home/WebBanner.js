@@ -32,7 +32,8 @@ const WebBanner = () => {
           height: isMobile ? "100%" : "356px",
           fontSize: isMobile ? "32px" : "50px", // Adjust font size for mobile
           paddingTop: isMobile ? "70px" : "100px", // Adjust top padding for mobile
-          fontFamily: "Berkshire Swash, cursive",
+          // fontFamily: "Berkshire Swash, cursive",
+          fontFamily:"serif",
         }}
       >
         {/* carousel text */}
@@ -51,13 +52,13 @@ const WebBanner = () => {
               Enjoy life and find your life partner
               <br />
               <span className="pt-7">
-                <span className="text-white text-lg text-center font-berkshire">
-                  JaffnaMariage.com💕
-                </span>
-                <br />
-                <span className="text-white text-lg font-times">
+              <span className="text-white text-lg font-serif">
                   "Where love stories begin and dreams come true."
                 </span>
+                <br />
+                <span className="text-white text-lg text-center font-berkshire">
+                  JaffnaMariage.com💕
+                </span>            
               </span>
             </p>
           </div>

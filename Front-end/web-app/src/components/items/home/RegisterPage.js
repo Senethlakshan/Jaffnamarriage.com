@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { FaEye, FaEyeSlash,FaUserAlt } from 'react-icons/fa';
-import { Link } from "react-router-dom";
+import { FaEye, FaEyeSlash, FaUserAlt } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 import { useSpring, animated } from 'react-spring';
 import LottieAnimation from 'lottie-react';
 import animationData from '../../../assests/home/bg-remover/l2/goldenhart.json';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import axios from 'axios';
 
 function RegisterPage() {
   const fadeAnimation = useSpring({
@@ -20,7 +21,7 @@ function RegisterPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [isChecked, setIsChecked] = useState(false);
+
 
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
@@ -29,12 +30,7 @@ function RegisterPage() {
   const handleRegister = (e) => {
     e.preventDefault();
 
-    // Check if terms and conditions checkbox is checked
-    if (!isChecked) {
-      toast.error('Please accept the terms and conditions');
-      return;
-    }
-
+   
     // Perform field validations
     if (!validateName(name)) {
       toast.error('Invalid name');
@@ -61,11 +57,29 @@ function RegisterPage() {
       return;
     }
 
-    // Perform registration logic
-    // ...
+    // Create data object to send to the backend API
+    const data = {
+      name: name,
+      marriedStatus: marriedStatus,
+      email: email,
+      password: password,
+    };
 
-    // Display success message
-    toast.success('Registration successful');
+    // Make Axios POST request to backend API
+    axios
+      .post('your-api-endpoint', data)
+      .then((response) => {
+        // Display success message
+        toast.success('Registration successful');
+        // Do something after a successful registration, such as redirecting to the next page
+       
+      })
+      .catch((error) => {
+        // Display error message
+        toast.error('Registration failed');
+        // Handle the error or display an appropriate message
+        
+      });
   };
 
   const validateName = (name) => {
@@ -93,18 +107,21 @@ function RegisterPage() {
               loop={true}
               autoplay={true}
             />
-         <div>
-         <h1 className=' text-3xl text-white' 
-          style={{
-            fontFamily: 'Berkshire Swash, cursive'
-          }}
-         >
-          "Marriage is a new beginning, let it be completed with just one eye."</h1>
-          <p className='mt-2 text-gray-100 '>திருமணம் ஒரு புதிய ஆரம்பம், அதை ஒரு கண்ணே முடிக்க வேண்டும்.</p>
-          </div>   
-            
+            <div>
+              <h1
+                className="text-3xl text-white"
+                style={{
+                  fontFamily: 'Berkshire Swash, cursive',
+                }}
+              >
+                "Marriage is a new beginning, let it be completed with just one eye."
+              </h1>
+              <p className="mt-2 text-gray-100 ">
+                திருமணம் ஒரு புதிய ஆரம்பம், அதை ஒரு கண்ணே முடிக்க வேண்டும்.
+              </p>
+            </div>
           </div>
-          {/* login from */}
+          {/* Register form */}
           <div className="w-1/2 flex items-center justify-center  ">
             <div className="w-full max-w-sm p-6 bg-white rounded-lg shadow-lg">
               <h2 className="text-2xl font-semibold flex items-center justify-center mb-6">
@@ -213,3 +230,10 @@ function RegisterPage() {
 }
 
 export default RegisterPage;
+
+
+// futture developemt *****
+
+// 01.if all field fill sucessfull enable next parent or enable button
+// 02.add google auth
+// 03.add next icon next button
