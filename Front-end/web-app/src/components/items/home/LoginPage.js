@@ -1,23 +1,23 @@
-import React, { useState } from 'react';
-import { FaEye, FaEyeSlash, FaUserAlt } from 'react-icons/fa';
-import { useSpring, animated } from 'react-spring';
-import LottieAnimation from 'lottie-react';
-import animationData from '../../../assests/home/bg-remover/lottie/login.json';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { FaEye, FaEyeSlash, FaUserAlt } from "react-icons/fa";
+import { useSpring, animated } from "react-spring";
+import LottieAnimation from "lottie-react";
+import animationData from "../../../assests/home/bg-remover/lottie/login.json";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
+import { useNavigate,Link } from "react-router-dom";
 
 function LoginPage() {
   const fadeAnimation = useSpring({
-    from: { opacity: 0, transform: 'translateY(20px)' },
-    to: { opacity: 1, transform: 'translateY(0)' },
+    from: { opacity: 0, transform: "translateY(20px)" },
+    to: { opacity: 1, transform: "translateY(0)" },
     config: { duration: 500 },
   });
 
   const [passwordVisible, setPasswordVisible] = useState(false);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
 
   const navigate = useNavigate();
@@ -31,27 +31,27 @@ function LoginPage() {
 
     // Perform email and password validation
     if (!validateEmail(email)) {
-      toast.error('Invalid email format');
+      toast.error("Invalid email format");
       return;
     }
 
     if (password.length < 6) {
-      toast.error('Password must be at least 6 characters long');
+      toast.error("Password must be at least 6 characters long");
       return;
     }
 
     // Make API call to login endpoint
     axios
-      .post('your-login-endpoint', { email, password })
+      .post("your-login-endpoint", { email, password })
       .then((response) => {
         // Display success message
-        toast.success('Login successful');
+        toast.success("Login successful");
         // Redirect to the user panel page after successful login
-        navigate('/user-panel');
+        navigate("/user-panel");
       })
       .catch((error) => {
         // Display error message
-        toast.error('Login failed');
+        toast.error("Login failed");
         // Handle the error or display an appropriate message
       });
   };
@@ -107,7 +107,7 @@ function LoginPage() {
                     Password
                   </label>
                   <input
-                    type={passwordVisible ? 'text' : 'password'}
+                    type={passwordVisible ? "text" : "password"}
                     id="password"
                     placeholder="Enter your password"
                     value={password}
@@ -136,7 +136,12 @@ function LoginPage() {
                     />
                     <span className="ml-2 text-gray-700">Remember me</span>
                   </label>
-                  <div className="text-sm text-blue-500 hover:text-blue-700">Forgot password?</div>
+                  {/* forget password */}
+                  <Link to="/forget-password">
+                    <div className="text-sm text-blue-500 hover:text-blue-700">
+                      Forgot password?
+                    </div>
+                  </Link>
                 </div>
                 <button
                   type="submit"
