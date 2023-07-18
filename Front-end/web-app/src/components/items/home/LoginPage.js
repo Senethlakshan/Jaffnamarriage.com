@@ -6,7 +6,7 @@ import animationData from "../../../assests/home/bg-remover/lottie/login.json";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
-import { useNavigate,Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 function LoginPage() {
   const fadeAnimation = useSpring({
@@ -126,7 +126,15 @@ function LoginPage() {
                     )}
                   </button>
                 </div>
-                <div className="flex items-center justify-between mb-4">
+
+                <button
+                  type="submit"
+                  className="w-full py-3 rounded-lg bg-gradient-to-tr from-amber-900 to-yellow-300 text-white font-bold "
+                >
+                  Login
+                </button>
+                {/* Remember me forget password */}
+                <div className="flex items-center justify-between mt-6 mb-4">
                   <label className="flex items-center">
                     <input
                       type="checkbox"
@@ -138,17 +146,23 @@ function LoginPage() {
                   </label>
                   {/* forget password */}
                   <Link to="/forget-password">
-                    <div className="text-sm text-blue-500 hover:text-blue-700">
+                    <div className="text-m text-blue-500 hover:text-blue-700">
                       Forgot password?
                     </div>
                   </Link>
                 </div>
-                <button
-                  type="submit"
-                  className="w-full py-3 rounded-lg bg-gradient-to-tr from-amber-900 to-yellow-300 text-white font-bold "
-                >
-                  Login
-                </button>
+                
+                {/* create new register : need help?  */}
+                <div className="flex mt-6 bg-slate-200 p-3 rounded-xl justify-between">
+                <Link to="/register">
+                <div className="text-black text-sm">
+                    <p>Create New An Account</p>
+                  </div>
+                  </Link>
+                  <div className="text-black text-sm">
+                    <h2>Need Help?</h2>
+                  </div>
+                </div>
               </form>
             </div>
           </div>
