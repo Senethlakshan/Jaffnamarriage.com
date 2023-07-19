@@ -2,17 +2,58 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaBars, FaTimes } from "react-icons/fa";
 import brandlogo from '../../../assests/home/b1.jpeg';
+import ResponsiveDialog from '../alert';
+import axiosInstance from '../../../api';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-
+const login = localStorage.getItem('login');
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [dialogOpen, setDialogOpen] = useState(false);
+
+  const handleLogout = () => {
+    // Handle logout logic
+    setDialogOpen(true);
+  };
+
+  const handleCloseDialog = () => {
+    setDialogOpen(false);
+    // Optionally, you can perform any additional logic after closing the dialog
+    // For example, you can navigate to another page or execute specific actions
+  };
+  
+  const logout = () => {
+    
+    // Make a POST request to the logout endpoint
+    axiosInstance.get('/logout')
+  .then(response => {
+    // Handle the response
+    console.log(response.data); // Assuming the response contains a 'message' field
+    // Handle logout logic
+    toast.success('Logout successful');
+    localStorage.removeItem('login');
+    localStorage.removeItem('api_token');
+    handleCloseDialog();
+    window.location.href = '/';
+  })
+  .catch(error => {
+    // Handle the error
+    console.error(error);
+    
+    // Perform any error handling or display error messages to the user
+  });
+
+    
+  };
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
 
   return (
+    
     <nav className="bg-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
         <div className="flex items-center justify-between h-16 ">
@@ -64,23 +105,47 @@ const Navbar = () => {
             </button>
           </div>
           <div className="hidden md:flex">
+          {login === 'true' ? (
+ 
+ <div>
+ <button
+   className="ml-4 text-xl bg-gradient-to-r from-yellow-600 to-yellow-800 text-white py-1 px-4 rounded transition-all hover:bg-gradient-to-r hover:from-yellow-800 hover:to-yellow-600 transform-gpu hover:scale-110"
+   style={{ fontFamily: 'Berkshire Swash, cursive' }}
+   onClick={handleLogout}
+ >
+   Logout
+ </button>
 
-            <Link
-              to="/login"
-              className="ml-4  text-xl bg-gradient-to-r from-yellow-600 to-yellow-800 text-white py-1 px-4 rounded transition-all hover:bg-gradient-to-r hover:from-yellow-800 hover:to-yellow-600 transform-gpu hover:scale-110"
-              style={{ fontFamily: 'Berkshire Swash, cursive' }}
-            >
-              Login
-            </Link>
+ <ResponsiveDialog
+   open={dialogOpen}
+   onClose={handleCloseDialog}
+   contentText="Are you sure you want to logout? Logging out will end your current session."
+   contentTitle="Logout Confirmation"
+   actionButtonLabel="Logout"
+   onActionButtonClick={logout}
+ />
+</div>
+  
+) : (
+  <>
+    <Link
+      to="/login"
+      className="ml-4 text-xl bg-gradient-to-r from-yellow-600 to-yellow-800 text-white py-1 px-4 rounded transition-all hover:bg-gradient-to-r hover:from-yellow-800 hover:to-yellow-600 transform-gpu hover:scale-110"
+      style={{ fontFamily: 'Berkshire Swash, cursive' }}
+    >
+      Login
+    </Link>
 
-            <Link
-              to="/register"
-              className="ml-4  text-xl bg-gradient-to-r from-yellow-600 to-yellow-800 text-white py-1 px-4 rounded transition-all hover:bg-gradient-to-r hover:from-yellow-800 hover:to-yellow-600 transform-gpu hover:scale-110"
-              style={{ fontFamily: 'Berkshire Swash, cursive' }}
-            >
-              Register
-            </Link>
-            
+    <Link
+      to="/register"
+      className="ml-4 text-xl bg-gradient-to-r from-yellow-600 to-yellow-800 text-white py-1 px-4 rounded transition-all hover:bg-gradient-to-r hover:from-yellow-800 hover:to-yellow-600 transform-gpu hover:scale-110"
+      style={{ fontFamily: 'Berkshire Swash, cursive' }}
+    >
+      Register
+    </Link>
+  </>
+)}
+      
 
 
             {/* additinal button style  */}
@@ -145,8 +210,31 @@ const Navbar = () => {
             </Link>
             
             {/* logo and register button responsive */}
+              
+            {login === 'true' ? (
+ 
+ <div>
+ <button
+   className="ml-4 text-xl bg-gradient-to-r from-yellow-600 to-yellow-800 text-white py-1 px-4 rounded transition-all hover:bg-gradient-to-r hover:from-yellow-800 hover:to-yellow-600 transform-gpu hover:scale-110"
+   style={{ fontFamily: 'Berkshire Swash, cursive' }}
+   onClick={handleLogout}
+ >
+   Logout
+ </button>
 
-              <Link to="/login" className="mt-2 text-xl bg-gradient-to-r from-yellow-600 to-yellow-800 text-white py-1 px-4 rounded transition-all hover:bg-gradient-to-r hover:from-yellow-800 hover:to-yellow-600 transform-gpu hover:scale-110 text-white mb-2"
+ <ResponsiveDialog
+   open={dialogOpen}
+   onClose={handleCloseDialog}
+   contentText="Are you sure you want to logout? Logging out will end your current session."
+   contentTitle="Logout Confirmation"
+   actionButtonLabel="Logout"
+   onActionButtonClick={logout}
+ />
+</div>
+  
+) : (
+  <>
+    <Link to="/login" className="mt-2 text-xl bg-gradient-to-r from-yellow-600 to-yellow-800 text-white py-1 px-4 rounded transition-all hover:bg-gradient-to-r hover:from-yellow-800 hover:to-yellow-600 transform-gpu hover:scale-110 text-white mb-2"
                 style={{ fontFamily: 'Berkshire Swash, cursive' }}
               >
 
@@ -157,11 +245,15 @@ const Navbar = () => {
               >
                 Register
               </Link>
+  </>
+)}
+   
             </div>
           </div>
         )}
       </div>
     </nav>
+    
   );
 };
 

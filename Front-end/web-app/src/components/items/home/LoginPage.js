@@ -7,7 +7,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import { useNavigate,Link } from "react-router-dom";
-
+import axiosInstance from '../../../api';
 function LoginPage() {
   const fadeAnimation = useSpring({
     from: { opacity: 0, transform: "translateY(20px)" },
@@ -41,19 +41,48 @@ function LoginPage() {
     }
 
     // Make API call to login endpoint
-    axios
-      .post("your-login-endpoint", { email, password })
-      .then((response) => {
-        // Display success message
-        toast.success("Login successful");
-        // Redirect to the user panel page after successful login
-        navigate("/user-panel");
-      })
-      .catch((error) => {
-        // Display error message
-        toast.error("Login failed");
-        // Handle the error or display an appropriate message
-      });
+    // Create data object to send to the backend API
+const data = {
+  email: email,
+  password: password,
+};
+
+// Make Axios POST request to backend API for login
+axiosInstance
+  .post('/login', data)
+  .then((response) => {
+    console.log(response.data);
+    // Get the token from the response
+    const token = response.data.token;
+
+    localStorage.setItem('api_token', token);
+    // Display success message
+    toast.success('Login successful');
+    localStorage.setItem('login', 'true');
+    // Do something after a successful login, such as redirecting to the next page
+    window.location.href = '/login-process';
+  })
+  .catch((error) => {
+    // Check if the error response contains validation errors
+    if (error.response && error.response.data && error.response.data.errors) {
+      const errorMessages = error.response.data.errors;
+      // Display the error message for the 'email' field
+      if (errorMessages.email && errorMessages.email.length > 0) {
+        toast.error(errorMessages.email[0]);
+      } else if (errorMessages.password && errorMessages.password.length > 0) {
+        toast.error(errorMessages.password[0]);
+      } else {
+        toast.error('Login failed');
+      }
+    } else if (error.response && error.response.data && error.response.data.message) {
+      // Display the error message from the response
+      toast.error(error.response.data.message);
+    } else {
+      // Handle other types of errors
+      toast.error('Login failed');
+    }
+  });
+
   };
 
   const validateEmail = (email) => {

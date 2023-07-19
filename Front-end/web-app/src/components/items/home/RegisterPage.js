@@ -7,6 +7,7 @@ import animationData from '../../../assests/home/bg-remover/l2/goldenhart.json';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
+import axiosInstance from '../../../api';
 
 function RegisterPage() {
   const fadeAnimation = useSpring({
@@ -66,22 +67,39 @@ function RegisterPage() {
     };
 
     // Make Axios POST request to backend API
-    axios
-      .post('your-api-endpoint', data)
-      .then((response) => {
+    axiosInstance
+  .post('/register', data)
+  .then((response) => {
+      console.log(response.data);
+        // Get the token from the response
+        const token = response.data.token;
+    
+        localStorage.setItem('api_token', token);
         // Display success message
         toast.success('Registration successful');
+        localStorage.setItem('login', 'true');
         // Do something after a successful registration, such as redirecting to the next page
-       
-      })
-      .catch((error) => {
-        // Display error message
+        window.location.href = '/regiter-process';
+  })
+  .catch((error) => {
+    // Check if the error response contains validation errors
+    if (error.response && error.response.data && error.response.data.errors) {
+      const errorMessages = error.response.data.errors;
+      // Display the error message for the 'email' field
+      if (errorMessages.email && errorMessages.email.length > 0) {
+        toast.error(errorMessages.email[0]);
+      } else {
         toast.error('Registration failed');
-        // Handle the error or display an appropriate message
-        
-      });
-  };
-
+      }
+    } else if (error.response && error.response.data && error.response.data.message) {
+      // Display the error message from the response
+      toast.error(error.response.data.message);
+    } else {
+      // Handle other types of errors
+      toast.error('Registration failed');
+    }
+  });
+  }
   const validateName = (name) => {
     return name.trim().length > 0;
   };
@@ -211,14 +229,14 @@ function RegisterPage() {
                   />
                 </div>
                 {/* Next button */}
-                <Link to="/regiter-process" >
+                
                 <button
                   type="submit"
                   className="w-full py-3 rounded-lg bg-gradient-to-tr from-amber-900 to-yellow-300 text-white font-bold"
                 >
                   Next
                 </button>
-                </Link>
+              
               </form>
             </div>
           </div>

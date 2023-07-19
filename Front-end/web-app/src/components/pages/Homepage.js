@@ -12,12 +12,41 @@ import ConnectIcon from "../../assests/home/çonnect.png";
 import FindIcon from "../../assests/home/search.png";
 import Footer from "../items/home/Footer";
 import animationData from "../../assests/home/bg-remover/lottie/riarrow.json";
+import axios from 'axios';
+import axiosInstance from '../../api';
+
+const token = localStorage.getItem('api_token');
+// Print the value of the api_token cookie
+
+if (token) {
+  axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+ // Print the headers to verify if the authorization header is set
+}
+
+axiosInstance.get('/validToken')
+  .then(response => {
+    // Token is valid, handle the response
+   
+    // Handle the response based on the message
+    if (response.data.message === 'valid') {
+      localStorage.setItem('login', 'true'); // Set boolean value as string 'true'
+    } else {
+      localStorage.setItem('login', 'false'); // Set boolean value as string 'false'
+    }
+  })
+  .catch(error => {
+    // Handle the error
+    console.error(error);
+    localStorage.setItem('login', 'false'); // Set boolean value as string 'false' for error case
+  });
+
 
 
 
 const Homepage = () => {
   const location = useLocation();
   const isHomePage = location.pathname === "/";
+
 
   return (
     <div>

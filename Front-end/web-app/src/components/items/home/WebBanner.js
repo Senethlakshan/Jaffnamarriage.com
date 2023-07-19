@@ -1,9 +1,17 @@
+
+// import React from 'react';
+// import { Carousel } from 'react-responsive-carousel';
+// import 'react-responsive-carousel/lib/styles/carousel.min.css';
+// import web_banner from '../../../assests/home/web-banner.jpeg';
+// import { useMediaQuery } from 'react-responsive';
+
 import React from "react";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import web_banner from "../../../assests/home/web-banner.jpeg";
 import { useMediaQuery } from "react-responsive";
 import { FaSearch } from "react-icons/fa";
+
 
 const WebBanner = () => {
   const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
@@ -12,6 +20,16 @@ const WebBanner = () => {
   });
 
   const boxStyles = {
+
+    // top: '549px',
+    // left: '180px',
+    // right: '180px',
+    // height: '107px',
+    // width: '90%',
+    // maxWidth: '1105px',
+    // background: 'rgba(255, 255, 255, 0.8)',
+    // borderRadius: '15px',
+
     top: "549px",
     left: "180px",
     right: "180px",
@@ -20,6 +38,7 @@ const WebBanner = () => {
     background: "rgba(255, 255, 255, 0.8)",
     // background: 'linear-gradient(to right, rgba(0, 0, 0, 0.6) 10%, rgba(255, 215, 0, 0.6) 50%, rgba(0, 0, 0, 0.6) 100%)',
     borderRadius: "15px",
+
   };
 
   return (
@@ -28,12 +47,14 @@ const WebBanner = () => {
       <div
         className="absolute top-0 left-0 p-4 text-yellow-400"
         style={{
-          width: isMobile ? "100%" : "561px",
-          height: isMobile ? "100%" : "356px",
-          fontSize: isMobile ? "32px" : "50px", // Adjust font size for mobile
-          paddingTop: isMobile ? "70px" : "100px", // Adjust top padding for mobile
-          // fontFamily: "Berkshire Swash, cursive",
-          fontFamily:"serif",
+
+          width: isMobile ? '90%' : '561px',
+          height: isMobile ? 'auto' : '356px',
+          fontSize: isMobile ? '24px' : '50px',
+          paddingTop: isMobile ? '50px' : '100px',
+          fontFamily: 'Berkshire Swash, cursive'
+
+         
         }}
       >
         {/* carousel text */}
@@ -83,6 +104,14 @@ const WebBanner = () => {
           </div>
         </Carousel>
         <div className="flex justify-center items-center h-full mt-2">
+          <iframe
+            src="https://embed.lottiefiles.com/animation/96048"
+            className="w-full h-full"
+            title="Animation"
+            allowFullScreen
+            frameBorder="0"
+          ></iframe>
+
           {/* lottiefiles hart animated */}
           <iframe
             src="https://embed.lottiefiles.com/animation/96048"
@@ -91,7 +120,13 @@ const WebBanner = () => {
         </div>
         <div className="flex justify-center items-center h-full mt-2">
           {isTablet ? <></> : <></>}
+
         </div>
+        {!isTablet && (
+          <div className="flex justify-center items-center h-full mt-2">
+            {/* Additional content for non-tablet devices */}
+          </div>
+        )}
       </div>
       {/* box like serach Members */}
       <div className="absolute p-2" style={boxStyles}>
