@@ -23,3 +23,7 @@ Route::middleware('auth:sanctum')->get('/validToken', [CommonController::class, 
 Route::post('/login', [CommonController::class, 'login']);
 Route::post('/register', [CommonController::class, 'register']);
 Route::middleware('auth:sanctum')->get('/logout', [CommonController::class, 'logout']);
+Route::post('/sendotp', [CommonController::class, 'sendOtp']);
+Route::post('/checkotp', [CommonController::class, 'checkOtp']);
+Route::post('/createForgotPass', [CommonController::class, 'createForgotPassword']);
+

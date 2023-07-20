@@ -6,6 +6,9 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\OtpEmail;
+use App\Models\PasswordReset;
 
 class CommonController extends Controller
 {
@@ -96,4 +99,107 @@ return response()->json(['message' => 'Login successful', 'user' => $user, 'toke
 
         return response()->json(['message' => 'Logout successful']);
     }
+
+    // sent otp to forgot password
+    public function sendOtp(Request $request)
+    {
+        $email = $request->input('email');
+        
+        // Generate a random OTP (e.g., 6 digits)
+        $otp = rand(1000, 9999);
+    
+        // Attempt to authenticate the user using email
+        $user = User::where('email', $email)->first();
+    
+        // Update or create the OTP record in the database
+        if ($user) {
+            $passwordReset = PasswordReset::where('email', $email)->first();
+            
+            if ($passwordReset) {
+                // Record with the given email exists, so update it
+                $passwordReset = PasswordReset::firstOrNew(['email' => $email]);
+                $passwordReset->token = $otp;
+                $passwordReset->expires_at = now()->addMinutes(3);
+                $passwordReset->created_at = now();
+                $passwordReset->save();
+            } else {
+                $passwordReset = new PasswordReset();
+                $passwordReset->id = $email;
+                $passwordReset->email = $email;
+                $passwordReset->token = $otp;
+                $passwordReset->expires_at = now()->addMinutes(3);
+                $passwordReset->created_at = now();
+                $passwordReset->save();
+            }
+            // Send the OTP email using the "otp.blade.php" view
+            Mail::to($email)->send(new OtpEmail($otp));
+            return response()->json(['message' => 'OTP sent', 'status' => 'true'], 200);
+        } else {
+            return response()->json(['message' => 'Email not registered', 'status' => 'false'], 200);
+        }
+    }
+    
+     // check otp code 
+     public function checkOtp(Request $request)
+    {
+        // Validate the incoming request data
+        $validatedData = $request->validate([
+            'email' => 'required|string',
+            'completeOtp' => 'required|string',
+        ]);
+
+        $email = $request->input('email');
+        $completeOtp = $request->input('completeOtp');
+
+        // Check if the OTP exists in the database for the given email
+        $passwordReset = PasswordReset::where('email', $email)
+            ->where('token', $completeOtp)
+            ->where('expires_at', '>', now()) // Check if the OTP is not expired
+            ->first();
+
+        if ($passwordReset) {
+            // Perform any additional logic for successful OTP verification here
+            // For example, reset the user's password, mark the OTP as used, etc.
+
+            // Return a success response
+            return response()->json(['message' => 'OTP verified successfully', 'status' => 'true'], 200);
+        } else {
+            return response()->json(['message' => 'Invalid OTP or OTP expired', 'status' => 'false'], 200);
+        }
+    }
+
+    // create new passwords for forgot password
+
+
+    public function createForgotPassword(Request $request)
+{
+    // Validate the incoming request data
+    $request->validate([
+        'email' => 'required|email',
+        'confirmPassword' => 'required|min:6', // Assumes you have a confirmPassword field in the form
+    ]);
+
+    // Get the user record based on the provided email
+    $user = User::where('email', $request->email)->first();
+
+    // Check if the user exists
+    if (!$user) {
+        return response()->json([
+            'status' => 'false',
+            'message' => 'User not found with the provided email',
+        ], 404);
+    }
+
+    // Update the user's password
+    $user->password = Hash::make($request->confirmPassword);
+    $user->save();
+    // Generate an access token for the user
+    $token = $user->createToken('Laravel API')->plainTextToken;
+    return response()->json([
+        'status' => 'true',
+        'message' => 'Password reset successfully',
+        'token' =>$token
+    ], 200);
 }
+}
+
