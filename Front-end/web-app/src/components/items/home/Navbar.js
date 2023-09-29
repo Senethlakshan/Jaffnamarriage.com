@@ -9,7 +9,8 @@ import "react-toastify/dist/ReactToastify.css";
 
 // const login = localStorage.getItem('login');
 
-const login = 'true';
+const login = localStorage.getItem('login');
+
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
