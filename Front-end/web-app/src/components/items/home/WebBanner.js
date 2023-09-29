@@ -30,11 +30,11 @@ const WebBanner = () => {
     // background: 'rgba(255, 255, 255, 0.8)',
     // borderRadius: '15px',
 
-    top: "549px",
-    left: "180px",
-    right: "180px",
-    height: "107px",
-    width: "1105px",
+    // top: "549px",
+    // left: "180px",
+    // right: "180px",
+    // height: "107px",
+    // width: "1105px",
     background: "rgba(255, 255, 255, 0.8)",
     // background: 'linear-gradient(to right, rgba(0, 0, 0, 0.6) 10%, rgba(255, 215, 0, 0.6) 50%, rgba(0, 0, 0, 0.6) 100%)',
     borderRadius: "15px",
@@ -129,16 +129,18 @@ const WebBanner = () => {
         )}
       </div>
       {/* box like serach Members */}
-      <div className="absolute p-2" style={boxStyles}>
-        <table className="w-full">
+    
+      <div className="typeSelectionContainer">
+      <div className="absolute p-2 typeSelection" style={boxStyles}>
+        {/* <table className="w-full">
           <tbody>
             <tr>
-              <td className=" p-2 text-center">I'm Looking For a </td>
-              <td className=" p-2 text-center">Age </td>
-              <td className=" p-2 text-center"></td>
-              <td className=" p-2 text-center">Age </td>
-              <td className=" p-2 text-center">Of Religion </td>
-              <td className=" p-2 text-center"> </td>
+              <th className=" p-2 text-center">I'm Looking For a </th>
+              <th className=" p-2 text-center">Age </th>
+              <th className=" p-2 text-center"></th>
+              <th className=" p-2 text-center">Age </th>
+              <th className=" p-2 text-center">Of Religion </th>
+              <th className=" p-2 text-center"> </th>
             </tr>
             <tr>
               <td className=" p-2 text-center">
@@ -180,7 +182,64 @@ const WebBanner = () => {
               </td>
             </tr>
           </tbody>
-        </table>
+        </table> */}
+
+
+        <div className="w-full userTasteFilter">
+          <div className="eachElem">
+            <div className=" p-2 text-center">I'm Looking For a </div>
+            <div className=" p-2 text-center optionCont">
+                  <select className="selectOption w-full bg-white border border-gray-300 rounded py-2 px-4">
+                    <option value="">Looking for</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                  </select>
+                </div>
+          </div>
+          <div className="eachElem">
+            <div className=" p-2 text-center">Age</div>
+            <div className=" p-2 text-center optionCont">
+                  <select className="selectOption w-full bg-white border border-gray-300 rounded py-2 px-4">
+                    <option value="">Looking for</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                  </select>
+                </div>
+          </div>
+          <div className="eachElem">
+            <div className=" p-2 text-center">To</div>
+            </div>
+          <div className="eachElem">
+            <div className=" p-2 text-center">Age</div>
+            <div className=" p-2 text-center optionCont">
+                  <select className="selectOption w-full bg-white border border-gray-300 rounded py-2 px-4">
+                    <option value="">Looking for</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                  </select>
+                </div>
+          </div>
+          <div className="eachElem">
+            <div className=" p-2 text-center">Of Religion</div>
+            <div className=" p-2 text-center optionCont">
+                  <select className="selectOption w-full bg-white border border-gray-300 rounded py-2 px-4">
+                    <option value="">Looking for</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                  </select>
+                </div>
+          </div>
+          <div className="eachElem">
+               <div className=" p-2 text-center optionCont">
+                <button className="searchTypeFiltBtn bg-gradient-to-tr from-amber-900 to-yellow-300 text-white py-2 px-4 rounded flex items-center">
+                  Search
+                  <FaSearch className="ml-2" />
+                </button>{" "}
+              </div>
+          </div>
+           
+        </div>
+      </div>
       </div>
     </div>
   );

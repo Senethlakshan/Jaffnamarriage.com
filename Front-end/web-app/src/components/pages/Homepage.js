@@ -1,6 +1,6 @@
 import React from "react";
 import { Helmet } from "react-helmet";
-import { FaUser, FaSearch, FaLink } from "react-icons/fa";
+// import { FaUser, FaSearch, FaLink } from "react-icons/fa";
 import { useLocation } from "react-router-dom";
 import LottieAnimation from "lottie-react";
 import WebBanner from "../items/home/WebBanner";
@@ -12,7 +12,7 @@ import ConnectIcon from "../../assests/home/çonnect.png";
 import FindIcon from "../../assests/home/search.png";
 import Footer from "../items/home/Footer";
 import animationData from "../../assests/home/bg-remover/lottie/riarrow.json";
-import axios from 'axios';
+// import axios from 'axios';
 import axiosInstance from '../../api';
 
 const token = localStorage.getItem('api_token');
@@ -71,16 +71,16 @@ const Homepage = () => {
       <div>
         <WebBanner />
         {/* padding 150px section start*****/}
-        <div className=" mx-20">
+        <div className="howItWorks containerWithPadding">
           <div className="container mx-auto ">
             {/* how to work
             if add border: border-solid border-2 border-gray-800 */}
             <div className="h-597 min-w-full mb-20">
               <div className="flex pl-4 pr-4 flex-col items-center justify-center">
-                <h2 className="text-amber-500 text-4xl m-2 font-serif">
+                <h2 className="text-amber-500 textSize4 m-2 font-serif">
                   How It Works
                 </h2>
-                <h1 className="text-6xl m-1 text-black font-serif">
+                <h1 className="textSize6 m-1 text-black font-serif">
                   Find Your Partner In Just a Few Steps
                 </h1>
                 <p className="text-2xl mt-4 font-serif text-gray-500 text-center">
@@ -92,93 +92,81 @@ const Homepage = () => {
             </div>
             {/* s2 div-sub: */}
             <div className="h-597 min-w-full mb-10 flex flex-col items-center justify-center">
-              <div className="flex items-center">
-                <table className="min-w-full ">
-                  <tbody>
-                    <tr>
-                      <td className=" px-4 py-2">
-                        <div className="flex justify-center hover:scale-110">
-                          <img src={RegisterIcon} alt="Register" />
-                        </div>
-                      </td>
-                      <td className=" px-1 py-2">
-                        <div className="w-179 h-146">
-                          <LottieAnimation
-                            lottieRef={(ref) => ref && ref.setSpeed(0.5)}
-                            animationData={animationData}
-                            loop={true}
-                            autoplay={true}
-                          />
-                        </div>
-                      </td>
-                      <td className=" px-4 py-2">
-                        <div className="flex justify-center hover:scale-110">
-                        <img src={FindIcon} alt="Find" />
-                        </div>
-                      </td>
-                      <td className=" px-1 py-2">
-                        <div className="w-179 h-146">
-                          <LottieAnimation
-                            lottieRef={(ref) => ref && ref.setSpeed(0.5)}
-                            animationData={animationData}
-                            loop={true}
-                            autoplay={true}
-                          />
-                        </div>
-                      </td>
-                      <td className=" px-4 py-2">
-                      <div className="flex justify-center hover:scale-110">
-                      <img src={ConnectIcon} alt="Connect" />
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className=" px-4 py-2">
-                        <h2 className="text-2xl font-bold text-center">
+              <div className="stepsCardCont flex items-center">
+
+                <div className="stepsCard">
+
+                  <div className="flex justify-center hover:scale-110">
+                     <img src={RegisterIcon} alt="Register" />
+                  </div>
+                  <h2 className="stepsCardHeading text-2xl font-bold text-center">
                           Registration
-                        </h2>
-                      </td>
-                      <td className=" px-4 py-2"></td>
-                      <td className=" px-4 py-2">
-                        <h2 className="text-2xl font-bold text-center">
+                  </h2>
+                  <h2 className="text-lg text-justify ">
+                    Start by creating your profile and providing
+                    information about yourself. Tell us your preferences,
+                    interests, and what you're looking for in a partner.
+                  </h2>
+
+                </div>
+                <div className="stepsCardArrow">
+
+                  <div className="w-179 h-146">
+                            <LottieAnimation
+                              lottieRef={(ref) => ref && ref.setSpeed(0.5)}
+                              animationData={animationData}
+                              loop={true}
+                              autoplay={true}
+                            />
+                  </div>
+
+                </div>
+                <div className="stepsCard">
+
+                  <div className="flex justify-center hover:scale-110">
+                    <img src={FindIcon} alt="Find" />
+                  </div>
+                  <h2 className="stepsCardHeading text-2xl font-bold text-center">
                           Find Your Partner
-                        </h2>
-                      </td>
-                      <td className=" px-4 py-2"></td>
-                      <td className=" px-4 py-2">
-                        <h2 className="text-2xl font-bold text-center">
-                          Connect with Your Partner
-                        </h2>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className=" px-4 py-2">
-                        <h2 className="text-lg text-justify ">
-                          Start by creating your profile and providing
-                          information about yourself. Tell us your preferences,
-                          interests, and what you're looking for in a partner.
-                        </h2>
-                      </td>
-                      <td className=" px-4 py-2"></td>
-                      <td className=" px-4 py-2">
-                        <h2 className="text-lg text-justify ">
+                  </h2>
+                  <h2 className="text-lg text-justify ">
                           Browse through profiles and find potential matches.
                           Connect with them through our messaging system and get
                           to know each other better.
-                        </h2>
-                      </td>
-                      <td className=" px-4 py-2"></td>
-                      <td className=" px-4 py-2">
-                        <h2 className="text-lg text-justify">
+                  </h2>
+
+                </div>
+                <div className="stepsCardArrow">
+
+                  <div className="w-179 h-146">
+                            <LottieAnimation
+                              lottieRef={(ref) => ref && ref.setSpeed(0.5)}
+                              animationData={animationData}
+                              loop={true}
+                              autoplay={true}
+                            />
+                  </div>
+
+                </div>
+                <div className="stepsCard">
+
+                  <div className="flex justify-center hover:scale-110">
+                      <img src={ConnectIcon} alt="Connect" />
+                        </div>
+                  <h2 className="stepsCardHeading text-2xl font-bold text-center">
+                    Connect with Your Partner
+                  </h2>
+                  <h2 className="text-lg text-justify">
                           Once you've found your ideal partner, take the next
                           step and start your journey together. Plan dates,
                           share experiences, and build a meaningful
                           relationship.
                         </h2>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+
+                </div>
+               
+                 
+
               </div>
             </div>
             {/* s3 div */}
@@ -191,13 +179,9 @@ const Homepage = () => {
           </div>
         </div>
         {/* padding 150px section end*****/}
-        <div className="bg-white">
-          <div className="container mx-auto px-150">
-            {/* footer section */}
-              <Footer/>
-          </div>
-        </div>
+       
       </div>
+      <Footer/>
     </div>
   );
 };

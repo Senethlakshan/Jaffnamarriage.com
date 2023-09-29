@@ -96,8 +96,8 @@ axiosInstance
     <div className="min-h-screen bg-gradient-to-t from-amber-900 to-yellow-300">
       <animated.div className="" style={fadeAnimation}>
         {/* animated svg */}
-        <div className="flex h-screen">
-          <div className="w-1/2 flex items-center justify-center">
+        <div className="loginContainer flex ">
+          <div className="loginArt w-1/2 flex items-center justify-center">
             <LottieAnimation
               lottieRef={(ref) => ref && ref.setSpeed(0.5)}
               animationData={animationData}
@@ -106,7 +106,7 @@ axiosInstance
             />
           </div>
           {/* login form */}
-          <div className="w-1/2 flex items-center justify-center  ">
+          <div className="loginForm flex items-center justify-center  ">
             <div className="p-6 max-w-sm w-full border-2 border-solid border-gray-300 rounded-lg bg-white">
               <h2 className="text-2xl font-semibold  flex items-center justify-center mb-6">
                 <FaUserAlt className="mr-2" />

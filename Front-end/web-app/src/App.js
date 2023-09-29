@@ -9,6 +9,9 @@ import Contactpage from "./components/pages/Contactpage";
 import RegProcesswrap from "./components/items/home/RegProcesswrap";
 import UserDashbord from "./components/pages/userPanel/UserDashbord";
 import ForgetPassword from "./components/items/home/ForgetPassword";
+import "./App.css";
+import ExplorePage from "./components/pages/ExplorePage";
+import MatchDetailsPage from "./components/pages/MatchDetailsPage";
 
 const App = () => {
   return (
@@ -23,6 +26,8 @@ const App = () => {
         <Route path="/contact" element={<Contactpage />} /> 
         <Route path="/regiter-process" element={<RegProcesswrap />} /> 
         <Route path="/user-panel" element={<UserDashbord />} /> 
+        <Route path="/browse" element={<ExplorePage />} /> 
+        <Route path="/match/:id" element={<MatchDetailsPage />} />
       </Routes>
     </Router>
   );
