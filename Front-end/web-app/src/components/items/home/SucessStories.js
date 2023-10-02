@@ -2,8 +2,33 @@ import React from "react";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import photo1 from "../../../assests/home/stories.jpeg";
+import { useState } from "react";
+import { useEffect } from "react";
 
 function SucessStories() {
+  const [fullDeviceWidth, setFullDeviceWidth] = useState(0);
+
+  useEffect(() => {
+    function handleResize() {
+      setFullDeviceWidth(window.innerWidth);
+    }
+
+    // Add event listener for window resize
+    window.addEventListener('resize', handleResize);
+
+    // Initial setup
+    handleResize();
+  }, [ fullDeviceWidth ]);
+
+  function getCenterSlidePercentage(){
+    if(fullDeviceWidth > 1024){
+      return 33.33;
+    }else if(fullDeviceWidth > 768){
+      return 60;
+    }else{
+      return 100;
+    }
+  }
   return (
     <div>
       <div className="h-597 min-w-full mt-10 flex flex-col items-center justify-center">
@@ -22,7 +47,7 @@ function SucessStories() {
           autoPlay={true}
           infiniteLoop={true}
           centerMode={true}
-          centerSlidePercentage={33.33}
+          centerSlidePercentage={getCenterSlidePercentage()}
           className="w-full"
         >
           {/* Success Story Card 1 */}

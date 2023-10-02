@@ -1,4 +1,4 @@
-import FooterImage from "../../../assests/home/footerwave.svg";
+// import FooterImage from "../../../assests/home/footerwave.svg";
 
 function Footer() {
   return (
@@ -14,7 +14,7 @@ function Footer() {
 
         <div className="py-8 " style={{ backgroundColor: '#1a202c' }}>
 
-          <div className="container mx-auto pl-10 pr-20 flex items-center justify-between">
+          <div className="footerContainer container mx-auto pl-10 pr-20 flex items-center justify-between">
             <div className="flex items-center">
               <img
                 src="/path/to/your/logo.png"
@@ -24,22 +24,22 @@ function Footer() {
               <span className="text-white text-lg font-bold">Company Name</span>
             </div>
 
-            <div className="flex space-x-8">
+            <div className="footerItems flex">
               <div>
                 <h4 className="text-white uppercase font-bold">Quick Links</h4>
                 <ul className="mt-2 space-y-2">
                   <li>
-                    <a href="#" className="text-gray-300 hover:text-white">
+                    <a href="/" className="text-gray-300 hover:text-white">
                       Link 1
                     </a>
                   </li>
                   <li>
-                    <a href="#" className="text-gray-300 hover:text-white">
+                    <a href="/" className="text-gray-300 hover:text-white">
                       Link 2
                     </a>
                   </li>
                   <li>
-                    <a href="#" className="text-gray-300 hover:text-white">
+                    <a href="/" className="text-gray-300 hover:text-white">
                       Link 3
                     </a>
                   </li>
@@ -49,17 +49,17 @@ function Footer() {
                 <h4 className="text-white uppercase font-bold">Follow Us</h4>
                 <ul className="mt-2 space-y-2">
                   <li>
-                    <a href="#" className="text-gray-300 hover:text-white">
+                    <a href="/" className="text-gray-300 hover:text-white">
                       Facebook
                     </a>
                   </li>
                   <li>
-                    <a href="#" className="text-gray-300 hover:text-white">
+                    <a href="/" className="text-gray-300 hover:text-white">
                       Twitter
                     </a>
                   </li>
                   <li>
-                    <a href="#" className="text-gray-300 hover:text-white">
+                    <a href="/  " className="text-gray-300 hover:text-white">
                       Instagram
                     </a>
                   </li>
@@ -71,7 +71,7 @@ function Footer() {
                   <li>
                     <span className="text-gray-300">Company Address</span>
                   </li>
-                  <li>
+                  <li>  
                     <span className="text-gray-300">Phone: 123-456-7890</span>
                   </li>
                   <li>

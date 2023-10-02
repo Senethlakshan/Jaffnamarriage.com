@@ -2,22 +2,63 @@ import { useState } from 'react';
 import RUserInfo from './RUserInfo';
 import TermsCon from './TermsCon';
 import Subscription from './Subscription';
+import axiosInstance from '../../../api';
 
 function RegProcesswrap() {
   const [step, setStep] = useState(1);
+
   const [values, setValues] = useState({
-    firstName: '',
-    lastName: '',
-    cardNumber: '',
-    cardExpiry: ''
+    // Initialize with default values or an empty object if needed
+    livingPlace: '',
+    religion: '',
+    age: '',
+    cast: '',
+    education: '',
+    workDetails: '',
+    height: '',
+    weight: '',
+    gender: '',
+    spokenLnguage: '',
+    town: '',
+    agree: false,
+    selectedPlans:''
   });
 
-  const handleChange = (input) => (e) => {
-    setValues({ ...values, [input]: e.target.value });
+  const handleChange = (fieldName, fieldValue) => {
+    setValues({
+      ...values,
+      [fieldName]: fieldValue,
+    });
   };
+  
+  const [agree, setAgree] = useState(false);
+
+  const handleAgreeChange = () => {
+    const newAgreeValue = !agree;
+
+    setAgree(newAgreeValue);
+    setValues({
+      ...values, // Spread the existing values
+      agree: !values.agree, // Toggle the 'agree' field
+    });
+  };
+  const handleSelectedPlans = (selectedPlans) => {
+    // Update the values state with the selected plans array
+    setValues({
+      ...values,
+      selectedPlans, // Assuming you want to store the selected plans in values.selectedPlans
+    });
+  };
+  
 
   const nextStep = () => {
-    setStep(step + 1);
+    //console.log(values);
+    if (step === 2 && agree) {
+      // Only proceed to the next step (3) if agree is true in step 2
+      setStep(3);
+    } else {
+      setStep(step + 1);
+    }
   };
 
   const prevStep = () => {
@@ -25,7 +66,16 @@ function RegProcesswrap() {
   };
 
   const handleSubmit = () => {
-    // Handle form submission logic
+
+
+    axiosInstance
+  .post('/insertUserDatial', values)
+  .then((response) => {
+    window.location.href = '/';
+  })
+  .catch((error) => {
+    
+  });
   };
 
   const getStepStatus = (currentStep) => {
@@ -104,31 +154,33 @@ function RegProcesswrap() {
             <TermsCon
               nextStep={nextStep}
               prevStep={prevStep}
-              handleChange={handleChange}
+              handleAgreeChange={handleAgreeChange}
               values={values}
+              agree={agree}
             />
           )}
           {step === 3 && (
-            <Subscription prevStep={prevStep} handleSubmit={handleSubmit} values={values} />
+            <Subscription prevStep={prevStep} handleSelectedPlans={handleSelectedPlans} values={values} />
           )}
         </div>
 
         <div className="flex justify-between p-6">
-          {step !== 1 && (
-            <button className="bg-[conic-gradient(at_top_right,_var(--tw-gradient-stops))] from-gray-200 via-gray-400 to-gray-600 text-white font-bold py-2 px-4 rounded" onClick={prevStep}>
-              Previous
-            </button>
-          )}
-          {step !== 3 ? (
-            <button className="bg-gradient-to-r from-orange-600 to-orange-500 text-white font-bold py-2 px-4 rounded" onClick={nextStep}>
-              Next
-            </button>
-          ) : (
-            <button className="bg-gradient-to-r from-orange-600 to-orange-500 font-bold text-white py-2 px-4 rounded" onClick={handleSubmit}>
-              Submit
-            </button>
-          )}
-        </div>
+  {step !== 1 && (
+    <button className="bg-[conic-gradient(at_top_right,_var(--tw-gradient-stops))] from-gray-200 via-gray-400 to-gray-600 text-white font-bold py-2 px-4 rounded" onClick={prevStep}>
+      Previous
+    </button>
+  )}
+  {step !== 3 ? (
+    <button className="bg-gradient-to-r from-orange-600 to-orange-500 text-white font-bold py-2 px-4 rounded" onClick={nextStep} disabled={step === 2 && !agree}>
+      Next
+    </button>
+  ) : (
+    <button className="bg-gradient-to-r from-orange-600 to-orange-500 font-bold text-white py-2 px-4 rounded" onClick={handleSubmit}>
+      Submit
+    </button>
+  )}
+</div>
+
       </div>
     </div>
   );

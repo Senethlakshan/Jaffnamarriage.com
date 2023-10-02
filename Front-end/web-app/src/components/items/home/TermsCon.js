@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
 
-const TermsCon = () => {
-  const [agree, setAgree] = useState(false);
-
-  const handleAgreeChange = () => {
-    setAgree(!agree);
-  };
-
+const shadowStyle = {
+  boxShadow: '0px 0px 10px 2px rgba(0, 255, 0, 1)', // Green shadow
+};
+const TermsCon = ({ agree, handleAgreeChange }) => {
+  const containerClasses = `w-861 h-645 mx-auto ${agree ? 'shadow' : ''}`;
   return (
-    <div className="w-861 h-645 mx-auto">
+    <div className={containerClasses} >
       <div className="max-w-lg mx-auto">
         <h1 className="text-2xl text-center font-bold mb-4 bg-gray-200 rounded-xl p-2">Terms and Conditions</h1>
         <div className="max-h-72 overflow-y-auto border rounded-md border-gray-300 p-4 mb-4">
@@ -33,25 +31,25 @@ const TermsCon = () => {
             {/* Add more content here */}
           </div>
         </div>
-        <div className="flex items-center">
-          <input
+        <div className="flex items-center" >
+          <input style={!agree ? shadowStyle : {}}
             type="checkbox"
             className="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out"
             checked={agree}
-            onChange={handleAgreeChange}
+            onChange={handleAgreeChange} 
           />
           <label className="ml-2 text-sm text-gray-700">
             I have read and agree to the Terms and Conditions
           </label>
         </div>
-        <button
+        {/* <button
           className={`mt-4 py-2 px-4 rounded-md text-white ${
             agree ? 'bg-indigo-600 hover:bg-indigo-700' : 'bg-gray-400 cursor-not-allowed'
           }`}
           disabled={!agree}
         >
           Agree
-        </button>
+        </button> */}
       </div>
     </div>
   );

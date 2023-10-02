@@ -1,0 +1,878 @@
+html,
+body {
+    overflow-x: hidden;
+}
+
+.maxFullDeviveWidth {
+    max-width: 100vw;
+}
+
+.logoutAndUser {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.logoutAndUserSmall {
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+
+.userPofileImg {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    background-color: #ff5858;
+    border: #eeeeee solid 1.5px;
+
+}
+
+.userPofileImg img {
+    width: 37px;
+    height: 37px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+
+
+.logoutAndUserSmall .userPofileImg {
+    margin-left: 20px;
+}
+
+.typeSelectionContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.typeSelection {
+    max-width: 90vw;
+}
+
+.userTasteFilter {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.eachElem {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+
+.selectOption {
+    /* Set a custom background color for the dropdown trigger (arrow area) */
+    background-color: #fff;
+    /* Add a shadow to the dropdown */
+    box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
+    /* Style the border to match the material design */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    /* Style the select text color */
+    color: #333;
+    /* Style the select text padding and font */
+    padding: 10px;
+    font-size: 16px;
+    -moz-appearance: none;
+    /* Firefox */
+    -webkit-appearance: none;
+    /* Safari and Chrome */
+    appearance: none;
+    /* Adjust the position as needed */
+    padding: 7px 20px 7px 10px;
+    /* Ensure space for the dot */
+
+
+
+}
+
+/* Style the select options */
+.selectOption option {
+    /* Match the text color to the select text color */
+    color: #333;
+    /* Add some padding for better spacing */
+    padding: 10px;
+    /* Style the hover effect for options */
+    transition: background-color 0.2s;
+}
+
+.selectOption option:hover {
+    /* Change the background color on hover */
+    background-color: #f0f0f0;
+}
+
+.howItWorks {
+    margin-top: 110px;
+}
+
+.textSize4 {
+    font-size: 1.5rem;
+
+}
+
+.textSize6 {
+    font-size: 3.2rem;
+    text-align: center;
+}
+
+
+
+
+
+.contacForm {
+
+
+    padding: 50px 50px;
+    gap: 30px;
+}
+
+.footerItems {
+    gap: 30px;
+}
+
+.stepsCardCont {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.stepsCard {
+    width: 250px;
+    padding: 30px 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+}
+
+.stepsCardHeading {
+    margin: 20px 0;
+}
+
+.stepsCardArrow {
+    width: 85px;
+    margin-top: 100px;
+}
+
+.loginForm {
+    width: 50vw;
+}
+
+.loginContainer {
+
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 50px 0;
+    gap: 60px;
+}
+
+
+.mainExploreContainer {
+    width: 100vw;
+    min-height: 100vh;
+    background: linear-gradient(180deg, #f2f2f2 0%, #eeeeee 100%);
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+
+
+.filterOptionsContainer {
+
+
+    width: 280px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    min-height: 100vh;
+    position: absolute;
+    top: 0;
+    transition: 480ms;
+    z-index: 999;
+
+}
+
+.filterOptionsToggleBtn {
+    position: absolute;
+    top: 5%;
+    right: -50px;
+    transform: translateY(-50%);
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+
+}
+
+.filterClosed {
+    left: -280px;
+}
+
+.filterOpen {
+    left: 0px;
+}
+
+.filterOptions {
+    padding: 50px 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.genderFFilter {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.smallFilterOptionCards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.smallFilterOptionCard {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    border-radius: 50%;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: 480ms;
+}
+
+.smallFilterOptionCardSelected {
+    border: #ff5858 solid 2px;
+
+}
+
+.filterOptionIcon {
+    font-size: 1.3rem;
+}
+
+
+
+.exploreItems {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+    align-items: center;
+}
+
+.exploreItemCard {
+    display: flex;
+    width: 450px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20px;
+    cursor: pointer;
+    transition: 480ms;
+}
+
+.exploreItemImg {
+    width: 280px;
+    position: relative;
+}
+
+.likeBtn {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: #ffffffa6;
+    padding: 10px;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+.exploreItemImg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+
+}
+
+.exploreItemDetails {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    height: 100%;
+    gap: 10px;
+    padding: 10px;
+}
+
+.nameAndAddressForCard {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 5px;
+}
+
+.exploreItemName {
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.exploreItemAddress {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+.addressIcon {
+    font-size: 0.8rem;
+    margin-top: 5px;
+}
+
+.generalDetails {
+    display: flex;
+    flex-wrap: wrap;
+
+}
+
+.eachGeneralDetail {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding: 5px 20px 5px 0;
+}
+
+.eachGeneralDetailInner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.gdIcon {
+    margin-right: 10px;
+}
+
+.favoritesPane {
+    width: 280px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    min-height: 100vh;
+    position: absolute;
+    transition: 480ms;
+    top: 0;
+
+}
+
+.favsToggleBtn {
+    position: absolute;
+    top: 5%;
+    left: -50px;
+    transform: translateY(-50%);
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    right: 0;
+    width: 36.5px;
+}
+
+.favsToggleBtnClosed {
+    position: absolute;
+    top: 5%;
+    left: -70px;
+    transform: translateY(-50%);
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    right: 0;
+    width: 36.5px;
+}
+
+.favClosed {
+    right: -280px;
+}
+
+.favOpen {
+    right: 0px;
+}
+
+.favorites {
+    padding: 50px 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.favoritesList {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.favoriteItem {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: 480ms;
+}
+
+.favoriteItem:hover {
+    background-color: #f2f2f2;
+}
+
+.favImg {
+    width: 30px;
+    height: 30px;
+}
+
+.favImg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+@media only screen and (max-width: 1024px) {
+    .stepsCard {
+        width: 220px;
+        padding: 30px 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+
+    }
+
+
+
+    .stepsCardArrow {
+        width: 65px;
+        margin-top: 100px;
+    }
+
+}
+
+@media only screen and (max-width: 950px) {
+
+    .footerItems {
+        flex-direction: column;
+    }
+
+    .margin0 {
+        margin: 0;
+    }
+
+    .stepsCard {
+        padding: 30px 20px;
+    }
+
+    .stepsCardArrow {
+        display: none;
+    }
+
+
+    .loginContainer {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        padding: 50px 0;
+        gap: 60px;
+    }
+
+    .loginArt {
+        /* display: none; */
+    }
+
+}
+
+@media only screen and (max-width: 860px) {
+
+    .typeSelectionContainer {
+        margin-top: 290px;
+    }
+
+    .userTasteFilter {
+
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        justify-content: center;
+        align-items: center;
+        width: 60vw;
+        padding: 15px 0;
+    }
+
+    .eachElem {
+        width: 87%;
+    }
+
+    .optionCont {
+        width: 100%;
+    }
+
+    .selectOption {
+        width: 100%;
+    }
+
+    .searchTypeFiltBtn {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+    }
+
+    .howItWorks {
+        margin-top: 350px;
+    }
+
+    .textSize6 {
+        font-size: 2.2rem;
+    }
+
+    .containerWithPadding {
+        padding: 30px;
+    }
+
+    .contactFormContainer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .contacForm {
+        flex-direction: column;
+        width: 85%;
+        justify-content: center;
+        align-items: center;
+        padding: 50px 30px;
+        gap: 30px;
+    }
+
+    .formElement {
+        width: 95%;
+    }
+
+    .getStartedTxt {
+        color: #fff;
+        font-size: 3.5rem;
+        font-weight: 600;
+    }
+
+}
+
+
+.openedCardOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100%;
+    overflow-y: hidden;
+    background-color: #000000a6;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    gap: 20px;
+}
+
+.openedCard {
+    width: 80vw;
+    min-height: 80vh;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    gap: 20px;
+    position: fixed;
+    top: 10vh;
+    left: 10vw;
+    z-index: 99999;
+}
+
+.openedCardImg {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.openedCardImg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.openedCardDetails {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.openedCardName {
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+.openedCardAddress {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.3rem;
+    font-weight: 400;
+}
+
+.openedCardAddressIcon {
+    font-size: 1rem;
+    margin-top: 5px;
+}
+
+.openedCardGeneralDetails {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.eachGeneralDetail {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding: 5px 20px 5px 0;
+}
+
+.eachGeneralDetailInner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.openedCardPostedOn {
+    font-size: 1.3rem;
+    font-weight: 400;
+}
+
+.viewButtonDiv {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+}
+
+.viewButton {
+    padding: 10px 20px;
+    border-radius: 10px;
+    background-color: #ff5858;
+    color: #fff;
+    font-size: 1.3rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 480ms;
+}
+
+.closeCardBtn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #ffffffa6;
+    padding: 10px;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+/*-------------------------------------------------------------------match page-------------------------------------------*/
+
+.matchPageContainer {
+    width: 100%;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 20px;
+    gap: 20px;
+
+}
+
+.matchDataContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.matchData {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+
+.openedCardImg img {
+    width: 50%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.contactBtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding: 10px 20px;
+    border-radius: 10px;
+    background-color: #71db57;
+    color: #fff;
+    font-size: 1.3rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 480ms;
+
+}
+
+@media only screen and (max-width: 720px) {
+    .stepsCardCont {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .stepsCard {
+        width: 100%;
+        padding: 30px 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+
+    }
+
+    .footerContainer {
+        flex-direction: column;
+        gap: 60px;
+        margin-top: 50px;
+    }
+
+    .loginForm {
+        width: 80vw;
+    }
+
+    .registerArt {
+        width: 80vw;
+    }
+
+    .exploreItems {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+    }
+
+    .exploreItemCard {
+        display: flex;
+        flex-direction: column;
+        width: 90%;
+        background-color: #fff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 20px;
+        cursor: pointer;
+        transition: 480ms;
+    }
+
+    .exploreItemImg {
+        width: 80vw;
+
+    }
+
+    .exploreItemImg img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 10px;
+        margin-top: 10px;
+    }
+
+    .likeBtn {
+        top: 20px;
+    }
+
+
+
+
+    .openedCard {
+        flex-direction: column;
+        padding: 10px 0px;
+    }
+
+    .openedCardImg {
+        width: 50px;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .openedCardImg img {
+        width: 50px;
+        height: 50px;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+
+}
