@@ -2,16 +2,16 @@ import React from 'react';
 
 function ContactForm() {
   return (
-    <div>
+    <div className='contactFormContainer'>
           
-    <div className="flex justify-center mt-5 bg-gradient-to-r from-yellow-500 to-yellow-700 rounded-xl">
-      <div className="w-1/2 p-8">
+    <div className="contacForm flex justify-center mt-5 bg-gradient-to-r from-yellow-500 to-yellow-700 rounded-xl">
+      <div className="formElement w-1/2">
         {/* Left side: Form */}
-        <div className="bg-gray-200 p-4 rounded-md">
+        <div className="bg-white p-4 rounded-md">
           <h2 className="text-2xl">Get Started</h2>
         </div>
       </div>
-      <div className="w-1/2 p-8">
+      <div className="formElement w-1/2">
         {/* Right side: "Get Started" text */}
 
         <div className='bg-white p-5 rounded-xl'>

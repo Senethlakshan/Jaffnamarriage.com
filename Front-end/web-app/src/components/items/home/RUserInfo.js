@@ -1,6 +1,6 @@
 import React from "react";
 
-function RUserInfo() {
+function RUserInfo({ handleChange, values }) {
   return (
     <div className="w-861 h-645">
       <h1 className="mb-2 text-center text-2xl font-bold bg-gray-200 rounded-xl p-2">User Details</h1>
@@ -16,8 +16,12 @@ function RUserInfo() {
                   </label>
                   <select
                     id="livingPlace"
+                    name="livingPlace"
+                    value={values.livingPlace}
+                    onChange={(e) => handleChange('livingPlace', e.target.value)}
                     className="w-full px-4 py-3 rounded-lg bg-gray-100 border-gray-300 focus:border-blue-500 focus:bg-white focus:outline-none"
                   >
+                    <option value="">select --</option>
                     <option value="sri lanka">Sri Lanka</option>
                     <option value="canada">Canada</option>
                   </select>
@@ -30,13 +34,79 @@ function RUserInfo() {
                   </label>
                   <select
                     id="religion"
+                    name="religion"
+                    value={values.religion}
+                    onChange={(e) => handleChange('religion', e.target.value)}
                     className="w-full px-4 py-3 rounded-lg bg-gray-100 border-gray-300 focus:border-blue-500 focus:bg-white focus:outline-none"
                   >
+                    <option value="">select --</option>
                     <option value="tamil">Tamil</option>
                     <option value="hindu">Hindu</option>
                     <option value="catholic">Catholic</option>
                   </select>
                 </div>
+              </td>
+            </tr>
+            <tr>
+              <td className="px-6 py-4 whitespace-nowrap">
+                <div className="mb-4">
+                  <label htmlFor="gender" className="block text-gray-700 text-sm font-bold mb-2">
+                     Gender
+                  </label>
+                  <select
+                    id="gender"
+                    name="gender"
+                    value={values.gender}
+                    onChange={(e) => handleChange('gender', e.target.value)}
+                    className="w-full px-4 py-3 rounded-lg bg-gray-100 border-gray-300 focus:border-blue-500 focus:bg-white focus:outline-none"
+                  >
+                    <option value="">select --</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                  </select>
+                </div>
+              </td>
+              <td className="px-6 py-4 whitespace-nowrap">
+                <div className="mb-4">
+                  <label htmlFor="spokenLnguage" className="block text-gray-700 text-sm font-bold mb-2">
+                  SpokenLnguage
+                  </label>
+                  <select
+                    id="spokenLnguage"
+                    name="spokenLnguage"
+                    value={values.spokenLnguage}
+                    onChange={(e) => handleChange('spokenLnguage', e.target.value)}
+                    className="w-full px-4 py-3 rounded-lg bg-gray-100 border-gray-300 focus:border-blue-500 focus:bg-white focus:outline-none"
+                  >
+                    <option value="">select --</option>
+                    <option value="tamil">Tamil</option>
+                    <option value="english">English</option>
+                    <option value="sinhala">Sinhala</option>
+                  </select>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td className="px-6 py-4 whitespace-nowrap">
+                <div className="mb-4">
+                  <label htmlFor="town" className="block text-gray-700 text-sm font-bold mb-2">
+                     City-Town
+                  </label>
+                  <select
+                    id="town"
+                    name="town"
+                    value={values.town}
+                    onChange={(e) => handleChange('town', e.target.value)}
+                    className="w-full px-4 py-3 rounded-lg bg-gray-100 border-gray-300 focus:border-blue-500 focus:bg-white focus:outline-none"
+                  >
+                    <option value="">select --</option>
+                    <option value="jaffna">Jaffna</option>
+                   
+                  </select>
+                </div>
+              </td>
+              <td className="px-6 py-4 whitespace-nowrap">
+              
               </td>
             </tr>
             <tr>
@@ -48,6 +118,9 @@ function RUserInfo() {
                   <input
                     type="number"
                     id="age"
+                    name="age"
+                    value={values.age}
+                    onChange={(e) => handleChange('age', e.target.value)}
                     className="w-full px-4 py-3 rounded-lg bg-gray-100 border-gray-300 focus:border-blue-500 focus:bg-white focus:outline-none"
                   />
                 </div>
@@ -59,8 +132,12 @@ function RUserInfo() {
                   </label>
                   <select
                     id="cast"
+                    name="cast"
+                    value={values.cast}
+                    onChange={(e) => handleChange('cast', e.target.value)}
                     className="w-full px-4 py-3 rounded-lg bg-gray-100 border-gray-300 focus:border-blue-500 focus:bg-white focus:outline-none"
                   >
+                    <option value="">select --</option>
                     <option value="Vellalar">Vellalar</option>
                     <option value="Pallar">Pallar</option>
                     <option value="Nalavar">Nalavar</option>
@@ -78,8 +155,12 @@ function RUserInfo() {
                   </label>
                   <select
                     id="education"
+                    name="education"
+                    value={values.education}
+                    onChange={(e) => handleChange('education', e.target.value)}
                     className="w-full px-4 py-3 rounded-lg bg-gray-100 border-gray-300 focus:border-blue-500 focus:bg-white focus:outline-none"
                   >
+                    <option value="">select --</option>
                     <option value="o/l">O/L</option>
                     <option value="a/l">A/L</option>
                     <option value="bachelor">Bachelor</option>
@@ -95,6 +176,9 @@ function RUserInfo() {
                   </label>
                   <textarea
                     id="workDetails"
+                    name="workDetails"
+                    value={values.workDetails}
+                    onChange={(e) => handleChange('workDetails', e.target.value)}
                     className="w-full px-4 py-3 rounded-lg bg-gray-100 border-gray-300 focus:border-blue-500 focus:bg-white focus:outline-none"
                   ></textarea>
                 </div>
@@ -109,6 +193,9 @@ function RUserInfo() {
                   <input
                     type="text"
                     id="height"
+                    name="height"
+                    value={values.height}
+                    onChange={(e) => handleChange('height', e.target.value)}
                     className="w-full px-4 py-3 rounded-lg bg-gray-100 border-gray-300 focus:border-blue-500 focus:bg-white focus:outline-none"
                   />
                 </div>
@@ -121,6 +208,9 @@ function RUserInfo() {
                   <input
                     type="text"
                     id="weight"
+                    name="weight"
+                    value={values.weight}
+                    onChange={(e) => handleChange('weight', e.target.value)}
                     className="w-full px-4 py-3 rounded-lg bg-gray-100 border-gray-300 focus:border-blue-500 focus:bg-white focus:outline-none"
                   />
                 </div>

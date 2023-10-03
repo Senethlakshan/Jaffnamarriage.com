@@ -117,8 +117,8 @@ function RegisterPage() {
     <div className="min-h-screen bg-gradient-to-t from-amber-900 to-yellow-300">
       <animated.div className="" style={fadeAnimation}>
         {/* animated svg */}
-        <div className="flex h-screen">
-          <div className="w-1/2 flex items-center justify-center">
+        <div className="loginContainer flex">
+          <div className="registerArt w-1/2 flex items-center justify-center">
             <LottieAnimation
               lottieRef={(ref) => ref && ref.setSpeed(0.5)}
               animationData={animationData}
@@ -140,7 +140,7 @@ function RegisterPage() {
             </div>
           </div>
           {/* Register form */}
-          <div className="w-1/2 flex items-center justify-center  ">
+          <div className="loginForm w-1/2 flex items-center justify-center  ">
             <div className="w-full max-w-sm p-6 bg-white rounded-lg shadow-lg">
               <h2 className="text-2xl font-semibold flex items-center justify-center mb-6">
                 <FaUserAlt className="mr-2" />
