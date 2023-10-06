@@ -43,12 +43,12 @@ const WebBanner = () => {
 
   return (
     <div className="relative">
-      <img src={web_banner} alt="web-banner" />
+      <img src={web_banner} style={{width:'100vw'}}alt="web-banner" />
       <div
         className="absolute top-0 left-0 p-4 text-yellow-400"
         style={{
 
-          width: isMobile ? '90%' : '561px',
+          width: isMobile ? '90%' : '661px',
           height: isMobile ? 'auto' : '356px',
           fontSize: isMobile ? '24px' : '50px',
           paddingTop: isMobile ? '50px' : '100px',
