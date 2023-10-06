@@ -6,7 +6,16 @@ import ResponsiveDialog from '../alert';
 import axiosInstance from '../../../api';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import Tooltip from '@mui/material/Tooltip';
+import IconButton from '@mui/material/IconButton';
+import Avatar from '@mui/material/Avatar';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import Divider from '@mui/material/Divider';
+import PersonAdd from '@mui/icons-material/PersonAdd';
+import Settings from '@mui/icons-material/Settings';
+import Logout from '@mui/icons-material/Logout';
 // const login = localStorage.getItem('login');
 
 const login = localStorage.getItem('login');
@@ -17,6 +26,7 @@ const Navbar = () => {
   const [dialogOpen, setDialogOpen] = useState(false);
 
   const handleLogout = () => {
+    setAnchorEl(null);
     // Handle logout logic
     setDialogOpen(true);
   };
@@ -54,13 +64,22 @@ const Navbar = () => {
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
+  
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   return (
 
-    <nav className="maxFullDeviveWidth bg-gray-900">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
-        <div className="flex items-center justify-between h-16 ">
-          <div className="flex items-center">
+    <nav className="maxFullDeviveWidth bg-gray-900" >
+      <div className=""  style={{ paddingLeft: '120px', paddingRight:'30px'}}>
+        <div className="flex items-center justify-between h-16 " >
+          <div className=" items-center" style={{ flex: 1}}>
             <Link
               to="/"
               className="text-yellow-600 text-lg font-bold"
@@ -69,7 +88,7 @@ const Navbar = () => {
             </Link>
           </div>
 
-          <div className="hidden md:flex">
+          <div className="hidden md:flex" style={{ flex: 1}}>
             <Link
               to="/browse"
               className="ml-4 text-xl text-yellow-600 hover:text-yellow-500 relative group"
@@ -102,23 +121,16 @@ const Navbar = () => {
             </Link>
           </div>
 
-          <div className="md:hidden">
+          <div className="md:hidden" >
             <button onClick={toggleMenu} className="text-white focus:outline-none">
               {isOpen ? <FaTimes /> : <FaBars />}
             </button>
           </div>
-          <div className="hidden md:flex">
+          
+          <div className="hidden md:flex" >
             {login === 'true' ? (
 
               <div className="logoutAndUser">
-                <button
-                  className="ml-4 text-xl bg-gradient-to-r from-yellow-600 to-yellow-800 text-white py-1 px-4 rounded transition-all hover:bg-gradient-to-r hover:from-yellow-800 hover:to-yellow-600 transform-gpu hover:scale-110"
-                  style={{ fontFamily: 'Berkshire Swash, cursive' }}
-                  onClick={handleLogout}
-                >
-                  Logout
-                </button>
-
                 <ResponsiveDialog
                   open={dialogOpen}
                   onClose={handleCloseDialog}
@@ -127,11 +139,79 @@ const Navbar = () => {
                   actionButtonLabel="Logout"
                   onActionButtonClick={logout}
                 />
-
-                <div className="userPofileImg">
-
-                  <img src="https://randomuser.me/api/portraits/med/men/23.jpg" alt="user profile" />
-                </div>
+                <Tooltip title="Account settings">
+          <IconButton
+            onClick={handleClick}
+            size="small"
+            sx={{ ml: 2 }}
+            aria-controls={open ? 'account-menu' : undefined}
+            aria-haspopup="true"
+            aria-expanded={open ? 'true' : undefined}
+          >
+            <Avatar sx={{ width: 35, height: 35 }} >  <div className="userPofileImg"><img src="https://randomuser.me/api/portraits/med/men/23.jpg" alt="user profile" /></div></Avatar>
+          </IconButton>
+        </Tooltip>
+        <Menu
+        anchorEl={anchorEl}
+        id="account-menu"
+        open={open}
+        onClose={handleClose}
+        onClick={handleClose}
+        PaperProps={{
+          elevation: 0,
+          sx: {
+            overflow: 'visible',
+            filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+            mt: 1.5,
+            '& .MuiAvatar-root': {
+              width: 32,
+              height: 32,
+              ml: -0.5,
+              mr: 1,
+            },
+            '&:before': {
+              content: '""',
+              display: 'block',
+              position: 'absolute',
+              top: 0,
+              right: 14,
+              width: 10,
+              height: 10,
+              bgcolor: 'background.paper',
+              transform: 'translateY(-50%) rotate(45deg)',
+              zIndex: 0,
+            },
+          },
+        }}
+        transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+        anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+      >
+        <MenuItem onClick={handleClose}>
+          <Avatar /> Profile
+        </MenuItem>
+        <MenuItem onClick={handleClose}>
+          <Avatar /> My account
+        </MenuItem>
+        <Divider />
+        <MenuItem onClick={handleClose}>
+          <ListItemIcon>
+            <PersonAdd fontSize="small" />
+          </ListItemIcon>
+          Add another account
+        </MenuItem>
+        <MenuItem onClick={handleClose}>
+          <ListItemIcon>
+            <Settings fontSize="small" />
+          </ListItemIcon>
+          Settings
+        </MenuItem>
+        <MenuItem onClick={handleLogout}>
+          <ListItemIcon>
+            <Logout fontSize="small" />
+          </ListItemIcon>
+          Logout
+        </MenuItem>
+      </Menu>
               </div>
 
             ) : (
