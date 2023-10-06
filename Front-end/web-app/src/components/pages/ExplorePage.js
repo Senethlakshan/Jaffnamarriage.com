@@ -6,6 +6,9 @@ import { userImageBASE_URL } from '../../api';
 import { baseURL } from '../../api';
 import axiosInstance from '../../api';
 
+
+import { FormControl, InputLabel, MenuItem, Select, Slider } from '@mui/material';
+
 function ExplorePage() {
     const [showFilter, setShowFilter] = useState(false);
     const [showFavorites, setShowFavorites] = useState(false);
@@ -14,6 +17,13 @@ function ExplorePage() {
     const [userData, setUserData] = useState({});
     const [genderFilter, setGenderFilter] = useState("");
     const [openedCardID, setOpenedCardId] = useState(null);
+
+    const [value, setValue] = React.useState([20, 37]);
+
+    const handleChange = (event, newValue) => {
+        setValue(newValue);
+    };
+
 
     function openCard(id) {
         setOpenedCardId(id)
@@ -175,6 +185,12 @@ function ExplorePage() {
 
     const likedItems = userData?.likedItems || [];
 
+    const [rele, setRele] = React.useState('');
+
+    const handleChangeRel = (event) => {
+        setRele(event.target.value);
+    };
+
 
     return (
         <div>
@@ -196,6 +212,65 @@ function ExplorePage() {
                                     <FaMale className='filterOptionIcon' onClick={() => setGenderFilterFunc("male")} />
                                 </div>
                             </div>
+                            <div>Age</div>
+                            <div className='smallFilterOptionCards'>
+                                <Slider
+                                    getAriaLabel={() => 'Temperature range'}
+                                    value={value}
+                                    onChange={handleChange}
+                                    valueLabelDisplay="auto"
+                                />
+                            </div>
+
+                            <div>Relegion</div>
+                            <div className='smallFilterOptionCards'>
+                                <FormControl variant="standard" sx={{ m: 1, minWidth: 200 }}>
+                                    <InputLabel id="demo-simple-select-standard-label">Relegion</InputLabel>
+                                    <Select
+                                        labelId="demo-simple-select-standard-label"
+                                        id="demo-simple-select-standard"
+                                        value={rele}
+                                        onChange={handleChangeRel}
+                                        label="Relegion"
+                                    >
+                                        <MenuItem value="">
+                                            <em>None</em>
+                                        </MenuItem>
+                                        <MenuItem value={"hindu"}>hindu</MenuItem>
+                                        <MenuItem value={"cristian"}>cristian</MenuItem>
+                                        <MenuItem value={"buddist"}>buddist</MenuItem>
+                                    </Select>
+                                </FormControl>
+                            </div>
+
+                            <div className="mb-4">
+                                <input
+                                    type="email"
+                                    id="email"
+                                    placeholder="Country"
+
+                                    className="w-full px-4 py-3 rounded-lg bg-gray-100 border-gray-300 focus:border-blue-500 focus:bg-white focus:outline-none"
+                                />
+                            </div>
+                            <div className="mb-4">
+                                <input
+                                    type="email"
+                                    id="email"
+                                    placeholder="Cast"
+
+                                    className="w-full px-4 py-3 rounded-lg bg-gray-100 border-gray-300 focus:border-blue-500 focus:bg-white focus:outline-none"
+                                />
+                            </div>
+                            <div className="mb-4">
+                                <input
+                                    type="email"
+                                    id="email"
+                                    placeholder="Language"
+
+                                    className="w-full px-4 py-3 rounded-lg bg-gray-100 border-gray-300 focus:border-blue-500 focus:bg-white focus:outline-none"
+                                />
+                            </div>
+
 
                         </div>
                     </div>

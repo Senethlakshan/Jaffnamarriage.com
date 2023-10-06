@@ -12,24 +12,27 @@ import ForgetPassword from "./components/items/home/ForgetPassword";
 import "./App.css";
 import ExplorePage from "./components/pages/ExplorePage";
 import MatchDetailsPage from "./components/pages/MatchDetailsPage";
-import PhotoUploadForm from "./components/items/home/userImagesUploader";
+import Footer from "./components/items/home/Footer";
+import ProfilePage from "./components/pages/ProfilePage";
+import Admin from "./components/pages/Admin";
 
 const App = () => {
   return (
     <Router>
      <Navbar/>
-      <Routes>
-        <Route path="/" element={<Homepage />} />     
+     <Routes>
+        <Route path="/" element={<Homepage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/forget-password" element={<ForgetPassword />} />
         <Route path="/about" element={<Aboutus />} />
-        <Route path="/contact" element={<Contactpage />} /> 
-        <Route path="/regiter-process" element={<RegProcesswrap />} /> 
-        <Route path="/user-panel" element={<UserDashbord />} /> 
-        <Route path="/browse" element={<ExplorePage />} /> 
+        <Route path="/contact" element={<Contactpage />} />
+        <Route path="/regiter-process" element={<RegProcesswrap />} />
+        <Route path="/user-panel" element={<UserDashbord />} />
+        <Route path="/browse" element={<ExplorePage />} />
         <Route path="/match/:id" element={<MatchDetailsPage />} />
-        <Route path="/userImagesUploader" element={<PhotoUploadForm />} />
+        <Route path="/userProfile" element={<ProfilePage />} />
+        <Route path="/administration" element={<Admin />} />
       </Routes>
     </Router>
   );
