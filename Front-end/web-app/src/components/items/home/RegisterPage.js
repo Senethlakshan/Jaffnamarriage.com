@@ -8,6 +8,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 import axiosInstance from '../../../api';
+import CircularProgress from '@mui/material/CircularProgress';
 
 function RegisterPage() {
   const fadeAnimation = useSpring({
@@ -22,7 +23,7 @@ function RegisterPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-
+  const [loading, setLoading] = useState(false);
 
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
@@ -30,31 +31,48 @@ function RegisterPage() {
 
   const handleRegister = (e) => {
     e.preventDefault();
+    setLoading(true);
 
    
     // Perform field validations
     if (!validateName(name)) {
-      toast.error('Invalid name');
+      setTimeout(() => {
+        setLoading(false); // Set loading to false after the operation is complete
+        toast.error('Invalid name');
+      }, 1000);
       return;
     }
 
     if (!validateMarriedStatus(marriedStatus)) {
-      toast.error('Invalid married status');
+      setTimeout(() => {
+        setLoading(false); // Set loading to false after the operation is complete
+        toast.error('Invalid married status');
+      }, 1000);
+      
       return;
     }
 
     if (!validateEmail(email)) {
-      toast.error('Invalid email format');
+      setTimeout(() => {
+        setLoading(false); // Set loading to false after the operation is complete
+        toast.error('Invalid email format');
+      }, 1000);
       return;
     }
 
     if (password.length < 6) {
-      toast.error('Password must be at least 6 characters long');
+      setTimeout(() => {
+        setLoading(false); // Set loading to false after the operation is complete
+        toast.error('Password must be at least 6 characters long');
+      }, 1000);     
       return;
     }
 
     if (password !== confirmPassword) {
-      toast.error('Passwords do not match');
+      setTimeout(() => {
+        setLoading(false); // Set loading to false after the operation is complete
+        toast.error('Passwords do not match');
+      }, 1000);
       return;
     }
 
@@ -75,11 +93,14 @@ function RegisterPage() {
         const token = response.data.token;
     
         localStorage.setItem('api_token', token);
-        // Display success message
-        toast.success('Registration successful');
-        localStorage.setItem('login', 'true');
-        // Do something after a successful registration, such as redirecting to the next page
-        window.location.href = '/regiter-process';
+        setTimeout(() => {
+          setLoading(false);
+          // Display success message
+          toast.success('Registration successful');
+          localStorage.setItem('login', 'true');
+          // Do something after a successful registration, such as redirecting to the next page
+          window.location.href = '/regiter-process';
+        }, 2000);
   })
   .catch((error) => {
     // Check if the error response contains validation errors
@@ -98,6 +119,7 @@ function RegisterPage() {
       // Handle other types of errors
       toast.error('Registration failed');
     }
+    setLoading(false);
   });
   }
   const validateName = (name) => {
@@ -234,7 +256,11 @@ function RegisterPage() {
                   type="submit"
                   className="w-full py-3 rounded-lg bg-gradient-to-tr from-amber-900 to-yellow-300 text-white font-bold"
                 >
-                  Next
+                 {loading ? (
+          <CircularProgress style={{ color: 'white', width: '18px', height: '18px', marginTop: '3px' }} />
+        ) : (
+          'Next'
+        )}
                 </button>
               
               </form>

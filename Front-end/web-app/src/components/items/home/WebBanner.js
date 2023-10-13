@@ -5,19 +5,33 @@
 // import web_banner from '../../../assests/home/web-banner.jpeg';
 // import { useMediaQuery } from 'react-responsive';
 
-import React from "react";
+import React, { useState, useEffect } from 'react'
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import web_banner from "../../../assests/home/web-banner.jpeg";
 import { useMediaQuery } from "react-responsive";
 import { FaSearch } from "react-icons/fa";
-
+import { useNavigate } from 'react-router-dom';
 
 const WebBanner = () => {
   const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
   const isTablet = useMediaQuery({
     query: "(min-width: 769px) and (max-width: 1024px)",
   });
+  const [lookingFor, setLookingFor] = useState('');
+  const [ageFrom, setAgeFrom] = useState('');
+  const [ageTo, setAgeTo] = useState('');
+  const [religion, setReligion] = useState('');
+  const navigate = useNavigate();
+  const handleSearch = () => {
+    // Handle the search here using the selected values (lookingFor, ageFrom, ageTo, religion)
+    console.log('Looking For:', lookingFor);
+    console.log('Age From:', ageFrom);
+    console.log('Age To:', ageTo);
+    console.log('Religion:', religion);
+    navigate(`/browse?lookingFor=${lookingFor}&ageFrom=${ageFrom}&ageTo=${ageTo}&religion=${religion}`);
+  };
+
 
   const boxStyles = {
 
@@ -186,59 +200,83 @@ const WebBanner = () => {
 
 
         <div className="w-full userTasteFilter">
-          <div className="eachElem">
-            <div className=" p-2 text-center">I'm Looking For a </div>
-            <div className=" p-2 text-center optionCont">
-                  <select className="selectOption w-full bg-white border border-gray-300 rounded py-2 px-4">
-                    <option value="">Looking for</option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                  </select>
-                </div>
-          </div>
-          <div className="eachElem">
-            <div className=" p-2 text-center">Age</div>
-            <div className=" p-2 text-center optionCont">
-                  <select className="selectOption w-full bg-white border border-gray-300 rounded py-2 px-4">
-                    <option value="">Looking for</option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                  </select>
-                </div>
-          </div>
-          <div className="eachElem">
-            <div className=" p-2 text-center">To</div>
-            </div>
-          <div className="eachElem">
-            <div className=" p-2 text-center">Age</div>
-            <div className=" p-2 text-center optionCont">
-                  <select className="selectOption w-full bg-white border border-gray-300 rounded py-2 px-4">
-                    <option value="">Looking for</option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                  </select>
-                </div>
-          </div>
-          <div className="eachElem">
-            <div className=" p-2 text-center">Of Religion</div>
-            <div className=" p-2 text-center optionCont">
-                  <select className="selectOption w-full bg-white border border-gray-300 rounded py-2 px-4">
-                    <option value="">Looking for</option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                  </select>
-                </div>
-          </div>
-          <div className="eachElem">
-               <div className=" p-2 text-center optionCont">
-                <button className="searchTypeFiltBtn bg-gradient-to-tr from-amber-900 to-yellow-300 text-white py-2 px-4 rounded flex items-center">
-                  Search
-                  <FaSearch className="ml-2" />
-                </button>{" "}
-              </div>
-          </div>
-           
+      <div className="eachElem">
+        <div className="p-2 text-center">I'm Looking For a</div>
+        <div className="p-2 text-center optionCont">
+          <select
+            className="selectOption w-full bg-white border border-gray-300 rounded py-2 px-4"
+            value={lookingFor}
+            onChange={(e) => setLookingFor(e.target.value)}
+          >
+            <option value="">Looking for</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
         </div>
+      </div>
+
+      <div className="eachElem">
+        <div className="p-2 text-center">Age</div>
+        <div className="p-2 text-center optionCont">
+          <select
+            className="selectOption w-full bg-white border border-gray-300 rounded py-2 px-4"
+            value={ageFrom}
+            onChange={(e) => setAgeFrom(e.target.value)}
+          >
+            <option value="">Looking for</option>
+            <option value="18">18</option>
+            {/* Add more age options as needed */}
+          </select>
+        </div>
+      </div>
+
+      <div className="eachElem">
+        <div className="p-2 text-center">To</div>
+      </div>
+
+      <div className="eachElem">
+        <div className="p-2 text-center">Age</div>
+        <div className="p-2 text-center optionCont">
+          <select
+            className="selectOption w-full bg-white border border-gray-300 rounded py-2 px-4"
+            value={ageTo}
+            onChange={(e) => setAgeTo(e.target.value)}
+          >
+            <option value="">Looking for</option>
+            <option value="60">60</option>
+            {/* Add more age options as needed */}
+          </select>
+        </div>
+      </div>
+
+      <div className="eachElem">
+        <div className="p-2 text-center">Of Religion</div>
+        <div className="p-2 text-center optionCont">
+          <select
+            className="selectOption w-full bg-white border border-gray-300 rounded py-2 px-4"
+            value={religion}
+            onChange={(e) => setReligion(e.target.value)}
+          >
+            <option value="">Looking for</option>
+            <option value="christian">Christian</option>
+            <option value="hindu">Hindu</option>
+            {/* Add more religion options as needed */}
+          </select>
+        </div>
+      </div>
+
+      <div className="eachElem">
+        <div className="p-2 text-center optionCont">
+          <button
+            className="searchTypeFiltBtn bg-gradient-to-tr from-amber-900 to-yellow-300 text-white py-2 px-4 rounded flex items-center"
+            onClick={handleSearch}
+          >
+            Search
+            <FaSearch className="ml-2" />
+          </button>{' '}
+        </div>
+      </div>
+    </div>
       </div>
       </div>
     </div>

@@ -28,28 +28,31 @@ body {
     flex-direction: column;
     gap: 10px;
 }
-
-
-
-.userPofileImg {
-    width: 40px;
-    height:40px;
-    border-radius: 100%;
-    object-fit: cover;
-    background-color: #ff5858;
-    border: #eeeeee solid 1.5px;
-
-}
-
-.userPofileImg img {
-    width: 37px;
-    height: 37px;
+.onlineStatusIndicator {
+    width: 8px;
+    height: 8px;
+    background-color: rgb(88, 255, 88);
     border-radius: 50%;
-    object-fit: cover;
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+  }
+.offlineStatusIndicator{
+    width: 8px;
+    height: 8px;
+    background-color: rgb(255, 204, 35);
+    border-radius: 50%;
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
 }
-
-
-
+/* styles.css */
+/* styles.css */
+.clickedIconButton {
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.9); /* White shadow with alpha (opacity) */
+  }
+  
+  
 .logoutAndUserSmall .userPofileImg {
     margin-left: 20px;
 }
@@ -200,7 +203,21 @@ body {
     padding: 20px;
 }
 
-
+.no-data-found {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 20px;
+    font-size: 20px;
+    color: #999; /* Text color */
+  }
+  
+  .no-data-found i {
+    font-size: 40px; /* Icon size */
+    margin-bottom: 10px; /* Spacing between icon and text */
+  }
+  
 
 .filterOptionsContainer {
 
@@ -1372,3 +1389,477 @@ textarea:focus {
     align-items: center;
     flex-direction: column;
 }
+
+/*----------------------------------user photo uploader form-----------------------------*/
+
+/* UploadImages.css */
+
+/* Define the custom font family, you can use any font you prefer */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap');
+
+/* Apply the custom font and other styles to the <h2> element */
+.custom-heading {
+  font-family: 'Roboto', sans-serif; /* Use the imported font */
+  font-size: 20px; /* Adjust font size as needed */
+  color: #333; /* Adjust font color as needed */
+  text-align: center; /* Center the text horizontally */
+  margin-bottom: 20px; /* Add spacing below the heading */
+  font-weight: 600;
+}
+.Neon {
+    font-family: sans-serif;
+    font-size: 14px;
+    color: #494949;
+    position: relative;
+    
+
+}
+.Neon * {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.Neon-input-dragDrop {
+    display: block;
+    width: 343px;
+    margin: 0 auto 25px auto;
+    padding: 25px;
+    color: #8d9499;
+    color: #97A1A8;
+    background: #fff;
+    border: 2px dashed #C8CBCE;
+    text-align: center;
+    -webkit-transition: box-shadow 0.3s, border-color 0.3s;
+    -moz-transition: box-shadow 0.3s, border-color 0.3s;
+    transition: box-shadow 0.3s, border-color 0.3s;
+}
+.Neon-input-dragDrop .Neon-input-icon {
+    font-size: 48px;
+    margin-top: -10px;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+.Neon-input-text h3 {
+    margin: 0;
+    font-size: 18px;
+}
+.Neon-input-text span {
+    font-size: 12px;
+}
+.Neon-input-choose-btn.blue {
+    color: #008BFF;
+    border: 1px solid #008BFF;
+}
+.Neon-input-choose-btn {
+    display: inline-block;
+    padding: 8px 14px;
+    outline: none;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    white-space: nowrap;
+    font-size: 12px;
+    font-weight: bold;
+    color: #8d9496;
+    border-radius: 3px;
+    border: 1px solid #c6c6c6;
+    vertical-align: middle;
+    background-color: #fff;
+    box-shadow: 0px 1px 5px rgba(0,0,0,0.05);
+    -webkit-transition: all 0.2s;
+    -moz-transition: all 0.2s;
+    transition: all 0.2s;
+}
+
+.container {
+    display: flex;
+    justify-content: center; /* Horizontal centering */
+    align-items: center; /* Vertical centering */
+
+  }
+
+.upload__box {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  }
+  
+  .upload__header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .upload__btn {
+    display: inline-block;
+    font-weight: bold;
+    color: #fff;
+    background-color: #007BFF;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .upload__btn:hover {
+    background-color: #0056b3;
+  }
+  
+  .upload__inputfile {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+  }
+  
+  .upload__img-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 10px -10px;
+  }
+  
+  .upload__img-box {
+    width: calc(33.33% - 20px);
+    padding: 0 10px;
+    margin-bottom: 12px;
+    position: relative;
+  }
+  
+  .upload__img-box img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  }
+  
+  .upload__img-close {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    text-align: center;
+    line-height: 24px;
+    z-index: 1;
+    cursor: pointer;
+    color: white;
+    font-size: 14px;
+  }
+  
+  /* Media Queries */
+  @media (max-width: 768px) {
+    .upload__img-box {
+      width: calc(50% - 20px);
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .upload__box {
+      padding: 10px;
+    }
+    .upload__img-box {
+      width: 100%;
+    }
+  }
+  
+
+  
+/*----------------------------------user Profile photo uploader form-----------------------------*/
+/* Center the content horizontally and add some spacing */
+.zoom-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 8px; /* Adjust the padding to control the space inside the button */
+    margin: 4px; /* Adjust the margin to control the space around the button */
+  }
+
+  .zoom-icon {
+    font-size: 18px;
+    color: white;
+  }
+.custom-heading-crop {
+    font-family: 'Roboto', sans-serif; /* Use the imported font */
+    font-size: 20px; /* Adjust font size as needed */
+    color: rgb(218, 218, 218); /* Adjust font color as needed */
+    text-align: center; /* Center the text horizontally */
+    margin-bottom: 20px; /* Add spacing below the heading */
+    font-weight: 600;
+  }
+.text-center {
+    text-align: center;
+    margin: 20px;
+  }
+  
+  /* Style the camera icon */
+  .mb-2-text {
+    position: relative;
+    font-size: 22px;  
+    margin-left: 33px;
+  }
+  
+  /* Make the text uppercase and style it */
+  .text-uppercase {
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-top: 7px;
+  }
+  
+  /* Style the edit icon */
+  .editIcon {
+   position: absolute;
+   margin-top: -20px;
+   margin-left: 75px;
+  }
+  
+  .editIcon p {
+    cursor: pointer; /* Add a pointer cursor for interactivity */
+    display: inline-block; /* Display the edit icon inline */
+    color: white; /* Text color for the edit button */
+    border-radius: 4px; /* Rounded corners for the button */
+  }
+  
+  /* Hover effect for the edit button */
+  
+.profile-pic-wrapper {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .pic-holder {
+    text-align: center;
+    position: relative;
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    border:  solid rgb(68, 131, 160);
+    padding:1px;
+  }
+  .pic-holder img{
+    border:1px solid rgb(153, 204, 228);
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+  }
+  .pic-holder .pic {
+    height: 100%;
+    width: 100%;
+    -o-object-fit: cover;
+    object-fit: cover;
+    -o-object-position: center;
+    object-position: center;
+  }
+  .bordered-image {
+    border:  solid #6e6a6a; /* Set your desired border width and color */
+    border-radius: 5px; /* Optional: Add rounded corners */
+    padding: 3px;
+
+  }
+  .responsive-image {
+    width: 80%;
+    max-width: 300px; /* Limit the maximum width to 500px */
+    height: auto; /* Maintain the aspect ratio */
+    border-radius: 0; /* Remove border radius */
+  }
+  .model .close{
+   color:white; 
+  }
+  .modal-content img{
+      width: 500px;
+      max-width: 450px; /* Limit the maximum width to 500px */
+      height: auto; /* Maintain the aspect ratio */
+      border-radius: 0; /* Remove border radius */
+    }
+  /* For mobile devices with screen width up to 600px */
+@media (max-width: 600px) {
+    .responsive-image {
+      width: 80%;
+      max-width: 300px; /* Limit the maximum width to 500px */
+      height: auto; /* Maintain the aspect ratio */
+      border-radius: 0; /* Remove border radius */
+    }
+    .modal-content img{
+        width: 350px;
+        max-width: 350px; /* Limit the maximum width to 500px */
+        height: auto; /* Maintain the aspect ratio */
+        border-radius: 0; /* Remove border radius */
+      }
+  }
+
+  
+  .pic-holder .upload-file-block,
+  .pic-holder .upload-loader {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(90, 92, 105, 0.7);
+    color: #f8f9fc;
+    font-size: 12px;
+    font-weight: 600;
+    opacity: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+  }
+  
+  .pic-holder .upload-file-block {
+    cursor: pointer;
+  }
+  
+  .pic-holder:hover .upload-file-block,
+  .uploadProfileInput:focus ~ .upload-file-block {
+    opacity: 1;
+  }
+  
+  .pic-holder.uploadInProgress .upload-file-block {
+    display: inline;
+  }
+  
+  .pic-holder.uploadInProgress .upload-loader {
+    opacity: 1;
+  }
+  
+  /* Snackbar css */
+  .snackbar {
+    visibility: visible;
+    min-width: 250px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    bottom: 30px;
+    font-size: 14px;
+    transform: translateX(-50%);
+  }
+  .dialog-content-no-scrollbar {
+    overflow: none;
+  }
+  
+  .snackbar.show {
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  }
+  
+  @-webkit-keyframes fadein {
+    from {
+      bottom: 0;
+      opacity: 0;
+    }
+    to {
+      bottom: 30px;
+      opacity: 1;
+    }
+  }
+  
+  @keyframes fadein {
+    from {
+      bottom: 0;
+      opacity: 0;
+    }
+    to {
+      bottom: 30px;
+      opacity: 1;
+    }
+  }
+  
+  @-webkit-keyframes fadeout {
+    from {
+      bottom: 30px;
+      opacity: 1;
+    }
+    to {
+      bottom: 0;
+      opacity: 0;
+    }
+  }
+  
+  @keyframes fadeout {
+    from {
+      bottom: 30px;
+      opacity: 1;
+    }
+    to {
+      bottom: 0;
+      opacity: 0;
+    }
+  }
+  
+  
+/* -------------------------------------------------- loader css ---------------------------*/
+
+  .centered-container {
+    display: flex;
+    justify-content: center; /* Horizontal centering */
+    align-items: center; /* Vertical centering */
+    height: 100vh; /* Set the container height to the viewport height for full-screen centering */
+  }
+  .loader {
+    width: 58px;
+    height: 58px;
+    display: block;
+    margin:500px auto;
+    position: relative;
+    color: #FFF;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+  }
+  .loader::after,
+  .loader::before {
+    content: '';  
+    box-sizing: border-box;
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    top: 0;
+    background-color: #ca8a04;
+    border-radius: 50%;
+    animation: scale50 1s infinite ease-in-out;
+  }
+  .loader::before {
+    top: auto;
+    bottom: 0;
+    background-color: #704e04;
+    animation-delay: 0.5s;
+  }
+  
+  @keyframes rotation {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  } 
+  @keyframes scale50 {
+    0%, 100% {
+      transform: scale(0);
+    }
+    50% {
+      transform: scale(1);
+    }
+  }  

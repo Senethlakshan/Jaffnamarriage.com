@@ -106,6 +106,22 @@ function RUserInfo({ handleChange, values }) {
                 </div>
               </td>
               <td className="px-6 py-4 whitespace-nowrap">
+                <div className="mb-4">
+                  <label htmlFor="pno" className="block text-gray-700 text-sm font-bold mb-2">
+                    Phone no
+                  </label>
+                  <input
+                    type="number"
+                    id="pno"
+                    name="pno"
+                    value={values.pno}
+                    placeholder="07X-XXXX-XXX"
+                    onChange={(e) => handleChange('pno', e.target.value)}
+                    className="w-full px-4 py-3 rounded-lg bg-gray-100 border-gray-300 focus:border-blue-500 focus:bg-white focus:outline-none"
+                  />
+                </div>
+              </td>
+              <td className="px-6 py-4 whitespace-nowrap">
               
               </td>
             </tr>

@@ -1,13 +1,14 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react'
-import { FaTimes, FaFilter, FaHeart, FaLandmark, FaLocationArrow, FaSpeakap, FaBirthdayCake, FaGraduationCap, FaFemale, FaRuler, FaMale, FaRegHeart } from 'react-icons/fa'
+import { FaTimes, FaFilter, FaHeart, FaLandmark, FaLocationArrow, FaSpeakap, FaBirthdayCake, FaGraduationCap, FaFemale, FaRuler, FaMale, FaRegHeart, FaInfoCircle } from 'react-icons/fa'
 import { Link } from 'react-router-dom';
 import { userImageBASE_URL } from '../../api';
 import { baseURL } from '../../api';
 import axiosInstance from '../../api';
+import '../../App.css'; // Import the external CSS file
+import { useLocation } from 'react-router-dom';
 
-
-import { FormControl, InputLabel, MenuItem, Select, Slider } from '@mui/material';
+import { FormControl, InputLabel, MenuItem, Select, Slider, colors } from '@mui/material';
 
 function ExplorePage() {
     const [showFilter, setShowFilter] = useState(false);
@@ -16,22 +17,16 @@ function ExplorePage() {
     const [exploreItemsOriginal, setExploreItemsOriginal] = useState([]);
     const [userData, setUserData] = useState({});
     const [genderFilter, setGenderFilter] = useState("");
+    const [ageFilter, setageFilter] = useState("");
     const [openedCardID, setOpenedCardId] = useState(null);
-
-    const [value, setValue] = React.useState([20, 37]);
-
-    const handleChange = (event, newValue) => {
-        setValue(newValue);
-    };
-
-
-    function openCard(id) {
-        setOpenedCardId(id)
-    }
-
-    function closeCard() {
-        setOpenedCardId(null)
-    }
+    const [selectuserData, selectsetUserData] = useState(null);
+    const [selectagevalue, setagetslectValue] = React.useState([20, 37]);
+    const [setreligion, setReligion] = useState('');
+    const [loading, setLoading] = useState(true); // Step 1: Initialize loading state
+    const location = useLocation();
+    // const handleChange = (event, newValue) => {
+    //     setValue(newValue);
+    // };
 
     function toggleFilter() {
         setShowFilter(!showFilter)
@@ -40,58 +35,78 @@ function ExplorePage() {
         setShowFavorites(!showFavorites)
     }
 
-    function setGenderFilterFunc(gender) {
+    function setGenderFilterFunc(gende) {
+        setExploreItems(null);
+        setLoading(true);
+        const filtered = exploreItemsOriginal.filter((item) => {
+            const age = item.details ? item.details.age : 0; // Assuming age is a property of 'details'
+            const gender = item.details ? item.details.gender : '';
+            const religion = item.details ? item.details.religion: '';
+            return (
+              age >= selectagevalue[0] &&
+              age <= selectagevalue[1] &&
+              (genderFilter === '' || gender === gende) &&
+              ( !setreligion || religion === setreligion)
+            );
+        });
+        setTimeout(() => {
+            setLoading(false);
+            setExploreItems(filtered);
+            setGenderFilter(gende);
+          }, 1000);
+          
 
-        let filteredItems = []
+        //   let filteredItems = []
 
-        if (gender === 'male') {
-
-
-            if (genderFilter === 'male') {
-                setGenderFilter('')
-                setExploreItems(exploreItemsOriginal)
-
-            } else {
-
-
-                exploreItemsOriginal.forEach((item) => {
-                    if (item.details.gender === 'male') {
-                        filteredItems.push(item)
-                    }
-                })
-                setExploreItems(filteredItems)
-                setGenderFilter('male')
-
-            }
-
-
-
-        } else if (gender === 'female') {
-
-            if (genderFilter === 'female') {
-                setGenderFilter('')
-                setExploreItems(exploreItemsOriginal)
-
-            } else {
-
-
-
-                exploreItemsOriginal.forEach((item) => {
-                    if (item.details.gender === 'female') {
-                        filteredItems.push(item)
-                    }
-                })
-
-                setExploreItems(filteredItems)
-                setGenderFilter('female')
-            }
-
-
-        }
-
-
+        //   if (gender === 'male') {
+  
+  
+        //       if (genderFilter === 'male') {
+        //           setGenderFilter('')
+        //           setExploreItems(exploreItemsOriginal)
+  
+        //       } else {
+  
+  
+        //           exploreItemsOriginal.forEach((item) => {
+        //               if (item.details.gender === 'male') {
+        //                   filteredItems.push(item)
+        //               }
+        //           })
+        //           setExploreItems(filteredItems)
+        //           setGenderFilter('male')
+  
+        //       }
+  
+  
+  
+        //   } else if (gender === 'female') {
+  
+        //       if (genderFilter === 'female') {
+        //           setGenderFilter('')
+        //           setExploreItems(exploreItemsOriginal)
+  
+        //       } else {
+  
+  
+  
+        //           exploreItemsOriginal.forEach((item) => {
+        //               if (item.details.gender === 'female') {
+        //                   filteredItems.push(item)
+        //               }
+        //           })
+  
+        //           setExploreItems(filteredItems)
+        //           setGenderFilter('female')
+        //       }
+  
+  
+        //   }
 
     }
+
+   
+
     function getItemById(id) {
         // Find the item with the matching ID in exploreItemsOriginal
         const item = exploreItemsOriginal.find((item) => item.id === id);
@@ -142,17 +157,80 @@ function ExplorePage() {
 
 
     useEffect(() => {
-        fetch(baseURL+'/allActiveUsers')
-        .then((res) => res.json())
-        .then((data) => {
-            // Set the exploreItemsOriginal state with the API response data
-            setExploreItemsOriginal(data.activeUsersWithImagesAndDetails);
-            console.log(data.activeUsersWithImagesAndDetails);
-        })
-        .catch((error) => {
-            // Handle any errors here
-            console.error('Error fetching data:', error);
-        });
+        
+        const searchParams = new URLSearchParams(location.search);
+      
+        // Access individual query parameters
+        const lookingFor = searchParams.get('lookingFor');
+        const ageFrom = searchParams.get('ageFrom');
+        const ageTo = searchParams.get('ageTo');
+        const religion = searchParams.get('religion');
+      
+        // Now you have the values of the query parameters
+        console.log('Looking For:', lookingFor);
+        console.log('Age From:', ageFrom);
+        console.log('Age To:', ageTo);
+        console.log('Religion:', religion);
+        // Using Axios for making the request
+        
+        if (!searchParams.has('lookingFor') && !searchParams.has('ageFrom') && !searchParams.has('ageTo') && !searchParams.has('religion')) {
+        
+         axiosInstance
+         .get('/allActiveUsers')
+         .then((response) => {
+         // Handle the successful response here
+         const data = response.data;
+         if (data.activeUsersWithImagesAndDetails && data.activeUsersWithImagesAndDetails.length > 0) {
+        // Access elements of the array safely
+        setExploreItemsOriginal(data.activeUsersWithImagesAndDetails);
+        setLoading(false);
+        console.log(data.activeUsersWithImagesAndDetails);
+        // ... rest of your code ...
+        } else {
+        setLoading(false);
+        // Handle the case where the array is empty or undefined
+        console.log('The array is empty or undefined');
+       }
+  
+
+      })
+      .catch((error) => {
+       // Handle any errors here
+       setExploreItemsOriginal([]);
+       setLoading(false);  
+       console.error('Error fetching data:', error);
+      });
+        }else{
+            
+            axiosInstance.post('/getSearchData', {
+                
+                  gender: lookingFor,        // Empty string for gender
+                  ageFrom: ageFrom,        // Age range from 1
+                  ageTo: ageTo,         // Age range up to 50
+                  religion: religion,      // Empty string for religion
+                
+              })
+              .then(response => {
+                const data = response.data;
+                console.log(data);
+                if (data.activeUsersWithImagesAndDetails && data.activeUsersWithImagesAndDetails.length > 0) {
+                // Access elements of the array safely
+                setExploreItemsOriginal(data.activeUsersWithImagesAndDetails);
+                setLoading(false);
+                }else{
+                setExploreItemsOriginal([]);
+                setLoading(false);  
+                }
+              })
+              .catch(error => {
+                // Handle errors here
+                setExploreItemsOriginal([]);
+                setLoading(false);  
+                console.error('Error fetching data:', error);
+              });
+              
+        }
+        
 
         let user = {
             name: 'user',
@@ -191,11 +269,79 @@ function ExplorePage() {
         setRele(event.target.value);
     };
 
+    function openCard(id) {
+        axiosInstance
+            .get('/selectUserProfile/' + id)
+            .then((response) => {
+                const userDataArray = response.data.activeUserWithImagesAndDetails;
+                selectsetUserData(userDataArray);
+                console.log(userDataArray);
+            })
+            .catch((error) => {
+                // Handle errors here
+            });
+    }
+    function closeCard() {
+        selectsetUserData(null)
+    }
 
+    const handleselectageChange = (event, newValue) => {
+        setagetslectValue(newValue);
+        setAgeFilterFunc();
+    };
+    function setAgeFilterFunc() {
+        setExploreItems(null);
+        setLoading(true);
+        const filtered = exploreItemsOriginal.filter((item) => {
+            const age = item.details ? item.details.age : 0; // Assuming age is a property of 'details'
+            const gender = item.details ? item.details.gender : '';
+            const religion = item.details ? item.details.religion: '';
+            return (
+              age >= selectagevalue[0] &&
+              age <= selectagevalue[1] &&
+              (genderFilter === '' || gender === genderFilter) &&
+              ( !setreligion || religion === setreligion)
+            );
+        });
+        setTimeout(() => {
+            setLoading(false);
+            setExploreItems(filtered);
+          }, 1000);
+          
+    }
+    
+    
+  const handleChangeReligion = (event) => {
+        setExploreItems(null);
+        setLoading(true);
+    const selectedValue = event.target.value;
+
+    const filtered = exploreItemsOriginal.filter((item) => {
+        const details = item.details;
+        const age = item.details ? item.details.age : 0; // Assuming age is a property of 'details'
+        const gender = item.details ? item.details.gender : '';
+      
+            return (
+              age >= selectagevalue[0] &&
+              age <= selectagevalue[1] &&
+              (genderFilter === '' || gender === genderFilter) && 
+              ( !selectedValue || details.religion === selectedValue)
+            );
+      });
+      setTimeout(() => {
+        setLoading(false);
+        setExploreItems(filtered);
+        setReligion(selectedValue);
+      }, 1000);
+
+  };
     return (
-        <div>
+        <div>   
             <div className='mainExploreContainer'>
-
+            {loading &&(  <div className="centered-container" style={{  position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', zIndex: 10 }}>
+                          <span className="loader"></span>
+                         </div>
+            )}
                 <div className={showFilter ? 'filterOpen filterOptionsContainer' : 'filterClosed filterOptionsContainer'}>
                     <div className='filterOptionsToggleBtn'>
                         {showFilter ? <FaTimes onClick={toggleFilter} /> : <FaFilter onClick={toggleFilter} />}
@@ -214,24 +360,24 @@ function ExplorePage() {
                             </div>
                             <div>Age</div>
                             <div className='smallFilterOptionCards'>
-                                <Slider
-                                    getAriaLabel={() => 'Temperature range'}
-                                    value={value}
-                                    onChange={handleChange}
-                                    valueLabelDisplay="auto"
-                                />
+                            <Slider
+                             getAriaLabel={() => 'Temperature range'}
+                             value={selectagevalue}
+                             onChange={handleselectageChange}
+                            valueLabelDisplay="auto"
+                            />
                             </div>
 
                             <div>Relegion</div>
                             <div className='smallFilterOptionCards'>
                                 <FormControl variant="standard" sx={{ m: 1, minWidth: 200 }}>
-                                    <InputLabel id="demo-simple-select-standard-label">Relegion</InputLabel>
+                                    <InputLabel id="demo-simple-select-standard-label">{setreligion? setreligion: 'Relegion'}</InputLabel>
                                     <Select
                                         labelId="demo-simple-select-standard-label"
                                         id="demo-simple-select-standard"
                                         value={rele}
-                                        onChange={handleChangeRel}
-                                        label="Relegion"
+                                        onChange={handleChangeReligion}
+                                        label= {setreligion? setreligion: 'Relegion'}
                                     >
                                         <MenuItem value="">
                                             <em>None</em>
@@ -275,22 +421,25 @@ function ExplorePage() {
                         </div>
                     </div>
                 </div>
-                <div className='exploreItems'>
+                <div>
+                {exploreItems && exploreItems.length > 0 && !loading ? (
+                    <div className='exploreItems'>
+
                     {exploreItems.map((item, index) => (
                         <div className='exploreItemCard' key={index} >
                             <div className='exploreItemImg'>
                                 <div className='likeBtn'>
-                                    {checkIfLiked(item.user_id) ? <FaHeart onClick={() => updateItemLikeStatus(item.user_id)} /> : <FaRegHeart onClick={() => updateItemLikeStatus(item.user_id)} />}
+                                    {checkIfLiked(item.user_id) ? <FaHeart onClick={() => updateItemLikeStatus(item.user_id)} style={{ color: "red" }} /> : <FaRegHeart onClick={() => updateItemLikeStatus(item.user_id)} />}
                                 </div>
                                 <img src={userImageBASE_URL + item.images[0].image_path} alt={item.name} />
                             </div>
                             <div className='exploreItemDetails'>
-
+   
                                 <div className='nameAndAddressForCard' onClick={() => openCard(item.user_id)}>
                                     <div className='exploreItemName'>{item.name}</div>
                                     <div className='exploreItemAddress'><FaLocationArrow className='addressIcon' /> {item.details.town}, {item.details.livingPlace}</div>
                                 </div>
-
+   
                                 <div className='generalDetails'>
                                     <div className='eachGeneralDetail'>
                                         <div className='eachGeneralDetailInner'><FaSpeakap className='gdIcon' /> {item.details.spokenLnguage}</div>
@@ -307,18 +456,28 @@ function ExplorePage() {
                                     <div className='eachGeneralDetail'>
                                         <div className='eachGeneralDetailInner'><FaRuler className='gdIcon' /> {item.details.height}</div>
                                     </div>
-
+   
                                 </div>
-                                <div className='exploreItemPostedOn'>{item.updated_at
-}</div>
+                                <div className='exploreItemPostedOn'>{item.created_at
+   }</div>
                             </div>
                         </div>
                     ))}
                 </div>
+                 ) : (
+                 <div>   { !loading && ( <div className="no-data-found">
+                    <FaInfoCircle></FaInfoCircle>
+                    <p>No Data Found</p>
+                  </div> )}
+                  </div>
+                 )}
+               </div>
+
 
                 <div className={showFavorites ? 'favOpen favoritesPane' : 'favClosed favoritesPane'}>
                     <div className={showFavorites ? 'favsToggleBtn' : 'favsToggleBtnClosed'}>
-                        {showFavorites ? <FaTimes onClick={toggleFavorites} /> : <FaHeart onClick={toggleFavorites} />}
+                        {showFavorites ? <FaTimes onClick={toggleFavorites} /> : <FaHeart onClick={toggleFavorites} style={{ color: "red" }} />
+}
                     </div>
                     <div className='favorites'>
                         <div>Favorites</div>
@@ -338,42 +497,68 @@ function ExplorePage() {
             </div>
 
 
-            {openedCardID && (
+            {selectuserData  && (
                 <div className='openedCardOverlay' onClick={closeCard}></div>
             )}
-            {openedCardID && (
+            {selectuserData && (
 
                 <div className='openedCardContainer'>
                     <div className='openedCard'>
                         <div className='openedCardImg'>
-                            <img src={userImageBASE_URL +getItemById(openedCardID.user_id).images[0].image_path} alt='openedCard' />
-                            
+                        {selectuserData && (
+  selectuserData.profilePic.length > 0 ? (
+    <img src={userImageBASE_URL + selectuserData.profilePic} alt='openedCard' />
+  ) : (
+    selectuserData.images.length > 0 ? (
+      <img src={userImageBASE_URL + selectuserData.images[0]} alt='openedCard' />
+    ) : null
+  )
+)}
+
+
                         </div>
                         <div className='openedCardDetails'>
-                            <div className='openedCardName'>{getItemById(openedCardID.user_id).name}</div>
-                            <div className='openedCardAddress'><FaLocationArrow className='addressIcon' /> {getItemById(openedCardID.user_id).details.town}, {getItemById(openedCardID.user_id).details.livingPlace}</div>
+                            <div className='openedCardName'>{selectuserData.name}</div>
+                            {selectuserData && (
+                             <div className='openedCardAddress'>
+                              <FaLocationArrow className='addressIcon' /> {selectuserData.details && selectuserData.details.town ? selectuserData.details.town : 'Unknown'}
+                             </div>
+                            )}
+
                             <div className='openedCardGeneralDetails'>
                                 <div className='eachGeneralDetail'>
-                                    <div className='eachGeneralDetailInner'><FaSpeakap className='gdIcon' /> {getItemById(openedCardID.user_id).details.spokenLnguage}</div>
+                                    {selectuserData && selectuserData.details && selectuserData.details.spokenLnguage && (
+                                      <div className='eachGeneralDetailInner'>
+                                       <FaSpeakap className='gdIcon' /> {selectuserData.details.spokenLnguage}
+                                      </div>
+                                    )}
                                 </div>
                                 <div className='eachGeneralDetail'>
-                                    <div className='eachGeneralDetailInner'><FaBirthdayCake className='gdIcon' />  {getItemById(openedCardID.user_id).details.age}</div>
-                                </div>
+                                {selectuserData && selectuserData.details && selectuserData.details.age && (
+                                    <div className='eachGeneralDetailInner'><FaBirthdayCake className='gdIcon' />  {selectuserData.details.age}</div>
+                                )}
+                                    </div>
                                 <div className='eachGeneralDetail'>
-                                    <div className='eachGeneralDetailInner'><FaGraduationCap className='gdIcon' />  {getItemById(openedCardID.user_id).details.education}</div>
-                                </div>
+                                {selectuserData && selectuserData.details && selectuserData.details.education && (
+                                    <div className='eachGeneralDetailInner'><FaGraduationCap className='gdIcon' />  {selectuserData.details.education}</div>
+                                )}
+                                    </div>
                                 <div className='eachGeneralDetail'>
-                                    <div className='eachGeneralDetailInner'><FaFemale className='gdIcon' /> {getItemById(openedCardID.user_id).details.gender}</div>
-                                </div>
+                                {selectuserData && selectuserData.details && selectuserData.details.gender && (
+                                    <div className='eachGeneralDetailInner'><FaFemale className='gdIcon' /> {selectuserData.details.gender}</div>
+                                )}
+                                    </div>
                                 <div className='eachGeneralDetail'>
-                                    <div className='eachGeneralDetailInner'><FaRuler className='gdIcon' /> {getItemById(openedCardID.user_id).details.height}</div>
-                                </div>
+                                {selectuserData && selectuserData.details && selectuserData.details.height && (
+                                    <div className='eachGeneralDetailInner'><FaRuler className='gdIcon' /> {selectuserData.details.height}</div>
+                                )}
+                                    </div>
 
                             </div>
-                            <div className='openedCardPostedOn'>{getItemById(openedCardID.user_id).updated_at}</div>
+                            <div className='openedCardPostedOn'>{selectuserData.created_at}</div>
                             <div className='viewButtonDiv'>
                                 <div className='viewButton'>
-                                    <Link to={`/match/${getItemById(openedCardID.user_id).user_id}`} className='viewProfileBtn'>View Profile</Link>
+                                    <Link to={`/match/${selectuserData.user_id}`} className='viewProfileBtn'>View Profile</Link>
                                 </div>
                             </div>
                         </div>

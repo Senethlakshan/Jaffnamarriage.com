@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from 'react'
+import { useState } from 'react'
 import { Helmet } from "react-helmet";
 // import { FaUser, FaSearch, FaLink } from "react-icons/fa";
 import { useLocation } from "react-router-dom";
@@ -46,10 +47,22 @@ axiosInstance.get('/validToken')
 const Homepage = () => {
   const location = useLocation();
   const isHomePage = location.pathname === "/";
+  const [loading, setLoading] = useState(true);
 
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+  });
 
   return (
     <div>
+       {loading ? (
+    <div className="centered-container" style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', zIndex: 10 }}>
+      <span className="loader"></span>
+    </div>
+  ) : (
+     <div>
       <Helmet>
         {isHomePage && (
           <script type="text/javascript">
@@ -182,7 +195,10 @@ const Homepage = () => {
        
       </div>
       <Footer/>
-    </div>
+      </div>
+  )}
+</div>
+   
   );
 };
 

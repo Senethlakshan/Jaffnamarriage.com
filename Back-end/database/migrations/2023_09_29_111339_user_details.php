@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('gender')->nullable();
             $table->string('spokenLnguage')->nullable();
             $table->string('town')->nullable();
+            $table->string('phonenum')->nullable();
             $table->boolean('Termsagree')->default(false);
             $table->string('selectedPlans')->nullable();
             $table->timestamps(); // This will add 'created_at' and 'updated_at' columns

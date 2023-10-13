@@ -39,13 +39,14 @@ const Newmember = () => {
 
   return (
     <div className="bg-white h-708">
-      <div className="flex pl-4 pr-4 pt-5  flex-col items-center justify-center">
-        <h1 className="text-amber-500 text-4xl m-2 font-serif text-center">Newest Members</h1>
-        <p className="text-xl mt-3 font-serif text-center">
-          JaffnaMarrige will help you find your perfect match with just a few steps.
-          You focus on what is most important to you we do all the work.
-        </p>
-      </div>
+      <div className="flex flex-col items-center justify-center h-screen">
+  <h1 className="text-amber-500 text-4xl m-2 font-serif text-center">Newest Members</h1>
+  <p className="text-xl mt-3 font-serif text-center">
+    JaffnaMarrige will help you find your perfect match with just a few steps.
+    You focus on what is most important to you we do all the work.
+  </p>
+</div>
+
       <div className="flex justify-center mt-10 py-2 px-4">
         {/* user profile scroll slide bar */}
         <Carousel

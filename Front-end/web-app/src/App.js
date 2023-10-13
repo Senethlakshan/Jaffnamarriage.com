@@ -15,7 +15,8 @@ import MatchDetailsPage from "./components/pages/MatchDetailsPage";
 import Footer from "./components/items/home/Footer";
 import ProfilePage from "./components/pages/ProfilePage";
 import Admin from "./components/pages/Admin";
-
+import ImagesUploader from "./components/items/home/userImagesUploader";
+import UserProfilePicUploade from "./components/items/home/userProfilePicUploader";
 const App = () => {
   return (
     <Router>
@@ -31,8 +32,10 @@ const App = () => {
         <Route path="/user-panel" element={<UserDashbord />} />
         <Route path="/browse" element={<ExplorePage />} />
         <Route path="/match/:id" element={<MatchDetailsPage />} />
-        <Route path="/userProfile" element={<ProfilePage />} />
+        <Route path="/userProfile/:id" element={<ProfilePage />} />
         <Route path="/administration" element={<Admin />} />
+        <Route path="/userImagesUploader" element={<ImagesUploader />} />
+        <Route path="/userProfilePicUploader" element={<UserProfilePicUploade />} />
       </Routes>
     </Router>
   );

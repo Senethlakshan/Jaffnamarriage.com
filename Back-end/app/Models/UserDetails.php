@@ -22,6 +22,7 @@ class UserDetails extends Model
         'gender',
         'spokenLnguage',
         'town',
+        'phonenum',
         'Termsagree',
         'selectedPlans',
     ];

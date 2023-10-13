@@ -8,6 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import { useNavigate,Link } from "react-router-dom";
 import axiosInstance from '../../../api';
+import CircularProgress from '@mui/material/CircularProgress';
 
 function LoginPage() {
   const fadeAnimation = useSpring({
@@ -20,6 +21,7 @@ function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -29,15 +31,22 @@ function LoginPage() {
 
   const handleLogin = (e) => {
     e.preventDefault();
+    setLoading(true);
 
     // Perform email and password validation
     if (!validateEmail(email)) {
       toast.error("Invalid email format");
+      setTimeout(() => {
+        setLoading(false); // Set loading to false after the operation is complete
+      }, 2000);
       return;
     }
 
     if (password.length < 6) {
       toast.error("Password must be at least 6 characters long");
+      setTimeout(() => {
+        setLoading(false); // Set loading to false after the operation is complete
+      }, 2000);
       return;
     }
 
@@ -57,11 +66,14 @@ axiosInstance
     const token = response.data.token;
 
     localStorage.setItem('api_token', token);
-    // Display success message
-    toast.success('Login successful');
-    localStorage.setItem('login', 'true');
-    // Do something after a successful login, such as redirecting to the next page
-    window.location.href = '/login-process';
+    setTimeout(() => {
+      setLoading(false); // Set loading to false after the operation is complete
+      toast.success('Login successful');
+      localStorage.setItem('login', 'true');
+      // Do something after a successful login, such as redirecting to the next page
+      window.location.href = '/browse';
+    }, 2000);
+
   })
   .catch((error) => {
     // Check if the error response contains validation errors
@@ -82,6 +94,7 @@ axiosInstance
       // Handle other types of errors
       toast.error('Login failed');
     }
+    setLoading(false);
   });
 
   };
@@ -156,13 +169,13 @@ axiosInstance
                     )}
                   </button>
                 </div>
-
                 <button
-                  type="submit"
-                  className="w-full py-3 rounded-lg bg-gradient-to-tr from-amber-900 to-yellow-300 text-white font-bold "
-                >
-                  Login
-                </button>
+        type="submit"
+        className="w-full py-3 rounded-lg bg-gradient-to-tr from-amber-900 to-yellow-300 text-white font-bold" // Attach the click handler
+        disabled={loading} // Disable the button when loading is true
+      >
+        {loading ? 'Logging In...' : 'Login'} {/* Show different text when loading */}
+      </button>
                 {/* Remember me forget password */}
                 <div className="flex items-center justify-between mt-6 mb-4">
                   <label className="flex items-center">

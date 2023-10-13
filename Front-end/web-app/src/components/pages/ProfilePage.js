@@ -1,13 +1,24 @@
 import React from 'react'
 import { useEffect } from 'react';
 import { useState } from 'react';
-import { FaArrowLeft, FaBackward, FaBirthdayCake, FaEdit, FaFacebookMessenger, FaFemale, FaGraduationCap, FaLocationArrow, FaPhone, FaRuler, FaSpeakap, FaTimes, FaUser, FaWhatsapp } from 'react-icons/fa';
-
+import { FaArrowLeft, FaBackward, FaBirthdayCake, FaEdit, FaFacebookMessenger, FaFemale, FaGraduationCap, FaLocationArrow, FaPhone, FaRuler, FaSpeakap, FaTimes, FaUser, FaWhatsapp, FaWindowClose } from 'react-icons/fa';
+import { baseURL } from '../../api';
 import { Link, useNavigate, useParams } from "react-router-dom";
 import p1 from '../../assests/home/p1.jpeg';
 import { Button } from '@mui/material';
 import Footer from '../items/home/Footer';
+import { userImageBASE_URL } from '../../api';
+import MuiAlert from '@mui/material/Alert';
+import profileImageNofemale from "../../assests/home/profileImageNofemale.jpg";
+import profileImageNomale from "../../assests/home/profileImageNomale.jpg";
+import ConfirmationDialog from './userProfilePicUploadToProfilePage'
+import '../../App.css';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
 
+const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
 function ProfilePage() {
 
     const navigate = useNavigate();
@@ -16,79 +27,94 @@ function ProfilePage() {
     const [userData, setUserData] = useState(null);
     const [editPanel, setEditPanel] = useState(false);
 
-    const [email, setEmail] = useState('lakshmi@mail.com');
-    const [name, setName] = useState('Lakshmi Devi');
-    const [country, setCountry] = useState('Sri Lnaka');
-    const [city, setCity] = useState('Jaffna');
-    const [relegion, seteligion] = useState('Hindu');
-    const [cast, setCast] = useState('brahman');
-    const [language, setLanguage] = useState('tamil');
-    const [mobile, setMobile] = useState('+94761234567');
-    const [gender, setGender] = useState('female');
-    const [age, setAge] = useState('23');
-    const [occupation, setOccupation] = useState('Doctor');
-    const [marritalStatus, setMarriedStatus] = useState('Single');
-
-
+    const [email, setEmail] = useState('');
+    const [name, setName] = useState('');
+    const [country, setCountry] = useState('');
+    const [city, setCity] = useState('');
+    const [relegion, seteligion] = useState('');
+    const [cast, setCast] = useState('');
+    const [language, setLanguage] = useState('');
+    const [mobile, setMobile] = useState('');
+    const [gender, setGender] = useState('');
+    const [age, setAge] = useState('');
+    const [occupation, setOccupation] = useState('');
+    const [marritalStatus, setMarriedStatus] = useState('');
+    const [matchData, setMatchData] = useState(null);
+    const [loading, setLoading] = useState(true);
     const { id } = useParams();
+    const [openDialog, setOpenDialog] = useState(false);
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const open = Boolean(anchorEl);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [setSelectedimg, setSelectedImage] = useState('');
+
+
+    const handleClick = (event, imageValue) => {
+      setSelectedImage(imageValue);
+      setAnchorEl(event.currentTarget);
+    };
+    const handleClose = () => {
+      setAnchorEl(null);
+    };
     const backButton = () => {
         navigate("/browse");
     };
-
+    
+    const editProfilePic = () => {
+        setOpenDialog(true);
+    };
+    const openMoadl = () => {
+        setIsModalOpen(true);
+    };
+      
+    const closeModal = () => {
+        setIsModalOpen(false);
+    };
+      
     useEffect(() => {
-        // const getMatchById = async () => {
-        //   try {
-        //     let response = await fetch(
-        //       `https://bckend/api/match/${id}`,
-        //       {
-        //         method: "GET",
-        //         headers: {
-        //           "Content-Type": "application/json",
-        //           // 'Content-Type': 'application/x-www-form-urlencoded',
-        //         },
-        //       }
-        //     );
-        //     let result = await response.json();
-        //     if (response.status === 200) {
-        //       setuserData(result);
-        //     } else if (response.status === 401) {
-        //       console.log("you are not autherized");
-        //     } else {
-        //       console.log("Some error occured");
-        //     }
-        //   } catch (err) {
-        //     console.log("not Authorized", err);
-        //   }
-        // };
-        // getMatchById();
+        const getMatchById = async () => {
+          try {
+            let response = await fetch(
+                baseURL+`/selectUserProfile/${id}`,
+              {
+                method: "GET",
+                headers: {
+                  "Content-Type": "application/json",
+                  // 'Content-Type': 'application/x-www-form-urlencoded',
+                },
+              }
+            );
+            let result = await response.json();
+            console.log(response);
+            if (response.status === 200) {
+              setLoading(false);
+              setMatchData(result.activeUserWithImagesAndDetails);
+              setEmail(result.activeUserWithImagesAndDetails.email);
+              setCountry(result.activeUserWithImagesAndDetails.details.livingPlace);
+              setName(result.activeUserWithImagesAndDetails.name);
+              setCity(result.activeUserWithImagesAndDetails.details.town);
+              seteligion(result.activeUserWithImagesAndDetails.details.religion);
+              setCast(result.activeUserWithImagesAndDetails.details.cast);
+              setLanguage(result.activeUserWithImagesAndDetails.details.spokenLnguage);
+              setMobile(result.activeUserWithImagesAndDetails.details.pno);
+              setGender(result.activeUserWithImagesAndDetails.details.gender);
+              setAge(result.activeUserWithImagesAndDetails.details.age);
+              setMarriedStatus(result.activeUserWithImagesAndDetails.marriedStatus);
+              console.log(result.activeUserWithImagesAndDetails);
+            } else if (response.status === 401) {
+              console.log("you are not autherized");
+            } else {
+              console.log("Some error occured");
+            }
+          } catch (err) {
+            console.log("not Authorized", err);
+          }
+        };
+        getMatchById();
 
-
-        const dummyUserData = {
-
-            id: 1,
-            name: 'Lakshmi Devi',
-            gender: 'female',
-            spokenLnguage: 'tamil',
-            marritalStatus: 'unmarried',
-            town: 'jaffna',
-            country: 'sri lanka',
-            age: '23',
-            photo: p1,
-            allPhotos: [p1, p1, p1],
-            language: ['tamil', 'english', 'sinhala'],
-            relegion: 'hindu',
-            caste: 'brahmin',
-            education: 'bachelor degree',
-            occupation: 'doctor',
-            height: '5.5ft',
-            postedOn: '2021-09-01',
-            contact: '+94761234567',
-            isAdmin: true,
-
-        }
-
-        setUserData(dummyUserData);
     }, [id]);
+
+
 
     function openCard() {
         setEditPanel(true)
@@ -97,10 +123,37 @@ function ProfilePage() {
     function closeCard() {
         setEditPanel(false)
     }
+    const modalStyle = {
+        display: 'block',
+        position: 'fixed',
+        zIndex: 1000, // Adjust as needed
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        backgroundColor: 'rgba(0, 0, 0, 0.7)', // Semi-transparent black overlay
+      };
+    
+      const modalContentStyle = {
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+      };
+    const handleCancel = () => {
+        // Add your logic here to determine whether the dialog should be closed or not
+        const shouldCloseDialog = true; // Set this to true or false based on your condition
 
+        if (shouldCloseDialog) {
+          setOpenDialog(false); // Close the dialog if shouldCloseDialog is true
+        }
+      };
     return (
-        <div>
-
+        <div>   
+           {loading &&(  <div className="centered-container" style={{  position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', zIndex: 10 }}>
+                          <span className="loader"></span>
+                         </div>
+            )}
 
             <div className="matchPageContainer">
                 <div className="row">
@@ -110,68 +163,115 @@ function ProfilePage() {
                         </button>
                     </div>
                 </div>
-
-                {userData && (
-
+                {matchData ? (
                     <div className='matchDataContainer'>
-                        <div className='userData'>
-                            <div className='openedCardImgUser userProf'>
-                                <img src={userData.photo} alt='openedCard' className='userImageProfile' />
-                                {(userData.allPhotos.length > 1) && (
-                                    <div className='imageArray'>
-                                        {userData.allPhotos.map((item, index) => (
-                                            <div className='secondaryImg'>
-                                                <img src={item} alt='openedCard' />
-                                            </div>
-                                        ))}
+                    <div className='userData'>
+                    <div className='openedCardImgUser userProf'>
+                    {matchData.profilePic != null?(<img
+  src={userImageBASE_URL+matchData.profilePic
+  }
+  alt='openedCard'
+  className='userImageProfile bordered-image'
+  onClick={(event) => handleClick(event, matchData.profilePic)}
+/>):<img
+  src={(gender == 'male')?profileImageNomale: profileImageNofemale
+  }
+  alt=''
+  className='userImageProfile bordered-image'
+  onClick={(event) => handleClick(event, matchData.profilePic)}
+/>}   
+
+
+<button onClick={editProfilePic} className="btn btn-primary mt-2"><FaEdit></FaEdit></button>
+<Menu
+        id="demo-positioned-menu"
+        aria-labelledby="demo-positioned-button"
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+        anchorOrigin={{
+          vertical: 'center',
+          horizontal: 'center',
+        }}
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'left',
+        }}
+      >
+        <MenuItem onClick={openMoadl}>View Profile Picture</MenuItem>
+        <MenuItem onClick={editProfilePic}>Change Picture</MenuItem>
+      </Menu>
+    {isModalOpen &&(<div className="modal" style={modalStyle}>
+        <span className="close" onClick={closeModal}>
+         <FaWindowClose style={{ color: 'white', fontSize:'24px', margin:'7px',float:'right' }} onClick={closeModal} />
+        </span>
+      <div className="modal-content" style={modalContentStyle}>
+        <img src={userImageBASE_URL + setSelectedimg} alt="Full Image"  style={{   borderRadius: '0' }} className="responsive-image"/>
+      </div>
+    </div>)}  
+                            {(matchData.images.length > 0) && (
+                            
+                                <div className='imageArray'>
+                                    {matchData.images.map((item, index) => (
+                                        <div className='secondaryImg'>
+                                            <img src={userImageBASE_URL+item} alt='openedCard' />
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+                        <div className='openedCardDetails'>
+                            <div className='openedCardName'>{matchData.name}</div>
+                            <div className='openedCardAddress'><FaLocationArrow className='addressIcon' /> {matchData.details.town}, {matchData.details.livingPlace}</div>
+                            <div className='openedCardGeneralDetails'>
+                                <div className='eachGeneralDetail'>
+                                    <div className='eachGeneralDetailInner'><FaSpeakap className='gdIcon' /> {matchData.details.spokenLnguage}</div>
+                                </div>
+                                <div className='eachGeneralDetail'>
+                                    <div className='eachGeneralDetailInner'><FaBirthdayCake className='gdIcon' />  {matchData.details.age}</div>
+                                </div>
+                                <div className='eachGeneralDetail'>
+                                    <div className='eachGeneralDetailInner'><FaGraduationCap className='gdIcon' />  {matchData.details.education}</div>
+                                </div>
+                                <div className='eachGeneralDetail'>
+                                    <div className='eachGeneralDetailInner'><FaFemale className='gdIcon' /> {matchData.details.gender}</div>
+                                </div>
+                                <div className='eachGeneralDetail'>
+                                    <div className='eachGeneralDetailInner'><FaRuler className='gdIcon' /> {matchData.details.height}</div>
+                                </div>
+
+                            </div>
+                            <div className='openedCardPostedOn'>{matchData.created_at}</div>
+                            <div className='openedCardPostedOn'>{matchData.details.pno}</div>
+
+                            <div className='viewButtonDivUserPage'>
+                                <div >
+                                    <Link onClick={openCard} className='editUserBtn'>edit info <FaEdit /></Link>
+                                </div>
+                                {  (
+                                    <div >
+                                        <Link to={`/userImagesUploader`} className='adminBtn'>Admin Page <FaUser /></Link>
                                     </div>
                                 )}
                             </div>
-                            <div className='openedCardDetails'>
-                                <div className='openedCardName'>{userData.name}</div>
-                                <div className='openedCardAddress'><FaLocationArrow className='addressIcon' /> {userData.town}, {userData.country}</div>
-                                <div className='openedCardGeneralDetails'>
-                                    <div className='eachGeneralDetail'>
-                                        <div className='eachGeneralDetailInner'><FaSpeakap className='gdIcon' /> {userData.spokenLnguage}</div>
-                                    </div>
-                                    <div className='eachGeneralDetail'>
-                                        <div className='eachGeneralDetailInner'><FaBirthdayCake className='gdIcon' />  {userData.age}</div>
-                                    </div>
-                                    <div className='eachGeneralDetail'>
-                                        <div className='eachGeneralDetailInner'><FaGraduationCap className='gdIcon' />  {userData.education}</div>
-                                    </div>
-                                    <div className='eachGeneralDetail'>
-                                        <div className='eachGeneralDetailInner'><FaFemale className='gdIcon' /> {userData.occupation}</div>
-                                    </div>
-                                    <div className='eachGeneralDetail'>
-                                        <div className='eachGeneralDetailInner'><FaRuler className='gdIcon' /> {userData.height}</div>
-                                    </div>
-
-                                </div>
-                                <div className='openedCardPostedOn'>{userData.postedOn}</div>
-                                <div className='openedCardPostedOn'>{userData.contact}</div>
-
-                                <div className='viewButtonDivUserPage'>
-                                    <div >
-                                        <Link onClick={openCard} className='editUserBtn'>edit info <FaEdit /></Link>
-                                    </div>
-                                    {userData.isAdmin && (
-                                        <div >
-                                            <Link to={`/administration`} className='adminBtn'>Admin Page <FaUser /></Link>
-                                        </div>
-                                    )}
-                                </div>
-                            </div>
-
                         </div>
+
                     </div>
+                </div>
+                ) : (
+                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                    {!loading && (
+                      <Alert severity="warning" style={{ width: '100%' }}>Your account has not been approved by admin.</Alert>
 
-
+                    )}
+                  </div>
+                  
                 )}
 
 
-            </div>
 
+            </div>
+            <ConfirmationDialog open={openDialog}  onClose={handleCancel} />
 
             {(editPanel == true) && (
                 <div className='openedCardOverlay' onClick={closeCard}></div>
@@ -302,7 +402,7 @@ function ProfilePage() {
                             variant="contained"
                             style=
                             {{
-                                width: "350px",
+                                width: "auto",
                                 backgroundColor: "#fefefe",
                                 color: "#ff9800",
                             }}

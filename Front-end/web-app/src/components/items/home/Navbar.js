@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
-import { FaBars, FaTimes } from "react-icons/fa";
+import { FaBars, FaTimes, FaUser } from "react-icons/fa";
 import brandlogo from '../../../assests/home/b1.jpeg';
 import ResponsiveDialog from '../alert';
 import axiosInstance from '../../../api';
+import { userImageBASE_URL } from '../../../api';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Tooltip from '@mui/material/Tooltip';
@@ -16,20 +17,80 @@ import Divider from '@mui/material/Divider';
 import PersonAdd from '@mui/icons-material/PersonAdd';
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
+import profileImageNofemale from "../../../assests/home/profileImageNofemale.jpg";
+import profileImageNomale from "../../../assests/home/profileImageNomale.jpg";
+import { useNavigate } from 'react-router-dom';
 // const login = localStorage.getItem('login');
 
-const login = localStorage.getItem('login');
 
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [dialogOpen, setDialogOpen] = useState(false);
+  const [profileUserId, setprofileUserId] = useState('');
+  const [profileUserImage, setprofileUserImage] = useState('');
+  const [gender, setprofileUsergender] = useState('');
+  const [imageLoading, setImageLoading] = useState(true);
+  const [isOnline, setIsOnline] = useState(navigator.onLine);
+  const [isProfileIconClicked, setIsProfileIconClicked] = useState(true);
+  const [login, setLogin] = useState();
+  const navigate = useNavigate();
 
+  
+  useEffect(() => {
+    // Check if the user is logged in (e.g., in your main entry point or a route component)
+const isLoggedIn = localStorage.getItem('api_token');
+
+if (isLoggedIn) {
+  setLogin(true);
+  // User is logged in, perform any necessary actions
+} else {
+  // User is not logged in, redirect to the login page or show a login prompt
+  setLogin(false);
+}
+    const handleOnlineStatusChange = () => {
+      setIsOnline(navigator.onLine);
+    };
+
+    window.addEventListener('online', handleOnlineStatusChange);
+    window.addEventListener('offline', handleOnlineStatusChange);
+
+    return () => {
+      window.removeEventListener('online', handleOnlineStatusChange);
+      window.removeEventListener('offline', handleOnlineStatusChange);
+    };
+  }, []);
+  
   const handleLogout = () => {
     setAnchorEl(null);
     // Handle logout logic
     setDialogOpen(true);
   };
+
+  useEffect(() => {
+    axiosInstance.get('/validToken')
+    .then(response => {
+      
+      const data = response.data; // Extract the JSON response
+      console.log(data);
+      // Access the values one by one
+      const activeUserWithImagesAndDetails = data.activeUserWithImagesAndDetails;
+      const userId = activeUserWithImagesAndDetails.user_id;
+      const profilePic = activeUserWithImagesAndDetails.profilePic;
+      const gender = activeUserWithImagesAndDetails.details.gender;
+      setprofileUsergender(gender);
+      setprofileUserImage(profilePic);
+      setprofileUserId(userId);
+      setImageLoading(false);
+    })
+    .catch(error => {
+      // localStorage.removeItem('login');
+      // localStorage.removeItem('api_token');
+      // navigate(`/login`);
+      console.error('Error:', error);
+    });
+  
+  }, []);
 
   const handleCloseDialog = () => {
     setDialogOpen(false);
@@ -68,14 +129,16 @@ const Navbar = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
+    setIsProfileIconClicked(false);
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
+    setIsProfileIconClicked(true);
     setAnchorEl(null);
   };
 
   return (
-
+    
     <nav className="maxFullDeviveWidth bg-gray-900" >
       <div className=""  style={{ paddingLeft: '120px', paddingRight:'30px'}}>
         <div className="flex items-center justify-between h-16 " >
@@ -128,7 +191,7 @@ const Navbar = () => {
           </div>
           
           <div className="hidden md:flex" >
-            {login === 'true' ? (
+            {login === true ? (
 
               <div className="logoutAndUser">
                 <ResponsiveDialog
@@ -147,8 +210,26 @@ const Navbar = () => {
             aria-controls={open ? 'account-menu' : undefined}
             aria-haspopup="true"
             aria-expanded={open ? 'true' : undefined}
+            
           >
-            <Avatar sx={{ width: 35, height: 35 }} >  <div className="userPofileImg"><img src="https://randomuser.me/api/portraits/med/men/23.jpg" alt="user profile" /></div></Avatar>
+           <Avatar sx={{ width: 36, height: 36 }} className={!isProfileIconClicked ? 'clickedIconButton' : ''}>
+  <div className="userProfileImage " >
+    {imageLoading && (
+      <div className="imageLoadingPlaceholder">
+        <FaUser className="userIcon" />
+      </div>
+    )}
+    <img
+      src={profileUserImage? userImageBASE_URL + profileUserImage: gender == 'male'
+      ? profileImageNomale
+      : profileImageNofemale }
+      alt="User Profile"
+      style={{ display: imageLoading ? 'none' : 'block' }}
+      
+    />
+  </div>
+  </Avatar>
+  <div className="onlineStatusIndicator"></div>
           </IconButton>
         </Tooltip>
         <Menu
@@ -186,9 +267,25 @@ const Navbar = () => {
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
-        <MenuItem onClick={handleClose}>
-          <Avatar /> Profile
-        </MenuItem>
+        <Link to={"/userProfile/"+profileUserId} ><MenuItem onClick={handleClose}>
+        <Avatar sx={{ width: 36, height: 36 }} className={!isProfileIconClicked ? 'clickedIconButton' : ''}>
+  <div className="userProfileImage " >
+    {imageLoading && (
+      <div className="imageLoadingPlaceholder">
+        <FaUser className="userIcon" />
+      </div>
+    )}
+     <img
+      src={profileUserImage? userImageBASE_URL + profileUserImage: gender == 'male'
+      ? profileImageNomale
+      : profileImageNofemale }
+      alt="User Profile"
+      style={{ display: imageLoading ? 'none' : 'block' }}
+      
+    />
+  </div>
+  </Avatar> Profile
+        </MenuItem></Link>
         <MenuItem onClick={handleClose}>
           <Avatar /> My account
         </MenuItem>
@@ -346,7 +443,6 @@ const Navbar = () => {
         )}
       </div>
     </nav>
-
   );
 };
 

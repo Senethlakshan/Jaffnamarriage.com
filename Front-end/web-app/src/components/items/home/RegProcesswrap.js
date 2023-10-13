@@ -1,17 +1,40 @@
+import * as React from 'react';
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import Slide from '@mui/material/Slide';
 import { useState } from 'react';
 import RUserInfo from './RUserInfo';
 import TermsCon from './TermsCon';
 import Subscription from './Subscription';
 import axiosInstance from '../../../api';
+import ConfirmationDialog from './userProfilePicUploader'; // Import the ConfirmationDialog component
 
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 function RegProcesswrap() {
+  const [openDialog, setOpenDialog] = useState(false);
   const [step, setStep] = useState(1);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [open, setOpen] = React.useState(false);
+  const handleOpenDialog = () => {
+    setIsDialogOpen(true);
+  };
 
+  const handleCloseDialog = () => {
+    setIsDialogOpen(false);
+  };
   const [values, setValues] = useState({
     // Initialize with default values or an empty object if needed
     livingPlace: '',
     religion: '',
     age: '',
+    pno: '',
     cast: '',
     education: '',
     workDetails: '',
@@ -52,6 +75,7 @@ function RegProcesswrap() {
   
 
   const nextStep = () => {
+   
     //console.log(values);
     if (step === 2 && agree) {
       // Only proceed to the next step (3) if agree is true in step 2
@@ -67,17 +91,19 @@ function RegProcesswrap() {
 
   const handleSubmit = () => {
 
-
     axiosInstance
   .post('/insertUserDatial', values)
   .then((response) => {
-    window.location.href = '/';
+    setOpenDialog(true);
   })
   .catch((error) => {
     
   });
   };
-
+ 
+  const handleClose = () => {
+    setOpen(false);
+  };
   const getStepStatus = (currentStep) => {
     if (currentStep < step) {
       return 'completed';
@@ -88,7 +114,17 @@ function RegProcesswrap() {
     }
   };
 
+  const handleCancel = () => {
+    // Add your logic here to determine whether the dialog should be closed or not
+    const shouldCloseDialog = true; // Set this to true or false based on your condition
+
+    if (shouldCloseDialog) {
+      setOpenDialog(false); // Close the dialog if shouldCloseDialog is true
+    }
+  };
+
   return (
+
     <div className="flex justify-center items-center min-h-screen bg-[conic-gradient(at_top,_var(--tw-gradient-stops))] from-amber-900 to-yellow-300">
       {/* register form stepper window */}
       <div className="w-11/12 md:w-861 h-11/12 md:h-651 max-w-screen-lg mt-5 bg-white rounded-lg shadow-xl">
@@ -163,7 +199,7 @@ function RegProcesswrap() {
             <Subscription prevStep={prevStep} handleSelectedPlans={handleSelectedPlans} values={values} />
           )}
         </div>
-
+        <ConfirmationDialog open={openDialog}  onClose={handleCancel} />
         <div className="flex justify-between p-6">
   {step !== 1 && (
     <button className="bg-[conic-gradient(at_top_right,_var(--tw-gradient-stops))] from-gray-200 via-gray-400 to-gray-600 text-white font-bold py-2 px-4 rounded" onClick={prevStep}>
@@ -181,6 +217,25 @@ function RegProcesswrap() {
   )}
 </div>
 
+<Dialog
+        open={open}
+        TransitionComponent={Transition}
+        keepMounted
+        onClose={handleClose}
+        aria-describedby="alert-dialog-slide-description"
+      >
+        <DialogTitle>{"Use Google's location service?"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-slide-description">
+            Let Google help apps determine location. This means sending anonymous
+            location data to Google, even when no apps are running.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Disagree</Button>
+          <Button onClick={handleClose}>Agree</Button>
+        </DialogActions>
+      </Dialog>
       </div>
     </div>
   );

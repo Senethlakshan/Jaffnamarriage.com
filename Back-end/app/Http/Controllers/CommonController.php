@@ -9,7 +9,10 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\OtpEmail;
 use App\Models\PasswordReset;
-
+use Illuminate\Support\Facades\DB;
+use App\Models\UserImage;
+use App\Models\UserDetails;
+use Carbon\Carbon;
 class CommonController extends Controller
 {
 
@@ -21,14 +24,83 @@ class CommonController extends Controller
 
     // Check if the user is authenticated
     if ($user) {
-        // User is authenticated
-        // Perform any additional checks or actions based on the authenticated user
-        // ...
-        return response()->json(['message' => 'valid', 'user' => $user]);
+        $userId = $user->id;
+        $activeUserStatus = DB::table('users')
+        ->where('id', $userId)
+        ->first();
+
+    $activeUserWithImages = DB::table('users')
+        ->join('user_images', 'users.id', '=', 'user_images.user_id')
+        ->where('users.id', $userId) // Filter by user ID
+        ->select('users.id as user_id', 'users.name','users.email','users.marriedStatus', 'users.created_at', 'user_images.image_path', 'user_images.profilePicStatus')
+        ->get();
+
+    $activeUserWithDetails = DB::table('users')
+        ->join('user_details', 'users.id', '=', 'user_details.user_id')
+        ->where('users.id', $userId) // Filter by user ID
+        ->select('users.id as user_id', 'user_details.*')
+        ->get();
+    if ($activeUserWithDetails !== null && count($activeUserWithDetails) > 0) {
+    // Initialize merged data as null
+    $mergedData = null;
+
+    // Check if both queries returned data
+    if ($activeUserWithImages->isNotEmpty() || $activeUserWithDetails->isNotEmpty()) {
+        $profilePicImages = '';
+        $otherImages = [];
+        $useractive = $activeUserStatus->active;
+        // Iterate over the activeUserWithImages result
+        foreach ($activeUserWithImages as $imageData) {
+            // Check if profilePicStatus is 1
+            if ($imageData->profilePicStatus === 1) {
+                // Set the 'profilePic' key to the profile picture image path
+                $profilePicImages = $imageData->image_path;
+            } else {
+                // Add other images to the 'images' array
+                $otherImages[] = $imageData->image_path;
+            }
+        }
+
+        $imageData = $activeUserWithImages->first();
+        $detailsData = $activeUserWithDetails->first();
+
+        // Create the merged user entry
+        $mergedData = [
+            'user_id' => $userId,
+            'name' => $activeUserStatus->name,
+            'email'=> $activeUserStatus->email,
+            'userActiveStatus' =>  $useractive,
+            'marriedStatus'=> $activeUserStatus->marriedStatus,
+            'created_at' => Carbon::parse($activeUserStatus->created_at)->diffForHumans(),
+            'images' => $otherImages,
+            'profilePic' => $profilePicImages,
+            'details' => [
+                'livingPlace' => $detailsData->livingPlace,
+                'religion' => $detailsData->religion,
+                'age' => $detailsData->age,
+                'cast' => $detailsData->cast,
+                'education' => $detailsData->education,
+                'height' => $detailsData->height,
+                'weight' => $detailsData->weight,
+                'workDetails' => $detailsData->workDetails,
+                'gender' => $detailsData->gender,
+                'spokenLnguage' => $detailsData->spokenLnguage,
+                'town' => $detailsData->town,
+                'Termsagree' => $detailsData->Termsagree,
+                'pno'=>$detailsData->phonenum,
+                'selectedPlans' => $detailsData->selectedPlans,
+            ],
+        ];
+    }
+    }else{
+        $mergedData = [];
+    }
+    // Return the merged data as a JSON response
+    return response()->json(['message' => 'valid', 'activeUserWithImagesAndDetails' => $mergedData]);
     } else {
         // User is not authenticated or token is invalid
         $apiToken = $request->header('Authorization');
-        return response()->json(['message' => 'invalid'], 401);
+        return response()->json(['message' => 'invalid']);
     }
 }
 

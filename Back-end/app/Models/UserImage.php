@@ -13,6 +13,7 @@ class UserImage extends Model
         'user_id',
         'image_name',
         'image_path',
+        'profilePicStatus'
     ];
 
     // Define the relationship with the User model
