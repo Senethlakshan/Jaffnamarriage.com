@@ -21,13 +21,13 @@ const token = localStorage.getItem('api_token');
 
 if (token) {
   axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
- // Print the headers to verify if the authorization header is set
+  // Print the headers to verify if the authorization header is set
 }
 
 axiosInstance.get('/validToken')
   .then(response => {
     // Token is valid, handle the response
-   
+
     // Handle the response based on the message
     if (response.data.message === 'valid') {
       localStorage.setItem('login', 'true'); // Set boolean value as string 'true'
@@ -57,16 +57,16 @@ const Homepage = () => {
 
   return (
     <div>
-       {loading ? (
-    <div className="centered-container" style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', zIndex: 10 }}>
-      <span className="loader"></span>
-    </div>
-  ) : (
-     <div>
-      <Helmet>
-        {isHomePage && (
-          <script type="text/javascript">
-            {`
+      {loading ? (
+        <div className="centered-container" style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', zIndex: 10 }}>
+          <span className="loader"></span>
+        </div>
+      ) : (
+        <div>
+          <Helmet>
+            {isHomePage && (
+              <script type="text/javascript">
+                {`
               var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
               (function(){
                 var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
@@ -77,128 +77,136 @@ const Homepage = () => {
                 s0.parentNode.insertBefore(s1,s0);
               })();
             `}
-          </script>
-        )}
-      </Helmet>
+              </script>
+            )}
+          </Helmet>
 
-      <div>
-        <WebBanner />
-        {/* padding 150px section start*****/}
-        <div className="howItWorks containerWithPadding">
-          <div className="container mx-auto ">
-            {/* how to work
+          <WebBanner />
+
+          <div>
+
+
+            {/* padding 150px section start*****/}
+            <div className="howItWorks containerWithPadding">
+              <div className="containerForNewMem mx-auto ">
+                {/* how to work
             if add border: border-solid border-2 border-gray-800 */}
-            <div className="h-597 min-w-full mb-20">
-              <div className="flex pl-4 pr-4 flex-col items-center justify-center">
-                <h2 className="text-amber-500 textSize4 m-2 font-serif">
-                  How It Works
-                </h2>
-                <h1 className="textSize6 m-1 text-black font-serif">
-                  Find Your Partner In Just a Few Steps
-                </h1>
-                <p className="text-2xl mt-4 font-serif text-gray-500 text-center">
-                  JaffnaMarriage will help you find your perfect match with just
-                  a few steps. You focus on what is most important to you, we do
-                  all the work.
-                </p>
+                <div className="h-597 min-w-full mb-20">
+                  <div className="flex pl-4 pr-4 flex-col items-center justify-center">
+                    <h2 className="text-amber-500 textSize4 m-2 font-serif">
+                      How It Works
+                    </h2>
+                    <h1 className="textSize6 m-1 text-black font-serif">
+                      Find Your Partner In Just a Few Steps
+                    </h1>
+                    <p className="text-2xl mt-4 font-serif text-gray-500 text-center">
+                      JaffnaMarriage will help you find your perfect match with just
+                      a few steps. You focus on what is most important to you, we do
+                      all the work.
+                    </p>
+                  </div>
+                </div>
+                {/* s2 div-sub: */}
+                <div className="h-597 min-w-full mb-10 flex flex-col items-center justify-center">
+                  <div className="stepsCardCont flex items-center">
+
+                    <div className="stepsCard">
+
+                      <div className="flex justify-center hover:scale-110">
+                        <img src={RegisterIcon} alt="Register" />
+                      </div>
+                      <h2 className="stepsCardHeading text-2xl font-bold text-center">
+                        Registration
+                      </h2>
+                      <h2 className="text-lg text-justify ">
+                        Start by creating your profile and providing
+                        information about yourself. Tell us your preferences,
+                        interests, and what you're looking for in a partner.
+                      </h2>
+
+                    </div>
+                    <div className="stepsCardArrow">
+
+                      <div className="w-179 h-146">
+                        <LottieAnimation
+                          lottieRef={(ref) => ref && ref.setSpeed(0.5)}
+                          animationData={animationData}
+                          loop={true}
+                          autoplay={true}
+                        />
+                      </div>
+
+                    </div>
+                    <div className="stepsCard">
+
+                      <div className="flex justify-center hover:scale-110">
+                        <img src={FindIcon} alt="Find" />
+                      </div>
+                      <h2 className="stepsCardHeading text-2xl font-bold text-center">
+                        Find Your Partner
+                      </h2>
+                      <h2 className="text-lg text-justify ">
+                        Browse through profiles and find potential matches.
+                        Connect with them through our messaging system and get
+                        to know each other better.
+                      </h2>
+
+                    </div>
+                    <div className="stepsCardArrow">
+
+                      <div className="w-179 h-146">
+                        <LottieAnimation
+                          lottieRef={(ref) => ref && ref.setSpeed(0.5)}
+                          animationData={animationData}
+                          loop={true}
+                          autoplay={true}
+                        />
+                      </div>
+
+                    </div>
+                    <div className="stepsCard">
+
+                      <div className="flex justify-center hover:scale-110">
+                        <img src={ConnectIcon} alt="Connect" />
+                      </div>
+                      <h2 className="stepsCardHeading text-2xl font-bold text-center">
+                        Connect with Your Partner
+                      </h2>
+                      <h2 className="text-lg text-justify">
+                        Once you've found your ideal partner, take the next
+                        step and start your journey together. Plan dates,
+                        share experiences, and build a meaningful
+                        relationship.
+                      </h2>
+
+                    </div>
+
+
+
+                  </div>
+                </div>
+                {/* s3 div */}
+
               </div>
+
+              {/* get started contact form */}
             </div>
-            {/* s2 div-sub: */}
-            <div className="h-597 min-w-full mb-10 flex flex-col items-center justify-center">
-              <div className="stepsCardCont flex items-center">
-
-                <div className="stepsCard">
-
-                  <div className="flex justify-center hover:scale-110">
-                     <img src={RegisterIcon} alt="Register" />
-                  </div>
-                  <h2 className="stepsCardHeading text-2xl font-bold text-center">
-                          Registration
-                  </h2>
-                  <h2 className="text-lg text-justify ">
-                    Start by creating your profile and providing
-                    information about yourself. Tell us your preferences,
-                    interests, and what you're looking for in a partner.
-                  </h2>
-
-                </div>
-                <div className="stepsCardArrow">
-
-                  <div className="w-179 h-146">
-                            <LottieAnimation
-                              lottieRef={(ref) => ref && ref.setSpeed(0.5)}
-                              animationData={animationData}
-                              loop={true}
-                              autoplay={true}
-                            />
-                  </div>
-
-                </div>
-                <div className="stepsCard">
-
-                  <div className="flex justify-center hover:scale-110">
-                    <img src={FindIcon} alt="Find" />
-                  </div>
-                  <h2 className="stepsCardHeading text-2xl font-bold text-center">
-                          Find Your Partner
-                  </h2>
-                  <h2 className="text-lg text-justify ">
-                          Browse through profiles and find potential matches.
-                          Connect with them through our messaging system and get
-                          to know each other better.
-                  </h2>
-
-                </div>
-                <div className="stepsCardArrow">
-
-                  <div className="w-179 h-146">
-                            <LottieAnimation
-                              lottieRef={(ref) => ref && ref.setSpeed(0.5)}
-                              animationData={animationData}
-                              loop={true}
-                              autoplay={true}
-                            />
-                  </div>
-
-                </div>
-                <div className="stepsCard">
-
-                  <div className="flex justify-center hover:scale-110">
-                      <img src={ConnectIcon} alt="Connect" />
-                        </div>
-                  <h2 className="stepsCardHeading text-2xl font-bold text-center">
-                    Connect with Your Partner
-                  </h2>
-                  <h2 className="text-lg text-justify">
-                          Once you've found your ideal partner, take the next
-                          step and start your journey together. Plan dates,
-                          share experiences, and build a meaningful
-                          relationship.
-                        </h2>
-
-                </div>
-               
-                 
-
-              </div>
-            </div>
-            {/* s3 div */}
             <Newmember />
-            {/* get started contact form */}
+
             <ContactForm />
             {/* success stories */}
+
             <SucessStories />
-          
+            {/* padding 150px section end*****/}
+
+
           </div>
+
+          <Footer />
         </div>
-        {/* padding 150px section end*****/}
-       
-      </div>
-      <Footer/>
-      </div>
-  )}
-</div>
-   
+      )}
+    </div>
+
   );
 };
 

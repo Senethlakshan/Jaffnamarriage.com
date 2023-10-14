@@ -18,20 +18,20 @@ const Newmember = () => {
 
     // Initial setup
     handleResize();
-    
-  }, [ fullDeviceWidth ]);
+
+  }, [fullDeviceWidth]);
 
 
-  function getCenterSlidePercentage(){
+  function getCenterSlidePercentage() {
 
     console.log("Full width - " + fullDeviceWidth);
 
 
-    if(fullDeviceWidth > 1024){
+    if (fullDeviceWidth > 1024) {
       return 33.33;
-    }else if(fullDeviceWidth > 768){
+    } else if (fullDeviceWidth > 768) {
       return 60;
-    }else{
+    } else {
       return 100;
     }
   }
@@ -39,14 +39,13 @@ const Newmember = () => {
 
   return (
     <div className="bg-white h-708">
-      <div className="flex flex-col items-center justify-center h-screen">
-  <h1 className="text-amber-500 text-4xl m-2 font-serif text-center">Newest Members</h1>
-  <p className="text-xl mt-3 font-serif text-center">
-    JaffnaMarrige will help you find your perfect match with just a few steps.
-    You focus on what is most important to you we do all the work.
-  </p>
-</div>
-
+      <div className="flex pl-4 pr-4 pt-5  flex-col items-center justify-center">
+        <h1 className="text-amber-500 text-4xl m-2 font-serif text-center">Newest Members</h1>
+        <p className="text-xl mt-3 font-serif text-center">
+          JaffnaMarrige will help you find your perfect match with just a few steps.
+          You focus on what is most important to you we do all the work.
+        </p>
+      </div>
       <div className="flex justify-center mt-10 py-2 px-4">
         {/* user profile scroll slide bar */}
         <Carousel
@@ -55,26 +54,27 @@ const Newmember = () => {
           autoPlay={true}
           infiniteLoop={true}
           centerMode={true}
-          centerSlidePercentage={getCenterSlidePercentage() }
+          centerSlidePercentage={getCenterSlidePercentage()}
           className="w-full"
         >
+
           <div className="flex justify-center">
             {/* Card 1 */}
-            <div className="bg-gray-800 rounded-lg p-4 m-1 shadow" style={{ width: '351px', height: '341px' }}>
+            <div className="gradiantLightGoldBg2 rounded-lg p-4 m-1 shadow" style={{ width: '351px', height: '341px' }}>
               {/* Card content */}
               <img src={photo1} alt='photo1' />
             </div>
           </div>
           <div className="flex justify-center">
-            {/* Card 2 */}
-            <div className="bg-gray-800 rounded-lg p-4 m-1 shadow" style={{ width: '351px', height: '341px' }}>
+            {/* Card 1 */}
+            <div className="gradiantLightGoldBg2 rounded-lg p-4 m-1 shadow" style={{ width: '351px', height: '341px' }}>
               {/* Card content */}
               <img src={photo1} alt='photo1' />
             </div>
           </div>
           <div className="flex justify-center">
-            {/* Card 3 */}
-            <div className="bg-gray-800 rounded-lg p-4 m-1 shadow" style={{ width: '351px', height: '341px' }}>
+            {/* Card 1 */}
+            <div className="gradiantLightGoldBg2 rounded-lg p-4 m-1 shadow" style={{ width: '351px', height: '341px' }}>
               {/* Card content */}
               <img src={photo1} alt='photo1' />
             </div>

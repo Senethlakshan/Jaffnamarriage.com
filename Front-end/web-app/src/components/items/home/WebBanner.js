@@ -56,19 +56,19 @@ const WebBanner = () => {
   };
 
   return (
-    <div className="relative">
-      <img src={web_banner} style={{width:'100vw'}}alt="web-banner" />
+    <div className="relative banner-cont">
+      <img src={web_banner} alt="web-banner" />
       <div
         className="absolute top-0 left-0 p-4 text-yellow-400"
         style={{
 
-          width: isMobile ? '90%' : '661px',
+          width: isMobile ? '90%' : '561px',
           height: isMobile ? 'auto' : '356px',
           fontSize: isMobile ? '24px' : '50px',
           paddingTop: isMobile ? '50px' : '100px',
           fontFamily: 'Berkshire Swash, cursive'
 
-         
+
         }}
       >
         {/* carousel text */}
@@ -87,13 +87,13 @@ const WebBanner = () => {
               Enjoy life and find your life partner
               <br />
               <span className="pt-7">
-              <span className="text-white text-lg font-serif">
+                <span className="text-white text-lg font-serif">
                   "Where love stories begin and dreams come true."
                 </span>
                 <br />
                 <span className="text-white text-lg text-center font-berkshire">
                   JaffnaMariage.com💕
-                </span>            
+                </span>
               </span>
             </p>
           </div>
@@ -143,141 +143,89 @@ const WebBanner = () => {
         )}
       </div>
       {/* box like serach Members */}
-    
+
       <div className="typeSelectionContainer">
-      <div className="absolute p-2 typeSelection" style={boxStyles}>
-        {/* <table className="w-full">
-          <tbody>
-            <tr>
-              <th className=" p-2 text-center">I'm Looking For a </th>
-              <th className=" p-2 text-center">Age </th>
-              <th className=" p-2 text-center"></th>
-              <th className=" p-2 text-center">Age </th>
-              <th className=" p-2 text-center">Of Religion </th>
-              <th className=" p-2 text-center"> </th>
-            </tr>
-            <tr>
-              <td className=" p-2 text-center">
-                <select className="w-full bg-white border border-gray-300 rounded py-2 px-4">
+        <div className=" p-2 typeSelection">
+
+          <div className="w-full userTasteFilter">
+            <div className="eachElemTypeFilter">
+              <div className="eachOption">I'm Looking For a</div>
+              <div className="eachOption optionCont">
+                <select
+                  className="selectOptionTypeFilt"
+                  value={lookingFor}
+                  onChange={(e) => setLookingFor(e.target.value)}
+                >
                   <option value="">Looking for</option>
                   <option value="male">Male</option>
                   <option value="female">Female</option>
                 </select>
-              </td>
-              <td className=" p-2 text-center">
-                <select className="w-full bg-white border border-gray-300 rounded py-2 px-4">
-                  <option value="">Select</option>
-                  <option value="male">Male</option>
-                  <option value="female">Female</option>
+              </div>
+            </div>
+
+            <div className="eachElemTypeFilter">
+              <div className="eachOption">Age</div>
+              <div className="eachOption optionCont">
+                <select
+                  className="selectOptionTypeFilt"
+                  value={ageFrom}
+                  onChange={(e) => setAgeFrom(e.target.value)}
+                >
+                  <option value="">Looking for</option>
+                  <option value="18">18</option>
+                  {/* Add more age options as needed */}
                 </select>
-              </td>
-              <td className=" p-2 text-center">
-                <p>To</p>
-              </td>
-              <td className=" p-2 text-center">
-                <select className="w-full bg-white border border-gray-300 rounded py-2 px-4">
-                  <option value="">Select</option>
-                  <option value="male">Male</option>
-                  <option value="female">Female</option>
+              </div>
+            </div>
+
+            <div className="eachElemTypeFilter">
+              <div className="eachOption">To</div>
+            </div>
+
+            <div className="eachElemTypeFilter">
+              <div className="eachOption">Age</div>
+              <div className="eachOption optionCont">
+                <select
+                  className="selectOptionTypeFilt"
+                  value={ageTo}
+                  onChange={(e) => setAgeTo(e.target.value)}
+                >
+                  <option value="">Looking for</option>
+                  <option value="60">60</option>
+                  {/* Add more age options as needed */}
                 </select>
-              </td>
-              <td className=" p-2 text-center">
-                <select className="w-full bg-white border border-gray-300 rounded py-2 px-4">
-                  <option value="">Select</option>
-                  <option value="male">Male</option>
-                  <option value="female">Female</option>
+              </div>
+            </div>
+
+            <div className="eachElemTypeFilter">
+              <div className="eachOption">Of Religion</div>
+              <div className="eachOption optionCont">
+                <select
+                  className="selectOptionTypeFilt"
+                  value={religion}
+                  onChange={(e) => setReligion(e.target.value)}
+                >
+                  <option value="">Looking for</option>
+                  <option value="christian">Christian</option>
+                  <option value="hindu">Hindu</option>
+                  {/* Add more religion options as needed */}
                 </select>
-              </td>
-              <td className=" p-2 text-center">
-                <button className="bg-gradient-to-tr from-amber-900 to-yellow-300 text-white py-2 px-4 rounded flex items-center">
+              </div>
+            </div>
+
+            <div className="eachElemTypeFilter">
+              <div className="eachOption optionCont">
+                <button
+                  className="searchTypeFiltBtn bg-gradient-to-tr from-amber-900 to-yellow-300 text-white py-2 px-4 rounded flex items-center"
+                  onClick={handleSearch}
+                >
                   Search
                   <FaSearch className="ml-2" />
-                </button>{" "}
-              </td>
-            </tr>
-          </tbody>
-        </table> */}
-
-
-        <div className="w-full userTasteFilter">
-      <div className="eachElem">
-        <div className="p-2 text-center">I'm Looking For a</div>
-        <div className="p-2 text-center optionCont">
-          <select
-            className="selectOption w-full bg-white border border-gray-300 rounded py-2 px-4"
-            value={lookingFor}
-            onChange={(e) => setLookingFor(e.target.value)}
-          >
-            <option value="">Looking for</option>
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-          </select>
+                </button>{' '}
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-
-      <div className="eachElem">
-        <div className="p-2 text-center">Age</div>
-        <div className="p-2 text-center optionCont">
-          <select
-            className="selectOption w-full bg-white border border-gray-300 rounded py-2 px-4"
-            value={ageFrom}
-            onChange={(e) => setAgeFrom(e.target.value)}
-          >
-            <option value="">Looking for</option>
-            <option value="18">18</option>
-            {/* Add more age options as needed */}
-          </select>
-        </div>
-      </div>
-
-      <div className="eachElem">
-        <div className="p-2 text-center">To</div>
-      </div>
-
-      <div className="eachElem">
-        <div className="p-2 text-center">Age</div>
-        <div className="p-2 text-center optionCont">
-          <select
-            className="selectOption w-full bg-white border border-gray-300 rounded py-2 px-4"
-            value={ageTo}
-            onChange={(e) => setAgeTo(e.target.value)}
-          >
-            <option value="">Looking for</option>
-            <option value="60">60</option>
-            {/* Add more age options as needed */}
-          </select>
-        </div>
-      </div>
-
-      <div className="eachElem">
-        <div className="p-2 text-center">Of Religion</div>
-        <div className="p-2 text-center optionCont">
-          <select
-            className="selectOption w-full bg-white border border-gray-300 rounded py-2 px-4"
-            value={religion}
-            onChange={(e) => setReligion(e.target.value)}
-          >
-            <option value="">Looking for</option>
-            <option value="christian">Christian</option>
-            <option value="hindu">Hindu</option>
-            {/* Add more religion options as needed */}
-          </select>
-        </div>
-      </div>
-
-      <div className="eachElem">
-        <div className="p-2 text-center optionCont">
-          <button
-            className="searchTypeFiltBtn bg-gradient-to-tr from-amber-900 to-yellow-300 text-white py-2 px-4 rounded flex items-center"
-            onClick={handleSearch}
-          >
-            Search
-            <FaSearch className="ml-2" />
-          </button>{' '}
-        </div>
-      </div>
-    </div>
-      </div>
       </div>
     </div>
   );
